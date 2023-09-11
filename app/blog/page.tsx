@@ -1,30 +1,32 @@
-import ListLayout from '@/layouts/ListLayoutWithTags'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import { allBlogs } from 'contentlayer/generated'
-import { genPageMetadata } from 'app/seo'
+import ListLayout from "@/layouts/ListLayoutWithTags";
+import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
+import { allBlogs } from "contentlayer/generated";
+import { genPageMetadata } from "app/seo";
 
-const POSTS_PER_PAGE = 5
+const POSTS_PER_PAGE = 5;
 
-export const metadata = genPageMetadata({ title: 'Blog' })
+export const metadata = genPageMetadata({ title: "Blog" });
 
 export default function BlogPage() {
-  const posts = allCoreContent(sortPosts(allBlogs))
-  const pageNumber = 1
-  const initialDisplayPosts = posts.slice(
-    POSTS_PER_PAGE * (pageNumber - 1),
-    POSTS_PER_PAGE * pageNumber
-  )
+  const posts = allCoreContent(sortPosts(allBlogs));
+  const pageNumber = 1;
+  const filteredPosts = posts.filter(post => !post.hidden);
+  const initialDisplayPosts = filteredPosts
+    .slice(
+      POSTS_PER_PAGE * (pageNumber - 1),
+      POSTS_PER_PAGE * pageNumber
+    );
   const pagination = {
     currentPage: pageNumber,
-    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
-  }
+    totalPages: Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
+  };
 
   return (
     <ListLayout
-      posts={posts}
+      posts={filteredPosts}
       initialDisplayPosts={initialDisplayPosts}
       pagination={pagination}
       title="All Posts"
     />
-  )
+  );
 }

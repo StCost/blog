@@ -21,7 +21,7 @@ export function genPageMetadata({ title, description, image, ...rest }: PageSEOP
       locale: 'en_US',
       type: 'website',
     },
-    twitter: {
+    youtube: {
       title: `${title} | ${siteMetadata.title}`,
       card: 'summary_large_image',
       images: image ? [image] : [siteMetadata.socialBanner],

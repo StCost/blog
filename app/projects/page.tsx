@@ -1,8 +1,8 @@
-import projectsData from '@/data/projectsData'
-import Card from '@/components/Card'
-import { genPageMetadata } from 'app/seo'
+import projectsData from "@/data/projectsData";
+import Card from "@/components/Card";
+import { genPageMetadata } from "app/seo";
 
-export const metadata = genPageMetadata({ title: 'Projects' })
+export const metadata = genPageMetadata({ title: "Projects" });
 
 export default function Projects() {
   return (
@@ -13,7 +13,8 @@ export default function Projects() {
             Projects
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Showcase your projects with a hero image (16 x 9)
+            {/*Showcase your projects with a hero image (16 x 9)*/}
+            Tiny portion of my pet projects I'm happy to share
           </p>
         </div>
         <div className="container py-12">
@@ -31,5 +32,5 @@ export default function Projects() {
         </div>
       </div>
     </>
-  )
+  );
 }
