@@ -1,5 +1,5 @@
-import { Metadata } from 'next'
-import siteMetadata from '@/data/siteMetadata'
+import { Metadata } from "next";
+import siteMetadata from "@/data/siteMetadata";
 
 interface PageSEOProps {
   title: string
@@ -15,17 +15,17 @@ export function genPageMetadata({ title, description, image, ...rest }: PageSEOP
     openGraph: {
       title: `${title} | ${siteMetadata.title}`,
       description: description || siteMetadata.description,
-      url: './',
+      url: "./",
       siteName: siteMetadata.title,
       images: image ? [image] : [siteMetadata.socialBanner],
-      locale: 'en_US',
-      type: 'website',
+      locale: "en_US",
+      type: "website"
     },
-    youtube: {
+    twitter: {
       title: `${title} | ${siteMetadata.title}`,
-      card: 'summary_large_image',
-      images: image ? [image] : [siteMetadata.socialBanner],
+      card: "summary_large_image",
+      images: image ? [image] : [siteMetadata.socialBanner]
     },
-    ...rest,
-  }
+    ...rest
+  };
 }
