@@ -1,5 +1,12 @@
-import NextImage, { ImageProps } from 'next/image'
+// import NextImage, { ImageProps } from "next/image";
+//
+// const Image = ({ ...rest }: ImageProps) => <NextImage {...rest} />;
+//
+// export default Image;
 
-const Image = ({ ...rest }: ImageProps) => <NextImage {...rest} />
+import NextImage, { ImageProps } from "next/image";
 
-export default Image
+// @ts-ignore
+const Image = ({ ...rest }: ImageProps) => <img {...rest} />;
+
+export default Image;
