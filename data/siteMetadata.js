@@ -1,32 +1,32 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: "StCost's Dreams Blog",
-  author: 'StCost',
-  headerTitle: 'Occasional Dreams',
+  author: "StCost",
+  headerTitle: "Occasional Dreams",
   description:
-    'Blog for occasional random thoughts from deep dreams. Created with Next.js and Tailwind.css',
-  language: 'en-us',
-  theme: 'dark', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
-  siteLogo: '/static/images/logo.png',
-  socialBanner: '/static/images/twitter-card.png',
+    "Blog for occasional random thoughts from deep dreams. Created with Next.js and Tailwind.css",
+  language: "en-us",
+  theme: "dark", // system, dark or light
+  siteUrl: "https://tailwind-nextjs-starter-blog.vercel.app",
+  siteRepo: "https://github.com/timlrx/tailwind-nextjs-starter-blog",
+  siteLogo: "/static/images/logo.png",
+  socialBanner: "/static/images/twitter-card.png",
   // mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'kostya010511@gmail.com',
-  github: 'https://github.com/StCost',
+  email: "kostya010511@gmail.com",
+  github: "https://github.com/StCost",
   // twitter: 'https://twitter.com/Twitter',
   // facebook: 'https://facebook.com',
-  youtube: 'https://www.youtube.com/@StCost',
+  youtube: "https://www.youtube.com/@StCost",
   // linkedin: 'https://www.linkedin.com',
-  locale: 'en-US',
+  locale: "en-US",
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
     // supports Plausible, Simple Analytics, Umami, Posthog or Google Analytics.
     umamiAnalytics: {
       // We use an env variable for this site to avoid other users cloning our analytics ID
-      umamiWebsiteId: process.env.NEXT_UMAMI_ID, // e.g. 123e4567-e89b-12d3-a456-426614174000
-    },
+      umamiWebsiteId: process.env.NEXT_UMAMI_ID // e.g. 123e4567-e89b-12d3-a456-426614174000
+    }
     // plausibleAnalytics: {
     //   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
     // },
@@ -74,10 +74,10 @@ const siteMetadata = {
   //   },
   // },
   search: {
-    provider: 'kbar', // kbar or algolia
+    provider: "kbar", // kbar or algolia
     kbarConfig: {
-      searchDocumentsPath: 'search.json', // path to load documents to search
-    },
+      searchDocumentsPath: "search.json" // path to load documents to search
+    }
     // provider: 'algolia',
     // algoliaConfig: {
     //   // The application ID provided by Algolia
@@ -86,7 +86,7 @@ const siteMetadata = {
     //   apiKey: '599cec31baffa4868cae4e79f180729b',
     //   indexName: 'docsearch',
     // },
-  },
-}
+  }
+};
 
-module.exports = siteMetadata
+module.exports = siteMetadata;

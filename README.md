@@ -2,7 +2,7 @@
 
 Personal blog to practice Next.js and Tailwind CSS.
 
-[My blog deployed on Vercel](https://blog-stcost.vercel.app/)
+[My blog deployed on Vercel](https://stcost-blog.vercel.app/)
 
 Using the [Tailwind Nextjs](https://github.com/timlrx/tailwind-nextjs-starter-blog) template.
 
