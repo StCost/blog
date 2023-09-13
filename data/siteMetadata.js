@@ -7,7 +7,7 @@ const siteMetadata = {
     "Blog for occasional random thoughts from deep dreams. Created with Next.js and Tailwind.css",
   language: "en-us",
   theme: "dark", // system, dark or light
-  siteUrl: "https://stcost-blog.vercel.app/",
+  siteUrl: "https://dreaming-blog.vercel.app",
   siteRepo: "https://github.com/StCost/blog",
   siteLogo: "/static/images/logo.png",
   socialBanner: "/static/images/twitter-card.png",
