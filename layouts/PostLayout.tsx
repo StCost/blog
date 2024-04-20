@@ -74,7 +74,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">Name</dt>
                         <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        <dt className="sr-only">Author</dt>
+                        {/* <dt className="sr-only">Author</dt>
                         <dd>
                           <Link
                             href={`/about`}
@@ -82,7 +82,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           >
                             about me
                           </Link>
-                        </dd>
+                        </dd> */}
                       </dl>
                     </li>
                   ))}
