@@ -77,7 +77,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                         <dt className="sr-only">Author</dt>
                         <dd>
                           <Link
-                            href={`/about`}
+                            href={`/about/${author.about}`}
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           >
                             about me
