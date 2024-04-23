@@ -1,0 +1,19 @@
+---
+title: Unity performance tips
+date: '2024-03-20'
+tags: ['unity']
+draft: false
+summary: disable everything you don't need
+images: []
+---
+
+- disable AudioSource if it's too far away or can't be heard
+- disable Animator if not visible
+- on awake do not enable/disable objects, do it in editor beforehand
+- for procedural mesh collider - generate it on separate thread to not stall the main thread
+- AudioSource.PlayOneShot creates a new audio source, play it and destroy it. make your own pool solution instead
+- Debug.Log is very expensive, use it only for debugging
+- setting .name is expensive, do it only in editor
+- .tag == tag is expensive, use .CompareTag instead
+- build navmesh on separate thread (install NavMeshComponents)
+- sleeping rigidbody still wastes CPU. I destroy it if no player controls entity, but create it when someone gets control
