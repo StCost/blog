@@ -11,8 +11,6 @@ import siteMetadata from "@/data/siteMetadata";
 import ScrollTopAndComment from "@/components/ScrollTopAndComment";
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`;
-const discussUrl = (path) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`;
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: "long",
@@ -74,15 +72,15 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">Name</dt>
                         <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        {/* <dt className="sr-only">Author</dt>
+                        <dt className="sr-only">Author</dt>
                         <dd>
                           <Link
-                            href={`/about`}
+                            href={`/about/${author.slug}`}
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           >
                             about me
                           </Link>
-                        </dd> */}
+                        </dd>
                       </dl>
                     </li>
                   ))}

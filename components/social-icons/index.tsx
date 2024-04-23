@@ -1,4 +1,4 @@
-import { Mail, Github, Facebook, Youtube, Linkedin, Twitter, Mastodon } from "./icons";
+import { Mail, Github, Facebook, Youtube, Linkedin, Twitter, Mastodon, Instagram } from "./icons";
 
 const components = {
   mail: Mail,
@@ -7,7 +7,8 @@ const components = {
   youtube: Youtube,
   linkedin: Linkedin,
   twitter: Twitter,
-  mastodon: Mastodon
+  mastodon: Mastodon,
+  instagram: Instagram
 };
 
 type SocialIconProps = {
