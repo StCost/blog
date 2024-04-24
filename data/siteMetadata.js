@@ -4,7 +4,7 @@ const siteMetadata = {
   author: "StCost",
   headerTitle: "Occasional Dreams",
   description:
-    "Blog for occasional random thoughts from deep dreams. Created with Next.js and Tailwind.css",
+    "Blog for occasional random thoughts from deep dreams",
   language: "en-us",
   theme: "dark", // system, dark or light
   siteUrl: "https://dreaming-blog.vercel.app",
