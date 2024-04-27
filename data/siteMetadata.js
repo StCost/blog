@@ -1,8 +1,8 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: "Occasional Dreams",
+  title: "Dreaming Blog",
   author: "StCost",
-  headerTitle: "Occasional Dreams",
+  headerTitle: "Dreaming Blog",
   description:
     "Blog for occasional random thoughts from deep dreams",
   language: "en-us",
