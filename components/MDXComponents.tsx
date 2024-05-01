@@ -5,6 +5,7 @@ import type { MDXComponents } from "mdx/types";
 import Image from "./Image";
 import CustomLink from "./Link";
 import Audio from "./Audio";
+import Youtube from "./Youtube";
 
 export const components: MDXComponents = {
   Image,
@@ -12,5 +13,6 @@ export const components: MDXComponents = {
   a: CustomLink,
   pre: Pre,
   BlogNewsletterForm,
-  Audio
+  Audio,
+  Youtube
 };
