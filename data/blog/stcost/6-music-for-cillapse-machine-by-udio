@@ -1,0 +1,16 @@
+---
+title: Why I make COLLAPSE MACHINE
+date: '2024-04-30'
+tags: ['unity', 'COLLAPSE MACHINE']
+draft: false
+summary: Udio made some music for us
+---
+
+**[Wasteland Sovereign](https://www.udio.com/songs/nddoPshVpjrjtq9Vh5yTus)**
+
+<Audio
+    controls
+    preload="none"
+    style={{ width: "100%" }}
+    src="/static/audio/Wasteland Sovereign v2.1.mp3"
+/>
