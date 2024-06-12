@@ -21,6 +21,7 @@ import rehypePrismPlus from "rehype-prism-plus";
 import rehypePresetMinify from "rehype-preset-minify";
 import siteMetadata from "./data/siteMetadata";
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer.js";
+import { sortPostsWithSameDate } from "./app/sort-posts-with-same-date";
 
 const root = process.cwd();
 const isProduction = process.env.NODE_ENV === "production";
@@ -69,7 +70,7 @@ function createSearchIndex(allBlogs) {
   ) {
     writeFileSync(
       `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)).filter((doc) => !doc.hidden))
+      JSON.stringify(allCoreContent(sortPostsWithSameDate(sortPosts(allBlogs))).filter((doc) => !doc.hidden))
     );
     console.log("Local search index generated...");
   }

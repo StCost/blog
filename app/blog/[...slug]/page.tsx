@@ -12,6 +12,7 @@ import PostLayout from "@/layouts/PostLayout";
 import PostBanner from "@/layouts/PostBanner";
 import { Metadata } from "next";
 import siteMetadata from "@/data/siteMetadata";
+import { sortPostsWithSameDate } from "../../sort-posts-with-same-date";
 
 const defaultLayout = "PostLayout";
 const layouts = {
@@ -82,7 +83,7 @@ export const generateStaticParams = async () => {
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join("/"));
   // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(sortPosts(allBlogs)).filter(p => !p.hidden);
+  const sortedCoreContents = allCoreContent(sortPostsWithSameDate(sortPosts(allBlogs))).filter(p => !p.hidden);
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug);
   if (postIndex === -1) {
     return (
