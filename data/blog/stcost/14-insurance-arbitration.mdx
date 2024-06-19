@@ -11,9 +11,26 @@ Main goal of app is insurance arbitration. One person's car gets damaged by anot
 
 I managed tech team and code quality. Implemented, refactored, and reviewed every tiny piece of app: auth, admin create root, root create users. They create offer. Root creates keys, assigns to users. Users create and sign the offers. Another team user creates response and signs it.
 
-Sophisticated UI with smooth and quick UX was the main focus of app. Animations and effects provided visual feedback to user actions. Loading state, errors and success messages were shown in a user-friendly way.
+My biggest impact was in Login and auth flow, password changing, user create and manage, organisation create and manage, current user profile managing. Took part in implementing/improving every part of project. Discussed best API implementation for seamless frontend integration
+
+Kept high attention to code quality. Set up eslint + husky to prevent dirty code from being pushed to repo. Quickly pointed out code for improvements to team members, also personally fixed lots of places because was faster to make big changes on my own. Kept data interface formats consistent, so backend and frontend have correct names everywhere
+
+I was responsible for CI/CD, so we can quickly see and test new changes. Made sure deployments are always working
+
+Sophisticated UI with smooth and quick UX was the main focus of app. Animations and effects provided visual feedback to user actions. Loading state, errors and success messages were shown in a user-friendly way. Made reusable components
+Tailwind inline styles removed the need to have separate styles file for each component. Styles are directly in JS code. But much more comfortable than styled components from Material UI
 
 In the future, we also planned to add AI arbitration and training AI on the data we have. But comparing to competitors we had not big enough team to do it.
 
-#### Tech Stack: Next.js, React, TypeScript, Tailwind, shadcn, nextauth, react-chart-js-2, zod, zustand, husky, storybook
+#### My main goals
+- Implementing features and design on pages: Login (access tokens), Profile, Users, Organisations, Transactions, History, Offers, Keys, Wallet
+- Implementing reusable atoms (components such as Button, Input, Modal window, switch, pop up messages, toasts, modal windows, etc)
+- Optimisation and fixing any kinds of bugs. Making sure 0 warnings are in code
+- Refactoring code and adding documentation to make working with code much simpler
 
+#### Challenges and solutions
+- Project went extremely smooth with already familiar technologies, so I was the most experienced dev on the project. NextJs + tailwind were perfect for our design, so implementing it and connecting to logic was simple.
+- Other dev members had a lot of code inconsistencies, potentially leading to complications in future. But I made sure to fix every piece of code and make it easily expandable and maintainable. For me project was extremely simple to expand and manage existing code. Others weren’t so fast, so I requested a lot of changes in their PRs. Each new PR had less and less things to change. Until eventually we reached clean Press
+- Quite some time took full implementing of auth tokens and refreshing them. Not challenging, but took time to migrate all requests and logic to safely protected behind active access tokens, which must be validated on server. Implemented reusable fetchAPI utility, which sends request to server, server adds tokens for backend request, then frontend handles response, data types and success/error messages
+
+#### Tech Stack: Next.js, React, TypeScript, Tailwind, shadcn, nextauth, react-chart-js-2, zod, zustand, husky, storybook, Figma 
