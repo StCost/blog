@@ -1,8 +1,7 @@
 ---
 title: Unity performance tips
-date: '2024-03-20'
+date: '2024-09-22'
 tags: ['unity']
-draft: false
 summary: disable everything you don't need
 images: []
 ---
@@ -14,6 +13,16 @@ images: []
 - AudioSource.PlayOneShot creates a new audio source, play it and destroy it. make your own pool solution instead
 - Debug.Log is very expensive, use it only for debugging
 - setting .name is expensive, do it only in editor
-- .tag == tag is expensive, use .CompareTag instead
+- .tag == tag is expensive, use .CompareTag(tag) instead
 - build navmesh on separate thread (install NavMeshComponents)
 - sleeping rigidbody still wastes CPU. I destroy it if no player controls entity, but create it when someone gets control
+
+- Don't use CharacterController.OnControllerColliderHit(ControllerColliderHit other). It generates 80B of garbage each frame, because ControllerColliderHit is class recreated each frame. Better manuall check ground using SphereCast, which doesn't allocate anything (same as Raycast, they both are just check of distance to colliders)
+- Disable shadows on what is not important, or user basic shapes
+- Use cheap colliders. Sphere, or Box. Better avoid MeshCollider to save performance
+- Unity methods which return Array - always generate garbage. Carefully cache them before needed (e.g. meshRenderer.materials)
+- Dont change UI canvas each frame, it rerenders it
+- if using `yield return new WaitForSeconds();`, make sure to cache the Wait. It is recreated each frame (if looped), so allocated garbage
+
+- original date: '2024-03-20'
+- modified: '2024-09-22'
