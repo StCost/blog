@@ -1,6 +1,6 @@
-# My Third Blog Post
+# ✨ My Third Blessed Post
 
-This is the third and latest post on my blog, and I'm getting into a nice rhythm with writing and sharing my thoughts.
+This is the third and latest divine post on my blog, and I'm getting into a nice rhythm with writing and sharing my thoughts.
 
 ## Progress Update
 
@@ -113,7 +113,7 @@ This quote really resonates with how I approach development now. Clean, simple c
 
 ## Thank You!
 
-Thanks for reading my blog posts! It's been fun documenting this journey and sharing what I learn. Feel free to create your own posts by adding markdown files to the `public/posts/` directory.
+Thanks for reading my blog posts! It's been fun documenting this journey and sharing what I learn. Feel free to create your own posts by adding markdown files to the `src/posts/` directory.
 
 Remember: the filename number determines the display order, so higher numbers appear first in the list.
 

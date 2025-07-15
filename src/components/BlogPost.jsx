@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 
+// Auto-import all markdown files
+const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' })
+
 function BlogPost() {
   const { filename } = useParams()
   const [content, setContent] = useState('')
@@ -14,15 +17,18 @@ function BlogPost() {
         setLoading(true)
         setError(null)
         
-        // Fetch markdown file from public/posts directory
-        const response = await fetch(`/SaintBlog/posts/${filename}.md`)
+        // Find the matching post file
+        const postPath = Object.keys(postFiles).find(path => 
+          path.includes(`${filename}.md`)
+        )
         
-        if (!response.ok) {
+        if (!postPath) {
           throw new Error('Post not found')
         }
         
-        const text = await response.text()
-        setContent(text)
+        // Load the markdown content
+        const content = await postFiles[postPath]()
+        setContent(content)
       } catch (err) {
         setError(err.message)
       } finally {
