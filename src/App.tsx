@@ -14,7 +14,7 @@ const App = () => {
       <div className="container">
         <Routes>
           <Route path="/" element={<BlogList />} />
-          <Route path="/post/:filename" element={<BlogPost />} />
+          <Route path="/:filename" element={<BlogPost />} />
         </Routes>
       </div>
     </Router>

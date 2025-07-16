@@ -94,7 +94,7 @@ const BlogList = () => {
             {posts.map((post) => (
               <Link 
                 key={post.filename}
-                to={`/post/${post.filename.replace('.md', '')}`}
+                to={`/${post.filename.replace('.md', '')}`}
                 className="post-link"
               >
                 <li className="post-item">
