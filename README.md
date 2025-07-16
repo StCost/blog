@@ -31,10 +31,10 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 
 ## Adding Blog Posts
 
-1. Create a new markdown file in `public/posts/`
+1. Create a new markdown file in `src/posts/`
 2. Name it with a number prefix: `004-my-new-post.md`
 3. Higher numbers appear first in the list
-4. Update the `blogPosts` array in `src/components/BlogList.jsx`
+4. Posts are automatically discovered and imported - no manual updates needed!
 
 ### Example Post Structure
 
@@ -57,22 +57,6 @@ console.log('Hello, World!')
 - Lists
 - Are
 - Supported
-```
-
-### Updating the Post List
-
-Edit `src/components/BlogList.jsx` and add your new post to the `blogPosts` array:
-
-```javascript
-const blogPosts = [
-  { 
-    filename: '004-my-new-post.md', 
-    title: 'My New Blog Post',
-    excerpt: 'A brief description of the post...'
-  },
-  // ... existing posts
-]
-```
 
 ## GitHub Pages Deployment
 
@@ -101,11 +85,12 @@ npm run deploy
 ```
 SaintBlog/
 ├── public/
-│   └── posts/           # Markdown blog posts
-│       ├── 001-first-post.md
-│       ├── 002-second-post.md
-│       └── 003-third-post.md
+│   └── favicon.svg      # Site favicon
 ├── src/
+│   ├── posts/           # Markdown blog posts
+│   │   ├── 001-first-post.md
+│   │   ├── 002-second-post.md
+│   │   └── 003-third-post.md
 │   ├── components/
 │   │   ├── BlogList.jsx # Post listing page
 │   │   └── BlogPost.jsx # Individual post viewer
