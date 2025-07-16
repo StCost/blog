@@ -92,15 +92,16 @@ function BlogList() {
         ) : (
           <ul className="post-list">
             {posts.map((post) => (
-              <li key={post.filename} className="post-item">
-                <Link 
-                  to={`/post/${post.filename.replace('.md', '')}`}
-                  className="post-link"
-                >
+              <Link 
+                key={post.filename}
+                to={`/post/${post.filename.replace('.md', '')}`}
+                className="post-link"
+              >
+                <li className="post-item">
                   <h2 className="post-title">{post.title}</h2>
                   <p className="post-excerpt">{post.excerpt}</p>
-                </Link>
-              </li>
+                </li>
+              </Link>
             ))}
           </ul>
         )}
