@@ -74,7 +74,6 @@ function BlogList() {
       <>
         <header className="header">
           <h1>✨ Saint Blog 👼</h1>
-          <p>🙏 A blessed blog powered by React & Vite ⭐</p>
         </header>
         <div className="loading">Loading blessed posts...</div>
       </>
@@ -85,7 +84,6 @@ function BlogList() {
     <>
       <header className="header">
         <h1>✨ Saint Blog 👼</h1>
-        <p>🙏 A blessed blog powered by React & Vite ⭐</p>
       </header>
       
       <main>

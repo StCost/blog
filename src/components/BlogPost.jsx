@@ -43,7 +43,9 @@ function BlogPost() {
     return (
       <>
         <Link to="/" className="back-link">← Back to posts</Link>
-        <div className="loading">Loading post...</div>
+        <article className="post-content">
+          <div className="loading">Loading post...</div>
+        </article>
       </>
     )
   }

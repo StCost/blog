@@ -33,6 +33,37 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   line-height: 1.6;
+  /* Make scrollbar always visible and overlay */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+/* Custom always-visible scrollbar with transparent interior and border */
+::-webkit-scrollbar {
+  width: 12px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 2px solid rgba(255, 140, 66, 0.4);
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border-color: rgba(255, 171, 112, 0.4);
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: auto;
+  scrollbar-color: rgba(255, 140, 66, 0.4) transparent;
+
 }
 
 .container {
@@ -98,6 +129,7 @@ body {
   border-radius: 6px;
   padding: 2rem;
   line-height: 1.7;
+  min-height: 87vh;
 }
 
 .post-content h1,
