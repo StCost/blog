@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
+import config from '../config.js'
 
 // Auto-import all markdown files
 const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' })
@@ -23,7 +24,7 @@ function BlogPost() {
         )
         
         if (!postPath) {
-          throw new Error('Post not found')
+          throw new Error(config.ui.postNotFound)
         }
         
         // Load the markdown content
@@ -42,9 +43,9 @@ function BlogPost() {
   if (loading) {
     return (
       <>
-        <Link to="/" className="back-link">← Back to posts</Link>
+        <Link to="/" className="back-link">{config.ui.backToPosts}</Link>
         <article className="post-content">
-          <div className="loading">Loading post...</div>
+          <div className="loading">{config.ui.loadingPost}</div>
         </article>
       </>
     )
@@ -53,7 +54,7 @@ function BlogPost() {
   if (error) {
     return (
       <>
-        <Link to="/" className="back-link">← Back to posts</Link>
+        <Link to="/" className="back-link">{config.ui.backToPosts}</Link>
         <div className="error">Error: {error}</div>
       </>
     )
@@ -61,7 +62,7 @@ function BlogPost() {
 
   return (
     <>
-      <Link to="/" className="back-link">← Back to posts</Link>
+      <Link to="/" className="back-link">{config.ui.backToPosts}</Link>
       <article className="post-content">
         <ReactMarkdown>{content}</ReactMarkdown>
       </article>

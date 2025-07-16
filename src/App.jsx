@@ -1,8 +1,15 @@
+import { useEffect } from 'react'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import BlogList from './components/BlogList'
 import BlogPost from './components/BlogPost'
+import { initializeDocumentMeta } from './utils'
 
 function App() {
+  useEffect(() => {
+    // Initialize document meta data from configuration
+    initializeDocumentMeta()
+  }, [])
+
   return (
     <Router future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
       <div className="container">

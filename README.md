@@ -6,6 +6,7 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 
 - 🌙 **Dark Mode**: Beautiful GitHub-inspired dark theme
 - 📝 **Markdown Support**: Write posts in markdown format
+- ⚙️ **Configurable**: Centralized configuration for all text and settings
 - 🔄 **Auto-sorting**: Posts sorted by number in filename (descending)
 - ⚡ **Fast**: Built with Vite for lightning-fast development
 - 🚀 **GitHub Pages Ready**: Deploy easily with GitHub Actions
@@ -110,14 +111,45 @@ SaintBlog/
 │   │   └── BlogPost.jsx # Individual post viewer
 │   ├── App.jsx          # Main app component
 │   ├── main.jsx         # React entry point
+│   ├── config.js        # Centralized configuration
+│   ├── utils.js         # Utility functions
 │   └── index.css        # Dark theme styles
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml   # GitHub Actions deployment
+├── CONFIG.md            # Configuration guide
 ├── package.json
 ├── vite.config.js
 └── index.html
 ```
+
+## Configuration
+
+Saint Blog now uses a centralized configuration system! All text, settings, and customization options are located in `src/config.js`.
+
+### Quick Setup
+
+1. **Open** `src/config.js`
+2. **Update** these essential settings:
+   ```javascript
+   site: {
+     title: "Your Blog Name",
+     description: "Your blog description",
+     tagline: "Your subtitle",
+     author: "Your Name",
+     url: "https://yourusername.github.io/SaintBlog/"
+   }
+   ```
+3. **Save** and restart your dev server
+
+### Full Configuration Guide
+
+See **[CONFIG.md](CONFIG.md)** for complete documentation on all available options including:
+- UI text and messages
+- SEO and meta tags  
+- Theme settings
+- Social media links
+- Feature toggles
 
 ## Customization
 
@@ -125,16 +157,14 @@ SaintBlog/
 
 Edit `src/index.css` to customize the dark theme colors and layout.
 
-### Blog Info
+### Advanced Configuration
 
-Update the blog title and description in `src/components/BlogList.jsx`:
-
-```javascript
-<header className="header">
-  <h1>Your Blog Name</h1>
-  <p>Your blog description</p>
-</header>
-```
+The configuration system allows you to customize:
+- Loading messages and error text
+- Post excerpt length
+- SEO keywords and meta tags
+- Social media integration
+- Future feature toggles
 
 ### Base URL
 

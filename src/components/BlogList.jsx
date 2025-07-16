@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import config from '../config.js'
 
 // Auto-import all markdown files from posts directory
 const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' })
@@ -8,12 +9,12 @@ const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' })
 const extractPostMeta = (content) => {
   const lines = content.split('\n')
   const titleLine = lines.find(line => line.startsWith('# '))
-  const title = titleLine ? titleLine.replace('# ', '').trim() : 'Untitled Post'
+  const title = titleLine ? titleLine.replace('# ', '').trim() : config.ui.defaultTitle
   
   // Get first paragraph as excerpt (skip title and empty lines)
   const contentLines = lines.slice(lines.findIndex(line => line.startsWith('# ')) + 1)
   const firstParagraph = contentLines.find(line => line.trim() && !line.startsWith('#'))
-  const excerpt = firstParagraph ? firstParagraph.trim().substring(0, 100) + '...' : 'No excerpt available...'
+  const excerpt = firstParagraph ? firstParagraph.trim().substring(0, config.blog.excerptLength) + '...' : config.ui.defaultExcerpt
   
   return { title, excerpt }
 }
@@ -69,13 +70,15 @@ function BlogList() {
 
     loadPosts()
   }, [])
+  
   if (loading) {
     return (
       <>
         <header className="header">
-          <h1>✨ Saint Blog 👼</h1>
+          <h1>{config.site.title}</h1>
+          {config.site.tagline && <p>{config.site.tagline}</p>}
         </header>
-        <div className="loading">Loading blessed posts...</div>
+        <div className="loading">{config.ui.loadingPosts}</div>
       </>
     )
   }
@@ -83,12 +86,13 @@ function BlogList() {
   return (
     <>
       <header className="header">
-        <h1>✨ Saint Blog 👼</h1>
+        <h1>{config.site.title}</h1>
+        {config.site.tagline && <p>{config.site.tagline}</p>}
       </header>
       
       <main>
         {posts.length === 0 ? (
-          <div className="loading">No posts found. Add some .md files to public/posts/ directory!</div>
+          <div className="loading">{config.ui.noPosts}</div>
         ) : (
           <ul className="post-list">
             {posts.map((post) => (
