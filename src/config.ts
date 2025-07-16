@@ -1,6 +1,6 @@
-// Blog Configuration
-export const config = {
-  // Site Information
+import { Config } from './types';
+
+export const config: Config = {
   site: {
     title: "✨ Saint Blog 👼",
     description: "A blessed collection of thoughts and musings",
@@ -10,7 +10,6 @@ export const config = {
     favicon: "/favicon.svg"
   },
 
-  // SEO and Meta Tags
   meta: {
     keywords: "blog, thoughts, inspiration, writing",
     language: "en",
@@ -18,29 +17,18 @@ export const config = {
     ogImage: "/og-image.jpg"
   },
 
-  // UI Text and Messages
   ui: {
-    // Loading messages
     loadingPosts: "Loading blessed posts...",
     loadingPost: "Loading post...",
-    
-    // Error messages
     postNotFound: "Post not found",
     noPosts: "No posts found. Add some .md files to public/posts/ directory!",
-    
-    // Navigation
     backToPosts: "← Back to posts",
-    
-    // Post metadata
     defaultTitle: "Untitled Post",
     defaultExcerpt: "No excerpt available...",
-    
-    // Actions
     readMore: "Read more...",
     share: "Share this post"
   },
 
-  // Blog Settings
   blog: {
     postsDirectory: "../posts",
     excerptLength: 100,
@@ -51,7 +39,6 @@ export const config = {
     enableComments: false
   },
 
-  // Theme and Layout
   theme: {
     primaryColor: "#ff8c42",
     darkMode: true,
@@ -59,7 +46,6 @@ export const config = {
     animations: true
   },
 
-  // Social Links (optional)
   social: {
     github: "",
     twitter: "",
@@ -68,7 +54,6 @@ export const config = {
     rss: "/feed.xml"
   },
 
-  // Features
   features: {
     search: false,
     tags: false,
@@ -76,6 +61,6 @@ export const config = {
     analytics: false,
     rss: false
   }
-}
+};
 
-export default config 
+export default config; 
