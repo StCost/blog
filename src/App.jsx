@@ -4,7 +4,7 @@ import BlogPost from './components/BlogPost'
 
 function App() {
   return (
-    <Router>
+    <Router future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
       <div className="container">
         <Routes>
           <Route path="/" element={<BlogList />} />
