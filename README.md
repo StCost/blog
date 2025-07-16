@@ -78,12 +78,12 @@ npm run deploy
 1. Go to your repository settings
 2. Navigate to "Pages" section
 3. Set source to "GitHub Actions"
-4. The site will be available at `https://yourusername.github.io/SaintBlog/`
+4. The site will be available at `https://yourusername.github.io/blog/`
 
 ## Project Structure
 
 ```
-SaintBlog/
+blog/
 ├── public/
 │   └── favicon.svg      # Site favicon
 ├── src/
@@ -122,7 +122,7 @@ Saint Blog now uses a centralized configuration system! All text, settings, and 
      description: "Your blog description",
      tagline: "Your subtitle",
      author: "Your Name",
-     url: "https://yourusername.github.io/SaintBlog/"
+     url: "https://yourusername.github.io/blog/"
    }
    ```
 3. **Save** and restart your dev server
