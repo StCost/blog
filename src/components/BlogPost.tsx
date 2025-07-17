@@ -3,12 +3,14 @@ import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import config from '../config';
 import { PostParams } from '../types';
+import ShareButton from './ShareButton';
 
 const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' });
 
 const BlogPost = () => {
   const { filename } = useParams<PostParams>();
   const [content, setContent] = useState<string>('');
+  const [postTitle, setPostTitle] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,6 +30,11 @@ const BlogPost = () => {
         
         const content = await postFiles[postPath]();
         setContent(content);
+        
+        // Extract title from markdown content (first # heading)
+        const titleMatch = content.match(/^#\s+(.+)$/m);
+        const title = titleMatch ? titleMatch[1] : config.ui.defaultTitle;
+        setPostTitle(title);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Unknown error';
         setError(errorMessage);
@@ -66,6 +73,13 @@ const BlogPost = () => {
       <Link to="/" className="back-link">{config.ui.backToPosts}</Link>
       <article className="post-content">
         <ReactMarkdown>{content}</ReactMarkdown>
+        <div className="post-actions">
+          <ShareButton 
+            title={postTitle}
+            url={window.location.href}
+            className="post-share-button"
+          />
+        </div>
       </article>
     </>
   );
