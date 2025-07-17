@@ -75,14 +75,14 @@ const BlogPost = () => {
       <article className="post-content">
         <ReactMarkdown>{content}</ReactMarkdown>
         <div className="post-actions">
+          <GitHubEditButton 
+            filename={`${filename}.md`}
+            className="post-edit-button"
+          />
           <ShareButton 
             title={postTitle}
             url={window.location.href}
             className="post-share-button"
-          />
-          <GitHubEditButton 
-            filename={`${filename}.md`}
-            className="post-edit-button"
           />
         </div>
       </article>
