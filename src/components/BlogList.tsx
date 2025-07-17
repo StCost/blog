@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import config from '../config';
 import { BlogPost, BlogPostMeta } from '../types';
+import NewPostButton from './NewPostButton';
 
 const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' });
 
@@ -105,6 +106,10 @@ const BlogList = () => {
             ))}
           </ul>
         )}
+        
+        <div className="new-post-section">
+          <NewPostButton className="new-post-button-main" />
+        </div>
       </main>
     </>
   );

@@ -67,13 +67,15 @@ theme: {
 ### Social Links
 ```javascript
 social: {
-  github: "",                         // GitHub profile URL
+  github: "https://github.com/yourusername/SaintBlog", // GitHub repo URL (required for edit/new post buttons)
   twitter: "",                        // Twitter profile URL
   linkedin: "",                       // LinkedIn profile URL
   email: "",                          // Contact email
   rss: "/feed.xml"                    // RSS feed URL
 }
 ```
+
+**Important**: The GitHub URL is required for the "Edit on GitHub" and "New Post" buttons to work. Make sure to set this to your actual repository URL.
 
 ### Feature Toggles
 ```javascript
@@ -101,6 +103,7 @@ features: {
 - [ ] Set `site.tagline` for your subtitle
 - [ ] Update `site.author` with your name
 - [ ] Set `site.url` to your domain
+- [ ] Set `social.github` to your GitHub repository URL (for edit/new post buttons)
 
 ### Optional Customizations
 - [ ] Adjust `blog.excerptLength` for longer/shorter previews
@@ -166,4 +169,33 @@ const MyComponent = () => {
 **Breaking the app?**
 - Check that all quotes and commas are properly formatted
 - Ensure no trailing commas after the last property
-- Verify the JavaScript syntax is valid 
+- Verify the JavaScript syntax is valid
+
+## New Features
+
+### GitHub Integration
+
+The blog now includes GitHub integration for easy post editing and creation:
+
+#### Edit on GitHub Button
+- Appears on individual blog post pages
+- Links directly to edit the current post file on GitHub
+- GitHub will handle authentication and permissions
+- Users can make changes and create pull requests
+
+#### New Post Button
+- Located at the bottom of the home page
+- Opens GitHub's "Create new file" interface in the posts directory
+- **Auto-numbering**: Automatically suggests the next available number (e.g., `004-new-post.md`)
+- Allows quick creation of new blog posts
+- GitHub handles the commit process
+
+#### Setup Requirements
+1. Set `social.github` in your config to your repository URL
+2. Ensure your repository is public or users have appropriate access
+3. The buttons will automatically work once the GitHub URL is configured
+
+#### Example GitHub URL Format
+```
+https://github.com/yourusername/SaintBlog
+``` 

@@ -47,7 +47,7 @@ export const config: Config = {
   },
 
   social: {
-    github: "",
+    github: "https://github.com/StCost/blog",
     twitter: "",
     linkedin: "",
     email: "",

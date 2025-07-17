@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import config from '../config';
 import { PostParams } from '../types';
 import ShareButton from './ShareButton';
+import GitHubEditButton from './GitHubEditButton';
 
 const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' });
 
@@ -78,6 +79,10 @@ const BlogPost = () => {
             title={postTitle}
             url={window.location.href}
             className="post-share-button"
+          />
+          <GitHubEditButton 
+            filename={`${filename}.md`}
+            className="post-edit-button"
           />
         </div>
       </article>

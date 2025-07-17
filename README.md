@@ -11,6 +11,8 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 - ⚡ **Fast**: Built with Vite for lightning-fast development
 - 🚀 **GitHub Pages Ready**: Deploy easily with GitHub Actions
 - 🔗 **Hash Routing**: Works perfectly with GitHub Pages
+- ✏️ **GitHub Integration**: Edit posts and create new ones directly on GitHub
+- 📤 **Social Sharing**: Share posts on X (Twitter) with one click
 
 ## Quick Start
 
@@ -31,10 +33,24 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 
 ## Adding Blog Posts
 
+### Method 1: Manual File Creation
 1. Create a new markdown file in `src/posts/`
 2. Name it with a number prefix: `004-my-new-post.md`
 3. Higher numbers appear first in the list
 4. Posts are automatically discovered and imported - no manual updates needed!
+
+### Method 2: Using the New Post Button (Recommended)
+1. Click the "New Post" button at the bottom of the home page
+2. This opens GitHub's file creation interface with a pre-filled filename
+3. The filename is automatically numbered (e.g., `004-new-post.md`) based on existing posts
+4. Write your post in markdown format
+5. Commit the changes - GitHub handles the rest!
+
+### Editing Posts
+- Click the "Edit on GitHub" button on any blog post page
+- Make your changes directly on GitHub
+- GitHub handles authentication and permissions
+- Perfect for quick fixes and updates
 
 ### Example Post Structure
 
