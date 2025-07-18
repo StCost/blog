@@ -8,8 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "type-check": "tsc --noEmit",
-    "analyze": "vite build --mode analyze"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "markdown-it": "^14.1.0",
