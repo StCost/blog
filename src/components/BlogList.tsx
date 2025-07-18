@@ -25,25 +25,30 @@ const BlogList = () => {
   useEffect(() => {
     const loadPosts = async (): Promise<void> => {
       try {
-        const loadedPosts: BlogPost[] = [];
+        const results = await Promise.allSettled(
+          Object.entries(postFiles).map(async ([path, loader]) => {
+            const content = await loader();
+            const filename = path.split('/').pop();
+            
+            if (!filename) throw new Error('Invalid filename');
+            
+            const { title, excerpt } = extractPostMeta(content);
+            
+            return {
+              filename,
+              title,
+              excerpt,
+              content
+            };
+          })
+        );
         
-        for (const [path, loader] of Object.entries(postFiles)) {
-          const content = await loader();
-          const filename = path.split('/').pop();
-          
-          if (!filename) continue;
-          
-          const { title, excerpt } = extractPostMeta(content);
-          
-          loadedPosts.push({
-            filename,
-            title,
-            excerpt,
-            content
-          });
-        }
-        
-        const sortedPosts = loadedPosts.sort((a, b) => {
+        const loadedPosts = (results
+        .map(result => result.status === 'fulfilled' ? result.value : null)
+        .filter(Boolean) as BlogPost[])
+        .sort((a, b) => {
+          if (!a || !b) return 0;
+
           const numA = a.filename.match(/^(\d+)/)?.[0];
           const numB = b.filename.match(/^(\d+)/)?.[0];
           
@@ -57,7 +62,7 @@ const BlogList = () => {
           return a.filename.localeCompare(b.filename);
         });
         
-        setPosts(sortedPosts);
+        setPosts(loadedPosts);
       } catch (error) {
         console.error('Error loading posts:', error);
       } finally {
@@ -69,15 +74,7 @@ const BlogList = () => {
   }, []);
   
   if (loading) {
-    return (
-      <>
-        <header className="header">
-          <h1>{config.site.title}</h1>
-          {config.site.tagline && <p>{config.site.tagline}</p>}
-        </header>
-        <div className="loading">{config.ui.loadingPosts}</div>
-      </>
-    );
+    return null;
   }
 
   return (
