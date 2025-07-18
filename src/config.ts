@@ -4,7 +4,7 @@ export const config: Config = {
   site: {
     title: "🎊 COLLAPSE MACHINE 🚘",
     description: "✨ Dreaming Saints 👼 developing my co-op FPS open world dream-game",
-    tagline: "COLLAPSE MACHINE",
+    tagline: "✨ Dreaming Saints 👼 developing my co-op FPS open world dream-game",
     author: "StCost",
     url: "https://stcost.github.io/blog/",
     favicon: "/favicon.svg"
