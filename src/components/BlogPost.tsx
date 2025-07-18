@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import MarkdownIt from 'markdown-it';
 import config from '../config';
 import { PostParams } from '../types';
 import ShareButton from './ShareButton';
 import GitHubEditButton from './GitHubEditButton';
 
 const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' });
+const md = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+  breaks: true
+});
 
 const BlogPost = () => {
   const { filename } = useParams<PostParams>();
@@ -29,11 +35,12 @@ const BlogPost = () => {
           throw new Error(config.ui.postNotFound);
         }
         
-        const content = await postFiles[postPath]();
-        setContent(content);
+        const markdownContent = await postFiles[postPath]();
+        const htmlContent = md.render(markdownContent);
+        setContent(htmlContent);
         
         // Extract title from markdown content (first # heading)
-        const titleMatch = content.match(/^#\s+(.+)$/m);
+        const titleMatch = markdownContent.match(/^#\s+(.+)$/m);
         const title = titleMatch ? titleMatch[1] : config.ui.defaultTitle;
         setPostTitle(title);
       } catch (err) {
@@ -73,7 +80,7 @@ const BlogPost = () => {
     <>
       <Link to="/" className="back-link">{config.ui.backToPosts}</Link>
       <article className="post-content">
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
         <div className="post-actions">
           <GitHubEditButton 
             filename={`${filename}.md`}
