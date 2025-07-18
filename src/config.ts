@@ -2,18 +2,18 @@ import { Config } from './types';
 
 export const config: Config = {
   site: {
-    title: "✨ Saint Blog 👼",
-    description: "A blessed collection of thoughts and musings",
-    tagline: "Sharing divine inspiration, one post at a time",
-    author: "Saint Blogger",
-    url: "https://your-domain.com",
+    title: "✨ Dreaming Saints Blog 👼",
+    description: "Dreaming Saints developing COLLAPSE MACHINE",
+    tagline: "COLLAPSE MACHINE",
+    author: "StCost",
+    url: "https://stcost.github.io/blog/",
     favicon: "/favicon.svg"
   },
 
   meta: {
-    keywords: "blog, thoughts, inspiration, writing",
+    keywords: "blog, thoughts, inspiration, writing, game dev, indie game, indie game dev, indie game studio, indie game development, indie game development studio, indie game development blog, indie game development studio blog, indie game development studio blog",
     language: "en",
-    twitterHandle: "@yourblog",
+    twitterHandle: "@dreamingsaints",
     ogImage: "/og-image.jpg"
   },
 
