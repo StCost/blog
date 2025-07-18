@@ -3,8 +3,8 @@ import { Config } from './types';
 export const config: Config = {
   site: {
     title: "🎊 COLLAPSE MACHINE 🚘",
-    description: "✨ Dreaming Saints 👼 developing my co-op FPS open world dream-game",
-    tagline: "✨ Dreaming Saints 👼 developing my co-op FPS open world dream-game",
+    description: "✨ Dreaming Saints 👼 studio developing: COLLAPSE MACHINE",
+    tagline: "✨ Dreaming Saints 👼 studio developing my co-op FPS open world dream-game: COLLAPSE MACHINE",
     author: "StCost",
     url: "https://stcost.github.io/blog/",
     favicon: "/favicon.svg"
