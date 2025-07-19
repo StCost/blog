@@ -73,13 +73,13 @@ const BlogPost = () => {
     <>
       <Link to="/" className="back-link">{config.ui.backToPosts}</Link>
       <article className="post-content">
-        <small className="post-filename">{filename}.md</small>
+        <small className="post-filename">
+          <GitHubEditButton filename={`${filename}.md`}>
+            {filename}.md
+          </GitHubEditButton>
+        </small>
         <ReactMarkdown>{content}</ReactMarkdown>
         <div className="post-actions">
-          <GitHubEditButton 
-            filename={`${filename}.md`}
-            className="post-edit-button"
-          />
           <ShareButton 
             title={postTitle}
             url={window.location.href}
