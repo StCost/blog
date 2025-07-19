@@ -23,6 +23,7 @@ const BlogList = ({ posts }: { posts: BlogPost[] }) => (
                 className="post-link"
               >
                 <li className="post-item">
+                  <small className="post-filename">{post.filename}</small>
                   <h2 className="post-title">{post.title}</h2>
                   <p className="post-excerpt">{post.excerpt}</p>
                 </li>
