@@ -11,8 +11,7 @@ const extractPostMeta = (content: string): BlogPostMeta => {
     
     const contentLines = lines.slice(lines.findIndex(line => line.startsWith('# ')) + 1);
     const firstParagraph = contentLines.find(line => line.trim() && !line.startsWith('#'));
-    const excerpt = firstParagraph ? firstParagraph.trim().substring(0, config.blog.excerptLength) + '...' : config.ui.defaultExcerpt;
-    
+    const excerpt = (firstParagraph ? firstParagraph.trim().substring(0, config.blog.excerptLength) + '...' : config.ui.defaultExcerpt).replace(/\*\*/g, '');
     return { title, excerpt };
   };
   
