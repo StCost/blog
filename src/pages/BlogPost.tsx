@@ -1,10 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
-import MarkdownWithImages from './MarkdownWithImages';
 import config from '../config';
 import { PostParams } from '../types';
-import ShareButton from './ShareButton';
-import GitHubEditButton from './GitHubEditButton';
+import ShareButton from '../components/ShareButton';
+import GitHubEditButton from '../components/GitHubEditButton';
 import { usePostByFilename } from '../usePosts';
+import { hasImage } from '../utils/imageParser';
+import ReactMarkdown from 'react-markdown';
+import { lazy } from 'react';
+const ReactMarkdownWithImages = lazy(() => import('../components/MarkdownWithImages'));
 
 const BlogPost = () => {
   const { filename } = useParams<PostParams>();
@@ -35,11 +38,12 @@ const BlogPost = () => {
       <Link to="/" className="back-link">{config.ui.backToPosts}</Link>
       <article className="post-content">
         <small className="post-filename">
-          <GitHubEditButton filename={`${filename}.md`}>
-            {filename}.md
-          </GitHubEditButton>
+          <GitHubEditButton filename={`${filename}.md`}/>
         </small>
-        <MarkdownWithImages>{content}</MarkdownWithImages>
+        {hasImage(content) 
+          ? <ReactMarkdownWithImages>{content}</ReactMarkdownWithImages> 
+          : <ReactMarkdown>{content}</ReactMarkdown>
+        }
         <div className="post-actions">
           <ShareButton 
             title={postTitle}

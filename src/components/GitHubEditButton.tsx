@@ -3,11 +3,9 @@ import config from '../config';
 
 interface GitHubEditButtonProps {
   filename: string;
-  className?: string;
-  children: React.ReactNode;
 }
 
-const GitHubEditButton: React.FC<GitHubEditButtonProps> = ({ filename, className = '', children }) => {
+const GitHubEditButton: React.FC<GitHubEditButtonProps> = ({ filename }) => {
   const handleEdit = () => {
     // Construct GitHub edit URL
     // Format: https://github.com/{username}/{repo}/edit/main/src/posts/{filename}
@@ -35,12 +33,12 @@ const GitHubEditButton: React.FC<GitHubEditButtonProps> = ({ filename, className
   return (
     <span 
       onClick={handleEdit}
-      className={`github-edit-button ${className}`}
+      className={`github-edit-button`}
       title="Edit post file on GitHub"
       aria-label="Edit this post file on GitHub"
       style={{ cursor: 'pointer' }}
     >
-      {children}
+      {filename}
     </span>
   );
 };

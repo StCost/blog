@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import config from '../config';
-import NewPostButton from './NewPostButton';
+import NewPostButton from '../components/NewPostButton';
 import { BlogPost } from '../types';
-
 
 const BlogList = ({ posts }: { posts: BlogPost[] }) => (
     <>

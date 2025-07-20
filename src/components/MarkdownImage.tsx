@@ -8,7 +8,7 @@ interface ImageProps {
   className?: string;
 }
 
-const Image: React.FC<ImageProps> = ({ 
+const MarkdownImage: React.FC<ImageProps> = ({ 
   src, 
   alt = 'Image', 
   width, 
@@ -83,4 +83,4 @@ const Image: React.FC<ImageProps> = ({
   );
 };
 
-export default Image; 
+export default MarkdownImage; 

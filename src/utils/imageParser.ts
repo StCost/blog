@@ -6,6 +6,9 @@ export interface ParsedImage {
   originalTag: string;
 }
 
+export const hasImage = (content: string): boolean =>
+  /<img[^>]*src="([^"]+)"[^>]*>/.test(content);
+
 export const parseImages = (content: string): ParsedImage[] => {
   const images: ParsedImage[] = [];
   
