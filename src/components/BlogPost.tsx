@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import MarkdownWithImages from './MarkdownWithImages';
 import config from '../config';
 import { PostParams } from '../types';
 import ShareButton from './ShareButton';
@@ -78,7 +78,7 @@ const BlogPost = () => {
             {filename}.md
           </GitHubEditButton>
         </small>
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <MarkdownWithImages>{content}</MarkdownWithImages>
         <div className="post-actions">
           <ShareButton 
             title={postTitle}
