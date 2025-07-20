@@ -85,4 +85,4 @@ export interface Config {
 
 export interface PostParams extends Record<string, string | undefined> {
   filename?: string;
-} 
+}

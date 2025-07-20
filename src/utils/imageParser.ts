@@ -11,28 +11,28 @@ export const hasImage = (content: string): boolean =>
 
 export const parseImages = (content: string): ParsedImage[] => {
   const images: ParsedImage[] = [];
-  
+
   // Regex to match any img tags
   const imgRegex = /<img[^>]*src="([^"]+)"[^>]*>/gi;
-  
+
   let match;
   while ((match = imgRegex.exec(content)) !== null) {
     const fullTag = match[0];
     const src = match[1];
-    
+
     // Extract additional attributes
     const altMatch = fullTag.match(/alt="([^"]*)"/i);
     const widthMatch = fullTag.match(/width="([^"]*)"/i);
     const heightMatch = fullTag.match(/height="([^"]*)"/i);
-    
+
     images.push({
       src,
       alt: altMatch ? altMatch[1] : undefined,
       width: widthMatch ? widthMatch[1] : undefined,
       height: heightMatch ? heightMatch[1] : undefined,
-      originalTag: fullTag
+      originalTag: fullTag,
     });
   }
-  
+
   return images;
 };

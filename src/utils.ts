@@ -1,4 +1,4 @@
-import config from './config';
+import config from "./config";
 
 interface MetaTag {
   property?: string;
@@ -11,18 +11,22 @@ export const updateDocumentTitle = (title?: string): void => {
 };
 
 export const updateMetaTags = (): void => {
-  let descMeta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+  let descMeta = document.querySelector(
+    'meta[name="description"]',
+  ) as HTMLMetaElement | null;
   if (!descMeta) {
-    descMeta = document.createElement('meta');
-    descMeta.name = 'description';
+    descMeta = document.createElement("meta");
+    descMeta.name = "description";
     document.head.appendChild(descMeta);
   }
   descMeta.content = config.site.description;
 
-  let keywordsMeta = document.querySelector('meta[name="keywords"]') as HTMLMetaElement | null;
+  let keywordsMeta = document.querySelector(
+    'meta[name="keywords"]',
+  ) as HTMLMetaElement | null;
   if (!keywordsMeta) {
-    keywordsMeta = document.createElement('meta');
-    keywordsMeta.name = 'keywords';
+    keywordsMeta = document.createElement("meta");
+    keywordsMeta.name = "keywords";
     document.head.appendChild(keywordsMeta);
   }
   keywordsMeta.content = config.meta.keywords;
@@ -33,35 +37,39 @@ export const updateMetaTags = (): void => {
 
 const updateOpenGraphTags = (): void => {
   const ogTags: MetaTag[] = [
-    { property: 'og:title', content: config.site.title },
-    { property: 'og:description', content: config.site.description },
-    { property: 'og:url', content: config.site.url },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:image', content: config.meta.ogImage }
+    { property: "og:title", content: config.site.title },
+    { property: "og:description", content: config.site.description },
+    { property: "og:url", content: config.site.url },
+    { property: "og:type", content: "website" },
+    { property: "og:image", content: config.meta.ogImage },
   ];
 
   ogTags.forEach(({ property, content }) => {
-    let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
+    let meta = document.querySelector(
+      `meta[property="${property}"]`,
+    ) as HTMLMetaElement | null;
     if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute('property', property!);
+      meta = document.createElement("meta");
+      meta.setAttribute("property", property!);
       document.head.appendChild(meta);
     }
     meta.content = content;
   });
 
   const twitterTags: MetaTag[] = [
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:site', content: config.meta.twitterHandle },
-    { name: 'twitter:title', content: config.site.title },
-    { name: 'twitter:description', content: config.site.description },
-    { name: 'twitter:image', content: config.meta.ogImage }
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:site", content: config.meta.twitterHandle },
+    { name: "twitter:title", content: config.site.title },
+    { name: "twitter:description", content: config.site.description },
+    { name: "twitter:image", content: config.meta.ogImage },
   ];
 
   twitterTags.forEach(({ name, content }) => {
-    let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
+    let meta = document.querySelector(
+      `meta[name="${name}"]`,
+    ) as HTMLMetaElement | null;
     if (!meta) {
-      meta = document.createElement('meta');
+      meta = document.createElement("meta");
       meta.name = name!;
       document.head.appendChild(meta);
     }
@@ -72,4 +80,4 @@ const updateOpenGraphTags = (): void => {
 export const initializeDocumentMeta = (): void => {
   updateDocumentTitle();
   updateMetaTags();
-}; 
+};

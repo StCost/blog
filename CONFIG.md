@@ -7,6 +7,7 @@ This guide explains how to customize your Saint Blog using the configuration fil
 All blog settings and text are centralized in `src/config.js`. This file contains various sections for different aspects of the blog:
 
 ### Site Information
+
 ```javascript
 site: {
   title: "✨ Saint Blog 👼",           // Main blog title
@@ -19,6 +20,7 @@ site: {
 ```
 
 ### UI Text and Messages
+
 ```javascript
 ui: {
   loadingPosts: "Loading blessed posts...",     // Loading message for post list
@@ -32,6 +34,7 @@ ui: {
 ```
 
 ### Blog Settings
+
 ```javascript
 blog: {
   postsDirectory: "../posts",          // Directory containing markdown files
@@ -45,6 +48,7 @@ blog: {
 ```
 
 ### SEO and Meta Tags
+
 ```javascript
 meta: {
   keywords: "blog, thoughts, inspiration, writing", // SEO keywords
@@ -55,6 +59,7 @@ meta: {
 ```
 
 ### Theme Settings
+
 ```javascript
 theme: {
   primaryColor: "#ff8c42",            // Primary accent color
@@ -65,6 +70,7 @@ theme: {
 ```
 
 ### Social Links
+
 ```javascript
 social: {
   github: "https://github.com/yourusername/SaintBlog", // GitHub repo URL (required for edit/new post buttons)
@@ -78,6 +84,7 @@ social: {
 **Important**: The GitHub URL is required for the "Edit on GitHub" and "New Post" buttons to work. Make sure to set this to your actual repository URL.
 
 ### Feature Toggles
+
 ```javascript
 features: {
   search: false,                      // Enable search functionality
@@ -98,6 +105,7 @@ features: {
 ## Quick Customization Checklist
 
 ### Essential Changes
+
 - [ ] Update `site.title` with your blog name
 - [ ] Change `site.description` for SEO
 - [ ] Set `site.tagline` for your subtitle
@@ -106,6 +114,7 @@ features: {
 - [ ] Set `social.github` to your GitHub repository URL (for edit/new post buttons)
 
 ### Optional Customizations
+
 - [ ] Adjust `blog.excerptLength` for longer/shorter previews
 - [ ] Customize loading and error messages in `ui` section
 - [ ] Add your social media links in `social` section
@@ -115,40 +124,44 @@ features: {
 ## Advanced Usage
 
 ### Accessing Config in Components
+
 ```javascript
-import config from '../config.js'
+import config from "../config.js";
 
 // Use in your component
 const MyComponent = () => {
-  return <h1>{config.site.title}</h1>
-}
+  return <h1>{config.site.title}</h1>;
+};
 ```
 
 ### Dynamic Title Updates
+
 ```javascript
-import { updateDocumentTitle } from '../utils'
+import { updateDocumentTitle } from "../utils";
 
 // Update page title dynamically
-updateDocumentTitle("Custom Page Title")
+updateDocumentTitle("Custom Page Title");
 ```
 
 ### Adding New Configuration Options
 
 1. Add your new option to `src/config.js`:
+
 ```javascript
 ui: {
   // ... existing options
-  myNewMessage: "Hello World!"
+  myNewMessage: "Hello World!";
 }
 ```
 
 2. Use it in your components:
+
 ```javascript
-import config from '../config.js'
+import config from "../config.js";
 
 const MyComponent = () => {
-  return <p>{config.ui.myNewMessage}</p>
-}
+  return <p>{config.ui.myNewMessage}</p>;
+};
 ```
 
 ## Tips
@@ -162,11 +175,13 @@ const MyComponent = () => {
 ## Troubleshooting
 
 **Config changes not showing?**
+
 - Make sure you saved the file
 - Restart the development server
 - Check browser console for errors
 
 **Breaking the app?**
+
 - Check that all quotes and commas are properly formatted
 - Ensure no trailing commas after the last property
 - Verify the JavaScript syntax is valid
@@ -178,12 +193,14 @@ const MyComponent = () => {
 The blog now includes GitHub integration for easy post editing and creation:
 
 #### Edit on GitHub Button
+
 - Appears on individual blog post pages
 - Links directly to edit the current post file on GitHub
 - GitHub will handle authentication and permissions
 - Users can make changes and create pull requests
 
 #### New Post Button
+
 - Located at the bottom of the home page
 - Opens GitHub's "Create new file" interface in the posts directory
 - **Auto-numbering**: Automatically suggests the next available number (e.g., `004-new-post.md`)
@@ -191,11 +208,13 @@ The blog now includes GitHub integration for easy post editing and creation:
 - GitHub handles the commit process
 
 #### Setup Requirements
+
 1. Set `social.github` in your config to your repository URL
 2. Ensure your repository is public or users have appropriate access
 3. The buttons will automatically work once the GitHub URL is configured
 
 #### Example GitHub URL Format
+
 ```
 https://github.com/yourusername/SaintBlog
-``` 
+```

@@ -1,20 +1,22 @@
-import { Config } from './types';
+import { Config } from "./types";
 
 export const config: Config = {
   site: {
     title: "🎊 COLLAPSE MACHINE 🚘",
     description: "✨ Dreaming Saints 👼 studio developing: COLLAPSE MACHINE",
-    tagline: "✨ Dreaming Saints 👼 studio developing my co-op FPS open world dream-game: COLLAPSE MACHINE",
+    tagline:
+      "✨ Dreaming Saints 👼 studio developing my co-op FPS open world dream-game: COLLAPSE MACHINE",
     author: "StCost",
     url: "https://stcost.github.io/blog/",
-    favicon: "/favicon.svg"
+    favicon: "/favicon.svg",
   },
 
   meta: {
-    keywords: "blog, thoughts, inspiration, writing, game dev, indie game, indie game dev, indie game studio, indie game development, indie game development studio, indie game development blog, indie game development studio blog, indie game development studio blog",
+    keywords:
+      "blog, thoughts, inspiration, writing, game dev, indie game, indie game dev, indie game studio, indie game development, indie game development studio, indie game development blog, indie game development studio blog, indie game development studio blog",
     language: "en",
     twitterHandle: "@dreamingsaints",
-    ogImage: "/og-image.jpg"
+    ogImage: "/og-image.jpg",
   },
 
   ui: {
@@ -26,7 +28,7 @@ export const config: Config = {
     defaultTitle: "Untitled Post",
     defaultExcerpt: "No excerpt available...",
     readMore: "Read more...",
-    share: "Share this post"
+    share: "Share this post",
   },
 
   blog: {
@@ -36,14 +38,14 @@ export const config: Config = {
     dateFormat: "MMMM d, yyyy",
     showDates: false,
     showAuthor: false,
-    enableComments: false
+    enableComments: false,
   },
 
   theme: {
     primaryColor: "#ff8c42",
     darkMode: true,
     showScrollbar: true,
-    animations: true
+    animations: true,
   },
 
   social: {
@@ -51,7 +53,7 @@ export const config: Config = {
     twitter: "",
     linkedin: "",
     email: "",
-    rss: "/feed.xml"
+    rss: "/feed.xml",
   },
 
   features: {
@@ -59,8 +61,8 @@ export const config: Config = {
     tags: false,
     categories: false,
     analytics: false,
-    rss: false
-  }
+    rss: false,
+  },
 };
 
-export default config; 
+export default config;

@@ -15,18 +15,21 @@ When a blog post contains an `<img>` tag (like `<img width="2552" height="861" a
 ## Components Created
 
 ### `CustomImage.tsx`
+
 - Custom React component for displaying any images
 - Handles loading states with spinner animation
 - Error handling with fallback options
 - Responsive design with hover effects
 
 ### `MarkdownWithImages.tsx`
+
 - Wrapper around ReactMarkdown that intercepts image tags
 - Automatically detects any HTML img tags
 - Replaces them with the custom `CustomImage` component
 - Preserves regular markdown image handling
 
 ### `imageParser.ts`
+
 - Utility functions for parsing any image URLs
 - Extracts image attributes (src, alt, width, height)
 - Helper functions for checking content and extracting URLs
@@ -40,6 +43,7 @@ The feature is automatically enabled for all blog posts. When you include any im
 ```
 
 It will be automatically processed and displayed with:
+
 - Loading spinner while the image loads
 - Error handling if the image fails to load
 - Responsive design that works on all screen sizes
@@ -69,6 +73,7 @@ The feature adds several CSS classes for styling:
 ## Example
 
 In your markdown post:
+
 ```markdown
 # My Blog Post
 
@@ -85,4 +90,4 @@ The image above will be automatically processed and displayed with loading state
 - Integrates with ReactMarkdown's component system
 - Handles CORS and network errors gracefully
 - Maintains backward compatibility with regular markdown images
-- Includes TypeScript interfaces for type safety 
+- Includes TypeScript interfaces for type safety

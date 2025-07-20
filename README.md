@@ -17,11 +17,13 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 ## Quick Start
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Start development server:**
+
    ```bash
    npm run dev
    ```
@@ -34,12 +36,14 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 ## Adding Blog Posts
 
 ### Method 1: Manual File Creation
+
 1. Create a new markdown file in `src/posts/`
 2. Name it with a number prefix: `004-my-new-post.md`
 3. Higher numbers appear first in the list
 4. Posts are automatically discovered and imported - no manual updates needed!
 
 ### Method 2: Using the New Post Button (Recommended)
+
 1. Click the "New Post" button at the bottom of the home page
 2. This opens GitHub's file creation interface with a pre-filled filename
 3. The filename is automatically numbered (e.g., `004-new-post.md`) based on existing posts
@@ -47,6 +51,7 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 5. Commit the changes - GitHub handles the rest!
 
 ### Editing Posts
+
 - Click the "Edit on GitHub" button on any blog post page
 - Make your changes directly on GitHub
 - GitHub handles authentication and permissions
@@ -54,19 +59,20 @@ A super quick and simple GitHub Pages blog built with Vite + React, featuring da
 
 ### Example Post Structure
 
-```markdown
+````markdown
 # My Blog Post Title
 
 Your content here...
 
 ## Subheading
 
-More content with **bold** and *italic* text.
+More content with **bold** and _italic_ text.
 
 ```javascript
 // Code blocks are supported
-console.log('Hello, World!')
+console.log("Hello, World!");
 ```
+````
 
 > Blockquotes work too!
 
@@ -146,8 +152,9 @@ Saint Blog now uses a centralized configuration system! All text, settings, and 
 ### Full Configuration Guide
 
 See **[CONFIG.md](CONFIG.md)** for complete documentation on all available options including:
+
 - UI text and messages
-- SEO and meta tags  
+- SEO and meta tags
 - Theme settings
 - Social media links
 - Feature toggles
@@ -161,6 +168,7 @@ Edit `src/index.css` to customize the dark theme colors and layout.
 ### Advanced Configuration
 
 The configuration system allows you to customize:
+
 - Loading messages and error text
 - Post excerpt length
 - SEO keywords and meta tags
@@ -174,9 +182,9 @@ If your repository name is different, update the `base` in `vite.config.js`:
 ```javascript
 export default defineConfig({
   plugins: [react()],
-  base: '/YourRepoName/',
+  base: "/YourRepoName/",
   // ...
-})
+});
 ```
 
 ## Technologies Used
@@ -194,4 +202,4 @@ MIT License - feel free to use this for your own blog!
 
 ---
 
-Happy blogging! 🚀  
+Happy blogging! 🚀

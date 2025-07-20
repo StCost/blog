@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface ImageProps {
   src: string;
@@ -8,14 +8,14 @@ interface ImageProps {
   className?: string;
 }
 
-const MarkdownImage: React.FC<ImageProps> = ({ 
-  src, 
-  alt = 'Image', 
-  width, 
-  height, 
-  className = '' 
+const MarkdownImage: React.FC<ImageProps> = ({
+  src,
+  alt = "Image",
+  width,
+  height,
+  className = "",
 }) => {
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,11 +24,11 @@ const MarkdownImage: React.FC<ImageProps> = ({
       try {
         setLoading(true);
         setError(null);
-        console.log('Loading image:', src);
+        console.log("Loading image:", src);
         setImageUrl(src);
       } catch (err) {
-        console.error('Error loading image:', err);
-        setError('Failed to load image');
+        console.error("Error loading image:", err);
+        setError("Failed to load image");
         // Still try to display the original URL as fallback
         setImageUrl(src);
       } finally {
@@ -70,17 +70,17 @@ const MarkdownImage: React.FC<ImageProps> = ({
       width={width}
       height={height}
       className={`custom-image ${className}`}
-      onError={() => setError('Image failed to load')}
+      onError={() => setError("Image failed to load")}
       style={{
-        maxWidth: '100%',
-        height: 'auto',
-        borderRadius: '6px',
-        margin: '1rem 0',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
-        transition: 'box-shadow 0.2s ease'
+        maxWidth: "100%",
+        height: "auto",
+        borderRadius: "6px",
+        margin: "1rem 0",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
+        transition: "box-shadow 0.2s ease",
       }}
     />
   );
 };
 
-export default MarkdownImage; 
+export default MarkdownImage;
