@@ -47,4 +47,47 @@ const usePosts = (): { posts: BlogPost[], loading: boolean } => {
   return { posts, loading };
 };
 
-export { usePosts };
+const usePostByFilename = (filename: string | undefined) => {
+  const [content, setContent] = useState<string>('');
+  const [postTitle, setPostTitle] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPost = async (): Promise<void> => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const postPath = Object.keys(postFiles).find(path => 
+          path.includes(`${filename}.md`)
+        );
+        
+        if (!postPath) {
+          throw new Error(config.ui.postNotFound);
+        }
+        
+        const content = await postFiles[postPath]();
+        setContent(content);
+        
+        // Extract title from markdown content (first # heading)
+        const titleMatch = content.match(/^#\s+(.+)$/m);
+        const title = titleMatch ? titleMatch[1] : config.ui.defaultTitle;
+        setPostTitle(title);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+        setError(errorMessage);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (filename) {
+      loadPost();
+    }
+  }, [filename]);
+
+  return { content, title: postTitle, loading, error };
+};
+
+export { usePosts, usePostByFilename };
