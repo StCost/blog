@@ -5,6 +5,7 @@ import config from '../config';
 import { PostParams } from '../types';
 import ShareButton from './ShareButton';
 import GitHubEditButton from './GitHubEditButton';
+import ClipboardToBase64 from './ClipboardToBase64';
 
 const postFiles = import.meta.glob('../posts/*.md', { as: 'raw' });
 
@@ -87,6 +88,7 @@ const BlogPost = () => {
           />
         </div>
       </article>
+      <ClipboardToBase64 />
     </>
   );
 };
