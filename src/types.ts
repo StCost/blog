@@ -25,50 +25,22 @@ export interface UIConfig {
   backToPosts: string;
   defaultTitle: string;
   defaultExcerpt: string;
-  readMore: string;
-  share: string;
 }
 
 export interface BlogConfig {
   postsDirectory: string;
   excerptLength: number;
-  postsPerPage: number;
-  dateFormat: string;
-  showDates: boolean;
-  showAuthor: boolean;
-  enableComments: boolean;
-}
-
-export interface ThemeConfig {
-  primaryColor: string;
-  darkMode: boolean;
-  showScrollbar: boolean;
-  animations: boolean;
 }
 
 export interface SocialConfig {
   github: string;
-  twitter: string;
-  linkedin: string;
-  email: string;
-  rss: string;
-}
-
-export interface FeaturesConfig {
-  search: boolean;
-  tags: boolean;
-  categories: boolean;
-  analytics: boolean;
-  rss: boolean;
 }
 
 export interface Config {
   site: SiteConfig;
   ui: UIConfig;
   blog: BlogConfig;
-  theme: ThemeConfig;
   social: SocialConfig;
-  features: FeaturesConfig;
 }
 
 export interface PostParams extends Record<string, string | undefined> {
