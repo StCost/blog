@@ -4,12 +4,15 @@ import { PostParams } from "../types";
 import ShareButton from "../components/ShareButton";
 import GitHubEditButton from "../components/GitHubEditButton";
 import { usePostByFilename } from "../usePosts";
-import { hasImage } from "../utils/imageParser";
 import ReactMarkdown from "react-markdown";
-import { lazy } from "react";
-const ReactMarkdownWithImages = lazy(
-  () => import("../components/MarkdownWithImages"),
-);
+
+// replace <img> tags with ![]()
+// why: GitHub .md editor allows to CTRL+V paste images, they uploaded to GitHub and returned as <img> tags. replaced to basic markdown syntax to display on our site
+const replaceImageTags = (content: string) =>
+  content.replace(
+    /<img[^>]*src="([^"]+)"[^>]*>/gi,
+    (_, src) => `![${src}](${src})`,
+  );
 
 const BlogPost = () => {
   const { filename } = useParams<PostParams>();
@@ -53,11 +56,7 @@ const BlogPost = () => {
         <small className="post-filename">
           <GitHubEditButton filename={`${filename}.md`} />
         </small>
-        {hasImage(content) ? (
-          <ReactMarkdownWithImages>{content}</ReactMarkdownWithImages>
-        ) : (
-          <ReactMarkdown>{content}</ReactMarkdown>
-        )}
+        <ReactMarkdown>{replaceImageTags(content)}</ReactMarkdown>
         <div className="post-actions">
           <ShareButton
             title={postTitle}
