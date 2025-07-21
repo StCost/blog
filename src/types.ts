@@ -14,18 +14,7 @@ export interface BlogPostMeta {
 
 export interface SiteConfig {
   title: string;
-  description: string;
   tagline: string;
-  author: string;
-  url: string;
-  favicon: string;
-}
-
-export interface MetaConfig {
-  keywords: string;
-  language: string;
-  twitterHandle: string;
-  ogImage: string;
 }
 
 export interface UIConfig {
@@ -75,7 +64,6 @@ export interface FeaturesConfig {
 
 export interface Config {
   site: SiteConfig;
-  meta: MetaConfig;
   ui: UIConfig;
   blog: BlogConfig;
   theme: ThemeConfig;

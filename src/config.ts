@@ -1,22 +1,14 @@
 import { Config } from "./types";
 
+/**
+ * NOTE: also visit index.html to configure meta tags
+ */
+
 export const config: Config = {
   site: {
     title: "🎊 COLLAPSE MACHINE 🚘",
-    description: "✨ Dreaming Saints 👼 studio developing: COLLAPSE MACHINE",
     tagline:
       "✨ Dreaming Saints 👼 studio developing my co-op FPS open world dream-game: COLLAPSE MACHINE",
-    author: "StCost",
-    url: "https://stcost.github.io/blog/",
-    favicon: "/favicon.svg",
-  },
-
-  meta: {
-    keywords:
-      "blog, thoughts, inspiration, writing, game dev, indie game, indie game dev, indie game studio, indie game development, indie game development studio, indie game development blog, indie game development studio blog, indie game development studio blog",
-    language: "en",
-    twitterHandle: "@dreamingsaints",
-    ogImage: "/og-image.jpg",
   },
 
   ui: {

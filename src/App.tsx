@@ -1,15 +1,10 @@
-import { lazy, useEffect } from "react";
+import { lazy } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 const BlogList = lazy(() => import("./pages/BlogList"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
-import { initializeDocumentMeta } from "./utils";
 import { usePosts } from "./usePosts";
 
 const App = () => {
-  useEffect(() => {
-    initializeDocumentMeta();
-  }, []);
-
   const { posts, loading } = usePosts();
 
   if (loading) {
