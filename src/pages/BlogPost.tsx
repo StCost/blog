@@ -58,11 +58,7 @@ const BlogPost = () => {
         </small>
         <ReactMarkdown>{replaceImageTags(content)}</ReactMarkdown>
         <div className="post-actions">
-          <ShareButton
-            title={postTitle}
-            url={window.location.href}
-            className="post-share-button"
-          />
+          <ShareButton title={postTitle} url={window.location.href} />
         </div>
       </article>
     </>

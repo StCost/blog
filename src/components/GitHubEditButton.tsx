@@ -33,9 +33,7 @@ const GitHubEditButton: React.FC<GitHubEditButtonProps> = ({ filename }) => {
   return (
     <span
       onClick={handleEdit}
-      className={`github-edit-button`}
-      title="Edit post file on GitHub"
-      aria-label="Edit this post file on GitHub"
+      className="github-edit-button"
       style={{ cursor: "pointer" }}
     >
       {filename}

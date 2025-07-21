@@ -32,7 +32,7 @@ const BlogList = ({ posts }: { posts: BlogPost[] }) => (
       )}
 
       <div className="new-post-section">
-        <NewPostButton className="new-post-button-main" />
+        <NewPostButton />
       </div>
     </main>
   </>

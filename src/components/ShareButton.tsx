@@ -3,14 +3,9 @@ import React from "react";
 interface ShareButtonProps {
   title: string;
   url: string;
-  className?: string;
 }
 
-const ShareButton: React.FC<ShareButtonProps> = ({
-  title,
-  url,
-  className = "",
-}) => {
+const ShareButton: React.FC<ShareButtonProps> = ({ title, url }) => {
   const handleShare = () => {
     // Encode the title and URL for Twitter
     const encodedTitle = encodeURIComponent(title);
@@ -24,12 +19,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   };
 
   return (
-    <button
-      onClick={handleShare}
-      className={`share-button ${className}`}
-      title="Share on X (Twitter)"
-      aria-label="Share this post on X (Twitter)"
-    >
+    <button onClick={handleShare} className="share-button post-share-button">
       <svg
         width="20"
         height="20"

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import config from "../config";
 
-interface NewPostButtonProps {
-  className?: string;
-}
-
 const postFiles = import.meta.glob("../posts/*.md", { as: "raw" });
 
-const NewPostButton: React.FC<NewPostButtonProps> = ({ className = "" }) => {
+const NewPostButton: React.FC = () => {
   const [nextNumber, setNextNumber] = useState<number>(1);
 
   useEffect(() => {
@@ -65,9 +61,7 @@ const NewPostButton: React.FC<NewPostButtonProps> = ({ className = "" }) => {
   return (
     <button
       onClick={handleNewPost}
-      className={`new-post-button ${className}`}
-      title="Create New Post"
-      aria-label="Create a new blog post on GitHub"
+      className="new-post-button new-post-button-main"
     >
       <svg
         width="20"
