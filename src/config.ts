@@ -1,5 +1,9 @@
 import { Config } from "./types";
 
+/**
+ * NOTE: also visit index.html to configure meta tags
+ */
+
 export const config: Config = {
   site: {
     title: "🎊 COLLAPSE MACHINE 🚘",
