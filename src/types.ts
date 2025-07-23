@@ -32,15 +32,10 @@ export interface BlogConfig {
   excerptLength: number;
 }
 
-export interface SocialConfig {
-  github: string;
-}
-
 export interface Config {
   site: SiteConfig;
   ui: UIConfig;
   blog: BlogConfig;
-  social: SocialConfig;
 }
 
 export interface PostParams extends Record<string, string | undefined> {

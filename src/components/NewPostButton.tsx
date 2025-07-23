@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import config from "../config";
+import { generateNewPostUrl } from "../utils/githubLinks";
 
 const postFiles = import.meta.glob("../posts/*.md", { as: "raw" });
 
@@ -16,7 +16,6 @@ const NewPostButton: React.FC = () => {
       let maxNumber = 0;
 
       filenames.forEach((filename) => {
-        // Extract number from filename (e.g., "001-first-post.md" -> 1)
         const numberMatch = filename.match(/^(\d+)/);
         if (numberMatch) {
           const number = parseInt(numberMatch[1], 10);
@@ -33,28 +32,15 @@ const NewPostButton: React.FC = () => {
   }, []);
 
   const handleNewPost = () => {
-    // Construct GitHub new file URL with prefilled filename
-    // Format: https://github.com/{username}/{repo}/new/main/src/posts?filename={nextNumber}-new-post.md
-    const githubUrl = config.social.github;
-
-    if (!githubUrl) {
-      console.warn("GitHub URL not configured in config.ts");
-      return;
-    }
-
-    // Extract username and repo from GitHub URL
-    const githubMatch = githubUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
-    if (!githubMatch) {
-      console.warn("Invalid GitHub URL format in config.ts");
-      return;
-    }
-
-    const [, username, repo] = githubMatch;
     const paddedNumber = nextNumber.toString().padStart(3, "0");
     const suggestedFilename = `${paddedNumber}-new-post.md`;
-    const newPostUrl = `https://github.com/${username}/${repo}/new/main/src/posts?filename=${encodeURIComponent(suggestedFilename)}`;
+    const newPostUrl = generateNewPostUrl(suggestedFilename);
 
-    // Open in new window
+    if (!newPostUrl) {
+      console.warn("Failed to generate GitHub new post URL");
+      return;
+    }
+
     window.open(newPostUrl, "_blank");
   };
 

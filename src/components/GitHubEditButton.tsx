@@ -1,5 +1,5 @@
 import React from "react";
-import config from "../config";
+import { generateEditUrl } from "../utils/githubLinks";
 
 interface GitHubEditButtonProps {
   filename: string;
@@ -7,26 +7,13 @@ interface GitHubEditButtonProps {
 
 const GitHubEditButton: React.FC<GitHubEditButtonProps> = ({ filename }) => {
   const handleEdit = () => {
-    // Construct GitHub edit URL
-    // Format: https://github.com/{username}/{repo}/edit/main/src/posts/{filename}
-    const githubUrl = config.social.github;
+    const editUrl = generateEditUrl(filename);
 
-    if (!githubUrl) {
-      console.warn("GitHub URL not configured in config.ts");
+    if (!editUrl) {
+      console.warn("Failed to generate GitHub edit URL");
       return;
     }
 
-    // Extract username and repo from GitHub URL
-    const githubMatch = githubUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
-    if (!githubMatch) {
-      console.warn("Invalid GitHub URL format in config.ts");
-      return;
-    }
-
-    const [, username, repo] = githubMatch;
-    const editUrl = `https://github.com/${username}/${repo}/edit/main/src/posts/${filename}`;
-
-    // Open in new window
     window.open(editUrl, "_blank");
   };
 

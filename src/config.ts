@@ -1,9 +1,5 @@
 import { Config } from "./types";
 
-/**
- * NOTE: also visit index.html to configure meta tags
- */
-
 export const config: Config = {
   site: {
     title: "🎊 COLLAPSE MACHINE 🚘",
@@ -24,10 +20,6 @@ export const config: Config = {
   blog: {
     postsDirectory: "../posts",
     excerptLength: 100,
-  },
-
-  social: {
-    github: "https://github.com/StCost/blog",
   },
 };
 
