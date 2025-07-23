@@ -8,7 +8,7 @@ export const config: Config = {
   site: {
     title: "🎊 COLLAPSE MACHINE 🚘",
     tagline:
-      "✨ Dreaming Saints 👼 studio developing my co-op FPS open world dream-game: COLLAPSE MACHINE",
+      "✨ Dreaming Saints 👼 studio, developing my co-op FPS open world dream-game",
   },
 
   ui: {
