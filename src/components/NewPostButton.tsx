@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { generateNewPostUrl } from "../utils/githubLinks";
+import { generateNewPostUrl } from "../utils/externalLinks";
 
 const postFiles = import.meta.glob("../posts/*.md", { as: "raw" });
 
