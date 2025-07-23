@@ -1,11 +1,11 @@
-import React from "react";
+import { FC } from "react";
 
 interface ShareButtonProps {
   title: string;
   url: string;
 }
 
-const ShareButton: React.FC<ShareButtonProps> = ({ title, url }) => {
+const ShareButton: FC<ShareButtonProps> = ({ title, url }) => {
   const handleShare = () => {
     // Encode the title and URL for Twitter
     const encodedTitle = encodeURIComponent(title);

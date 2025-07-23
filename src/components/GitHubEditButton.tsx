@@ -1,11 +1,11 @@
-import React from "react";
+import { FC } from "react";
 import { generateEditUrl } from "../utils/githubLinks";
 
 interface GitHubEditButtonProps {
   filename: string;
 }
 
-const GitHubEditButton: React.FC<GitHubEditButtonProps> = ({ filename }) => {
+const GitHubEditButton: FC<GitHubEditButtonProps> = ({ filename }) => {
   const handleEdit = () => {
     const editUrl = generateEditUrl(filename);
 
