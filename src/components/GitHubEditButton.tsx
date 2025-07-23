@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { generateEditUrl } from "../utils/externalLinks";
+import { generateEditUrl } from "../helpers/externalLinks";
 
 interface GitHubEditButtonProps {
   filename: string;

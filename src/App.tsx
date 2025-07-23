@@ -1,8 +1,8 @@
 import { lazy } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, HashRouter as Router, Routes } from "react-router-dom";
+import { usePosts } from "./helpers/usePosts";
 const BlogList = lazy(() => import("./pages/BlogList"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
-import { usePosts } from "./usePosts";
 
 const App = () => {
   const { posts, loading } = usePosts();

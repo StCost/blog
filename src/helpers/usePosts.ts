@@ -1,8 +1,8 @@
-import { BlogPost, BlogPostMeta } from "./types";
-import config from "./config";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import config from "../config";
+import { BlogPost, BlogPostMeta } from "../types";
 
-const postFiles = import.meta.glob("./posts/*.md", { as: "raw" });
+const postFiles = import.meta.glob("../posts/*.md", { as: "raw" });
 
 const extractPostMeta = (content: string): BlogPostMeta => {
   const lines = content.split("\n");
@@ -106,4 +106,5 @@ const usePostByFilename = (filename: string | undefined) => {
   return { content, title: postTitle, loading, error };
 };
 
-export { usePosts, usePostByFilename };
+export { usePostByFilename, usePosts };
+

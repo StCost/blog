@@ -1,10 +1,10 @@
-import { useParams, Link } from "react-router-dom";
-import config from "../config";
-import { PostParams } from "../types";
-import ShareButton from "../components/ShareButton";
-import GitHubEditButton from "../components/GitHubEditButton";
-import { usePostByFilename } from "../usePosts";
 import ReactMarkdown from "react-markdown";
+import { Link, useParams } from "react-router-dom";
+import GitHubEditButton from "../components/GitHubEditButton";
+import ShareButton from "../components/ShareButton";
+import config from "../config";
+import { usePostByFilename } from "../helpers/usePosts";
+import { PostParams } from "../types";
 
 // replace <img> tags with ![]()
 // why: GitHub .md editor allows to CTRL+V paste images, they uploaded to GitHub and returned as <img> tags. replaced to basic markdown syntax to display on our site
