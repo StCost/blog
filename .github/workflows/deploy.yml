@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install React packages
+      - name: Initialize and install React
         run: |
           npm init -y
           npm install react react-dom
@@ -38,34 +38,35 @@ jobs:
 
           echo "body { font-family: sans-serif; background: #f4f4f4; padding: 2rem; } h1 { color: #333; }" > dist/style.css
 
-          node - <<EOF
-            import fs from 'fs';
-            import { renderToStaticMarkup } from 'react-dom/server';
-            import React from 'react';
+          node <<EOF
+          const fs = require('fs');
+          const React = require('react');
+          const ReactDOMServer = require('react-dom/server');
 
-            const App = () => React.createElement("h1", null, "Hello from React on GitHub Actions!");
+          const App = () => React.createElement("h1", null, "Hello from React on GitHub Actions!");
 
-            const html = renderToStaticMarkup(React.createElement(App));
+          const html = ReactDOMServer.renderToStaticMarkup(React.createElement(App));
 
-            const fullHtml = \`<!DOCTYPE html>
-            <html>
-              <head>
-                <meta charset="UTF-8" />
-                <title>Static React Site</title>
-                <link rel="stylesheet" href="style.css" />
-              </head>
-              <body>
-                <div id="root">\${html}</div>
-              </body>
-            </html>\`;
+          const fullHtml = \`<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Static React Page</title>
+            <link rel="stylesheet" href="style.css" />
+          </head>
+          <body>
+            <div id="root">\${html}</div>
+          </body>
+          </html>\`;
 
-            fs.writeFileSync("dist/index.html", fullHtml);
+          fs.writeFileSync("dist/index.html", fullHtml);
           EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload static site
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
