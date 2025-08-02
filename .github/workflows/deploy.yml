@@ -1,4 +1,4 @@
-name: Static React Build + Deploy
+name: Build and Deploy Vite React to GitHub Pages
 
 on:
   push:
@@ -19,57 +19,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: "18"
+          cache: "npm"
 
-      - name: Initialize and install React
-        run: |
-          npm init -y
-          npm install react react-dom
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Build static site
-        run: |
-          mkdir -p dist
+      - name: Build with Vite
+        run: npm run build
 
-          echo "body { font-family: sans-serif; background: #f4f4f4; padding: 2rem; } h1 { color: #333; }" > dist/style.css
-
-          node <<EOF
-          const fs = require('fs');
-          const React = require('react');
-          const ReactDOMServer = require('react-dom/server');
-
-          const App = () => React.createElement("h1", null, "Hello from React on GitHub Actions!");
-
-          const html = ReactDOMServer.renderToStaticMarkup(React.createElement(App));
-
-          const fullHtml = \`<!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Static React Page</title>
-            <link rel="stylesheet" href="style.css" />
-          </head>
-          <body>
-            <div id="root">\${html}</div>
-          </body>
-          </html>\`;
-
-          fs.writeFileSync("dist/index.html", fullHtml);
-          EOF
-
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload artifact
+      - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          path: ./dist
 
   deploy:
     needs: build
