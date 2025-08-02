@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Static React Build + Deploy
 
 on:
   push:
@@ -26,28 +26,56 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: "npm"
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install React packages
+        run: |
+          npm init -y
+          npm install react react-dom
 
-      - name: Build
-        run: npm run build
+      - name: Build static site
+        run: |
+          mkdir -p dist
+
+          echo "body { font-family: sans-serif; background: #f4f4f4; padding: 2rem; } h1 { color: #333; }" > dist/style.css
+
+          node - <<EOF
+            import fs from 'fs';
+            import { renderToStaticMarkup } from 'react-dom/server';
+            import React from 'react';
+
+            const App = () => React.createElement("h1", null, "Hello from React on GitHub Actions!");
+
+            const html = renderToStaticMarkup(React.createElement(App));
+
+            const fullHtml = \`<!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="UTF-8" />
+                <title>Static React Site</title>
+                <link rel="stylesheet" href="style.css" />
+              </head>
+              <body>
+                <div id="root">\${html}</div>
+              </body>
+            </html>\`;
+
+            fs.writeFileSync("dist/index.html", fullHtml);
+          EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload artifact
+      - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
 
     steps:
       - name: Deploy to GitHub Pages
