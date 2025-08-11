@@ -3,7 +3,6 @@
 *A technical deep-dive into generating real-time item icons for game inventories using Unity's HDRP and camera rendering systems*
 
 <img width="676" height="98" alt="image" src="https://github.com/user-attachments/assets/35123d2c-604d-445c-ad53-d0412662b19d" />
-<br/>
 <img width="181" height="381" alt="image" src="https://github.com/user-attachments/assets/5aecee15-0bf9-461f-a950-a0344d44f200" />
 
 
