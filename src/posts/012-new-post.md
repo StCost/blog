@@ -2,6 +2,11 @@
 
 *A technical deep-dive into generating real-time item icons for game inventories using Unity's HDRP and camera rendering systems*
 
+<img width="676" height="98" alt="image" src="https://github.com/user-attachments/assets/35123d2c-604d-445c-ad53-d0412662b19d" />
+<br/>
+<img width="181" height="381" alt="image" src="https://github.com/user-attachments/assets/5aecee15-0bf9-461f-a950-a0344d44f200" />
+
+
 ## The Problem: Static Icons vs Dynamic Content
 
 Picture this: you're building a survival game with hundreds of different items, weapons, and tools. Your traditional approach would be to manually create icon textures for each item in Photoshop, import them into Unity, and assign them to your inventory UI. But what happens when you have:
