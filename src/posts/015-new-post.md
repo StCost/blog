@@ -1,4 +1,4 @@
-# WH40k Darktide: Bones of Cowardice
+# WH40k Darktide: Biggest Coward
 
 The squad plunged into the underhive, a blur of fire and psychic screams. Two psykers crackled with warp-light, a zealot roared hymns through a storm of gore—and behind them, **Rukk** shuffled, eyes wide, ripper gun clutched like a child’s toy.  
 
