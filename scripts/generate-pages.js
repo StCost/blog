@@ -54,12 +54,14 @@ function readBlogConfig() {
 
 const YOUTUBE_WATCH = /^https:\/\/(?:www\.)?youtube\.com\/watch\?v=([A-Za-z0-9_-]{11})$/;
 const YOUTUBE_SHORT = /^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})$/;
+const YOUTUBE_SHORTS = /^https:\/\/(?:www\.)?youtube\.com\/shorts\/([A-Za-z0-9_-]{11})$/;
 
 function extractFirstYouTubeId(line) {
   const t = line.trim();
   const watch = t.match(YOUTUBE_WATCH);
   const short = t.match(YOUTUBE_SHORT);
-  return watch ? watch[1] : short ? short[1] : null;
+  const shorts = t.match(YOUTUBE_SHORTS);
+  return watch ? watch[1] : short ? short[1] : shorts ? shorts[1] : null;
 }
 
 function extractMeta(content, excerptLength, filename) {
