@@ -23,6 +23,7 @@ export const config: Config = {
     postsDirectory: "../posts",
     excerptLength: 100,
     postsPerPage: 10, // 0 or omit to show all
+    pinnedPost: "000-pinned", // post filename without .md; omit or set undefined to hide
   },
 };
 

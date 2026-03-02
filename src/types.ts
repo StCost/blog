@@ -42,6 +42,8 @@ export interface BlogConfig {
   excerptLength: number;
   /** Max posts per page; 0 or undefined = show all (no pagination) */
   postsPerPage?: number;
+  /** Filename (without .md) of post to show pinned on top of the list; e.g. "000-links" */
+  pinnedPost?: string;
 }
 
 export interface Config {

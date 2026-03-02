@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
-import config from "../config";
 import NewPostButton from "../components/NewPostButton";
+import PinnedPost from "../components/PinnedPost";
+import config from "../config";
 import { useBlogListPage } from "../helpers/usePosts";
 
 const BlogList = () => {
@@ -24,6 +25,7 @@ const BlogList = () => {
       </header>
 
       <main>
+        {config.blog.pinnedPost && <PinnedPost />}
         {error && <div className="loading">{error}</div>}
         {!error && loading && (
           <div className="loading">{config.ui.loadingPosts}</div>
