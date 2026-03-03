@@ -41,7 +41,7 @@ export default defineConfig({
       jsxRuntime: "automatic",
     }),
   ],
-  base: "/dreaming-saints/",
+  base: "/blog/",
   server: {
     port: 3000,
   },
