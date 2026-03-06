@@ -1,0 +1,2 @@
+- Avoid making UI (user interface) to pretend doing in-game actions. Use actual world and interactions with it
+- Super magnetic dusty wasteland planet. Rich on metals and magnetism. Poor on humanity
