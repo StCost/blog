@@ -1,2 +1,5 @@
-- Avoid making UI (user interface) to pretend doing in-game actions. Use actual world and interactions with it
 - Super magnetic dusty wasteland planet. Rich on metals and magnetism. Poor on humanity
+- Make obvious difference if entity interactable and grabbable, or just static object built into wall
+- Instant response on user actions
+- Fun more important than realism
+- Avoid making UI (user interface) to pretend doing in-game actions. Use actual world and interactions with it
