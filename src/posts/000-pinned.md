@@ -7,8 +7,6 @@
 - [Discord — Dreaming Saints](https://discord.com/invite/xQwWSFDC8Y)
 - [Email —— dreamingsaints@gmail.com](mailto:dreamingsaints@gmail.com)
 
-------------
-
 #
 
 - [Ready Features](https://dreamingsaints.github.io/blog/#/001-features)
