@@ -8,7 +8,6 @@
 - [Tik Tok —— https://www.tiktok.com/@dreamingsaints](https://www.tiktok.com/@dreamingsaints)
 - [Instagram - https://www.instagram.com/dreaming_saints/](https://www.instagram.com/dreaming_saints/)
 - [Email —— dreamingsaints@gmail.com](mailto:dreamingsaints@gmail.com)
-- Reddit —— soon
 
 #
 
