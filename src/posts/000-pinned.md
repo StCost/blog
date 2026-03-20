@@ -1,4 +1,4 @@
-# info
+# links
 
 - [Steam —— https://store.steampowered.com/app/2980830/COLLAPSE_MACHINE/](https://store.steampowered.com/app/2980830/COLLAPSE_MACHINE/)
 - [Discord —— https://discord.com/invite/xQwWSFDC8Y](https://discord.com/invite/xQwWSFDC8Y)
