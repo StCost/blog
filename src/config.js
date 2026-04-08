@@ -2,7 +2,8 @@ export default {
   site: {
     title: "👼 Dreaming Saints 👼",
     tagline: "Developing 🚕 COLLAPSE MACHINE 💥, a co-op FPS open world dream-game",
-    url: ""
+    url: "",
+    companyName: "Dreaming Saints"
   },
   ui: {
     backToPosts: "← Back to posts",

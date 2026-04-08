@@ -87,6 +87,9 @@ function renderTemplate(template, vars) {
   return out;
 }
 
+const BUILD_YEAR = new Date().getFullYear();
+const FOOTER_TEXT = `© 2017–${BUILD_YEAR} ${config.site.companyName || "Dreaming Saints"}`;
+
 async function mdToHtml(md) {
   const file = await unified()
     .use(remarkParse)
@@ -218,7 +221,8 @@ async function build() {
       TWITTER_IMAGE_META: twitterImageMeta,
       BACK_TO_POSTS: htmlEscape(config.ui.backToPosts),
       POST_HTML: html,
-      POST_SOURCE_FILENAME: htmlEscape(filename)
+      POST_SOURCE_FILENAME: htmlEscape(filename),
+      FOOTER_TEXT: htmlEscape(FOOTER_TEXT)
     });
     fs.writeFileSync(path.join(postOutDir, "index.html"), postHtml, "utf-8");
 
@@ -291,7 +295,8 @@ async function build() {
       OG_IMAGE: "",
       POST_LIST: listHtml,
       PAGINATION: pagination,
-      NEW_POST_FILENAME: htmlEscape(nextPostFilename)
+      NEW_POST_FILENAME: htmlEscape(nextPostFilename),
+      FOOTER_TEXT: htmlEscape(FOOTER_TEXT)
     });
 
     // Always write /page/N/ for every page (matches "separate page html" request)
