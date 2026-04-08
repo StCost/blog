@@ -1,0 +1,32 @@
+:root {
+  /* SaintBlog palette (amber/orange) */
+  --color-primary: #ff8c42;
+  --color-primary-hover: #ffab70;
+  --color-primary-glow: rgba(255, 140, 66, 0.3);
+
+  --color-bg-primary: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-code: #262c36;
+
+  --color-text-primary: #c9d1d9;
+  --color-text-muted: #8b949e;
+  --color-text-bright: #f0f6fc;
+  --color-text-code: #e6edf3;
+
+  --color-border: #30363d;
+
+  --background-grid-size: calc(64px * 4);
+
+  /* Back-compat aliases used by current templates/styles */
+  --bg: var(--color-bg-primary);
+  --panel: var(--color-bg-secondary);
+  --text: var(--color-text-primary);
+  --muted: var(--color-text-muted);
+  --border: var(--color-border);
+  --link: var(--color-primary);
+  --link-hover: var(--color-primary-hover);
+  --accent: var(--color-primary);
+  --shadow: rgba(0, 0, 0, 0.35);
+  --code-bg: var(--color-bg-code);
+}
+
