@@ -21,6 +21,12 @@ jobs:
           ref: main
           fetch-depth: 0
 
+      # Merge commits require a committer identity; runners have none by default.
+      - name: Configure Git user for commits
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Resolve upstream (parent) repo
         id: upstream
         env:
