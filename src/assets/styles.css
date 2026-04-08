@@ -82,6 +82,21 @@ header.site-header {
   text-shadow: 0 0 20px var(--color-primary-glow);
 }
 
+.site-title a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.site-title a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: none;
+}
+
+.site-header-post {
+  margin-bottom: 1.25rem;
+}
+
 .site-tagline {
   color: var(--color-text-muted);
   font-size: 1.1rem;
@@ -123,6 +138,10 @@ header.site-header {
 
 .post-item:hover {
   border-color: var(--color-primary);
+}
+
+.post-item h2 {
+  cursor: pointer;
 }
 
 .post-item > *:not(.post-item-link) {

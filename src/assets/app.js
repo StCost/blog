@@ -28,6 +28,46 @@ function setupNewPostButton() {
   });
 }
 
+/** True if URL is the post index (page 1) or /page/N/ — matches build.mjs listing routes. */
+function isListingReferrer(ref, basePath) {
+  if (!ref) return false;
+  let u;
+  try {
+    u = new URL(ref);
+  } catch {
+    return false;
+  }
+  if (u.origin !== window.location.origin) return false;
+
+  const bp = (basePath || "/").replace(/\/?$/, "/");
+  let localPath = u.pathname;
+
+  if (bp !== "/") {
+    const prefix = bp.replace(/\/$/, "");
+    if (!localPath.startsWith(`${prefix}/`) && localPath !== prefix) return false;
+    localPath =
+      localPath === prefix || localPath === `${prefix}/`
+        ? "/"
+        : localPath.slice(prefix.length);
+  }
+
+  const tail = localPath.replace(/^\/+/, "").replace(/\/+$/, "");
+  if (tail === "" || tail === "index.html") return true;
+  return /^page\/\d+$/.test(tail);
+}
+
+/** Point "Back to posts" at the listing page the user came from (correct pagination), not always page 1. */
+function setupBackToPosts() {
+  const a = document.getElementById("back-to-posts");
+  if (!a) return;
+
+  const basePath = a.getAttribute("data-base-path") || "/";
+  const ref = document.referrer;
+  if (ref && isListingReferrer(ref, basePath)) {
+    a.href = ref;
+  }
+}
+
 function setupGitHubEditButton() {
   const el = document.getElementById("github-edit-button");
   if (!el) return;
@@ -46,6 +86,47 @@ function setupGitHubEditButton() {
     const editUrl = `https://github.com/${username}/${repo}/edit/main/content/posts/${encodeURIComponent(filename)}`;
     window.open(editUrl, "_blank");
   });
+}
+
+const prefetchedHrefs = new Set();
+
+function prefetchDocument(href) {
+  if (!href || prefetchedHrefs.has(href)) return;
+  prefetchedHrefs.add(href);
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.href = href;
+  link.as = "document";
+  document.head.appendChild(link);
+}
+
+/** Prefetch post HTML on hover only (no scroll / no pagination). Skipped when Save-Data is on. */
+function setupListPrefetch() {
+  if (navigator.connection?.saveData) return;
+
+  for (const item of document.querySelectorAll(".post-item")) {
+    const a = item.querySelector("a.post-item-link[href]");
+    if (!a) continue;
+
+    a.addEventListener(
+      "pointerenter",
+      () => {
+        prefetchDocument(a.href);
+      },
+      { passive: true }
+    );
+  }
+}
+
+function initClientEnhancements() {
+  setupBackToPosts();
+  setupListPrefetch();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initClientEnhancements);
+} else {
+  initClientEnhancements();
 }
 
 setupNewPostButton();

@@ -157,6 +157,14 @@ function uniqueSlug(slug, used) {
   return s;
 }
 
+/** Slugs that would collide with root `dist/` folders (e.g. `assets/` for CSS/JS). */
+const RESERVED_PATH_SLUGS = new Set(["assets"]);
+
+function uniquePostSlug(baseSlug, used) {
+  const initial = RESERVED_PATH_SLUGS.has(baseSlug) ? `${baseSlug}-post` : baseSlug;
+  return uniqueSlug(initial, used);
+}
+
 async function build() {
   const pageTpl = readText(path.join(templatesDir, "page.html"));
   const postTpl = readText(path.join(templatesDir, "post.html"));
@@ -192,7 +200,7 @@ async function build() {
         : baseTitle;
     const excerpt = extractExcerpt(rawForMeta, config.blog.excerptLength || 120);
     const description = excerpt || config.site.tagline || "";
-    const slug = uniqueSlug(makeSlug({ content: normalized, filename }), used);
+    const slug = uniquePostSlug(makeSlug({ content: normalized, filename }), used);
     const html = await mdToHtml(stripFirstH1(normalized));
 
     const firstImageUrl = extractFirstImageUrl(rawForMeta);
@@ -203,12 +211,12 @@ async function build() {
       : firstYouTubeId
         ? `https://i.ytimg.com/vi/${firstYouTubeId}/hqdefault.jpg`
         : "";
-    const postUrl = SITE_URL ? `${SITE_URL}${BASE_PATH}posts/${slug}/` : `${BASE_PATH}posts/${slug}/`;
+    const postUrl = SITE_URL ? `${SITE_URL}${BASE_PATH}${slug}/` : `${BASE_PATH}${slug}/`;
     const ogImageMeta = ogImage ? `<meta property="og:image" content="${htmlEscape(ogImage)}" />` : "";
     const twitterCard = ogImage ? "summary_large_image" : "summary";
     const twitterImageMeta = ogImage ? `<meta name="twitter:image" content="${htmlEscape(ogImage)}" />` : "";
 
-    const postOutDir = path.join(distDir, "posts", slug);
+    const postOutDir = path.join(distDir, slug);
     ensureDir(postOutDir);
     const postHtml = renderTemplate(postTpl, {
       BASE_PATH,
@@ -250,7 +258,7 @@ async function build() {
     const listHtml = slice.length
       ? slice
           .map((post) => {
-            const href = `${BASE_PATH}posts/${post.slug}/`;
+            const href = `${BASE_PATH}${post.slug}/`;
             const media = post.media || {};
             const mediaHtml = media.imageUrl
               ? `<div class="post-media"><img loading="lazy" decoding="async" src="${htmlEscape(media.imageUrl)}" alt="" /></div>`
@@ -272,11 +280,11 @@ async function build() {
 
     const pagination = (() => {
       if (pages <= 1) return "";
-      const prevHref = p > 1 ? (p === 2 ? `${BASE_PATH}index.html` : `${BASE_PATH}page/${p - 1}/`) : null;
+      const prevHref = p > 1 ? (p === 2 ? `${BASE_PATH}` : `${BASE_PATH}page/${p - 1}/`) : null;
       const nextHref = p < pages ? `${BASE_PATH}page/${p + 1}/` : null;
       const pageLinks = Array.from({ length: pages }, (_, i) => i + 1)
         .map((n) => {
-          const href = n === 1 ? `${BASE_PATH}index.html` : `${BASE_PATH}page/${n}/`;
+          const href = n === 1 ? `${BASE_PATH}` : `${BASE_PATH}page/${n}/`;
           return n === p ? `<strong aria-current="page">${n}</strong>` : `<a href="${href}">${n}</a>`;
         })
         .join(" ");
@@ -311,8 +319,8 @@ async function build() {
   // A simple 404 that sends users to index (project pages often need this)
   const notFound = `<!doctype html>
 <html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Not found</title>
-<meta http-equiv="refresh" content="0; url=${BASE_PATH}index.html"/></head>
-<body>Not found. <a href="${BASE_PATH}index.html">Go home</a>.</body></html>`;
+<meta http-equiv="refresh" content="0; url=${BASE_PATH}"/></head>
+<body>Not found. <a href="${BASE_PATH}">Go home</a>.</body></html>`;
   fs.writeFileSync(path.join(distDir, "404.html"), notFound, "utf-8");
 
   // Optional: CNAME support (if provided)

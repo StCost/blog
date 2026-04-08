@@ -25,8 +25,18 @@
   </head>
   <body>
     <div class="container">
+      <header class="site-header site-header-post">
+        <div class="site-title">
+          <a href="{{BASE_PATH}}">{{SITE_TITLE}}</a>
+        </div>
+      </header>
       <div class="post-topbar">
-        <a class="back-link" href="{{BASE_PATH}}index.html">{{BACK_TO_POSTS}}</a>
+        <a
+          class="back-link"
+          id="back-to-posts"
+          href="{{BASE_PATH}}"
+          data-base-path="{{BASE_PATH}}"
+          >{{BACK_TO_POSTS}}</a>
         <a
           class="github-edit-button"
           id="github-edit-button"

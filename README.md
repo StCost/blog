@@ -4,7 +4,7 @@ Static blog generator that turns Markdown files into **SEO-friendly, fully stati
 
 ## What it does
 - **Builds HTML pages** from Markdown in `content/posts/`
-- **Generates an index** (optionally paginated) and one folder-per-post under `dist/posts/<slug>/index.html`
+- **Generates an index** (optionally paginated) and one folder-per-post under `dist/<slug>/index.html` (public URL `/<slug>/`; pagination: site root `/`, `/page/N/`)
 - **Copies static assets** from `src/assets/` into `dist/assets/`
 - **Adds basic SEO metadata** (canonical URL, OpenGraph, Twitter cards)
 - **Auto-embeds YouTube links** and preserves inline HTML when rendering Markdown
