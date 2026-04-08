@@ -21,17 +21,38 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Add upstream remote
+      - name: Resolve upstream (parent) repo
+        id: upstream
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git remote add upstream "${{ github.event.repository.parent.clone_url }}"
+          parent_clone_url="$(gh api "repos/${GITHUB_REPOSITORY}" --jq '.parent.clone_url // empty')"
+          parent_full_name="$(gh api "repos/${GITHUB_REPOSITORY}" --jq '.parent.full_name // empty')"
+
+          if [ -z "$parent_clone_url" ]; then
+            echo "No parent repo found (not a fork?); skipping."
+            echo "clone_url=" >> "$GITHUB_OUTPUT"
+            echo "full_name=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "clone_url=$parent_clone_url" >> "$GITHUB_OUTPUT"
+          echo "full_name=$parent_full_name" >> "$GITHUB_OUTPUT"
+
+      - name: Add upstream remote
+        if: ${{ steps.upstream.outputs.clone_url != '' }}
+        run: |
+          git remote add upstream "${{ steps.upstream.outputs.clone_url }}"
           git fetch upstream --prune
 
       - name: Merge upstream/main into local main
+        if: ${{ steps.upstream.outputs.clone_url != '' }}
         run: |
           git checkout main
           git merge --no-edit upstream/main
 
       - name: Create PR (upstream -> fork)
+        if: ${{ steps.upstream.outputs.clone_url != '' }}
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +61,7 @@ jobs:
           body: |
             Automated sync PR.
 
-            Upstream: `${{ github.event.repository.parent.full_name }}`
+            Upstream: `${{ steps.upstream.outputs.full_name }}`
             Branch: `upstream/main` -> `main`
           branch: "automation/sync-upstream"
           delete-branch: true
