@@ -33,6 +33,7 @@ jobs:
       - name: Build (with GitHub Pages base path)
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
+          SITE_URL: https://${{ github.repository_owner }}.github.io
         run: npm run build
 
       - name: Setup Pages
