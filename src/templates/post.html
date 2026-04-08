@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{POST_TITLE}} · {{SITE_TITLE}}</title>
     <meta name="description" content="{{POST_EXCERPT}}" />
+    <link rel="canonical" href="{{CANONICAL_URL}}" />
+
+    <meta property="og:title" content="{{POST_TITLE}} · {{SITE_TITLE}}" />
+    <meta property="og:description" content="{{POST_EXCERPT}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{CANONICAL_URL}}" />
+    {{OG_IMAGE_META}}
+
+    <meta name="twitter:card" content="{{TWITTER_CARD}}" />
+    <meta name="twitter:title" content="{{POST_TITLE}} · {{SITE_TITLE}}" />
+    <meta name="twitter:description" content="{{POST_EXCERPT}}" />
+    {{TWITTER_IMAGE_META}}
     <link rel="stylesheet" href="{{BASE_PATH}}assets/theme.css" />
     <link rel="stylesheet" href="{{BASE_PATH}}assets/styles.css" />
     <link rel="stylesheet" href="{{BASE_PATH}}assets/highlight.css" />

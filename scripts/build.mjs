@@ -34,6 +34,20 @@ const BASE_PATH_RAW = process.env.BASE_PATH || "/";
 const BASE_PATH = (BASE_PATH_RAW.startsWith("/") ? BASE_PATH_RAW : `/${BASE_PATH_RAW}`)
   .replace(/\/?$/, "/");
 
+const SITE_URL_RAW = process.env.SITE_URL || config.site.url || "";
+const SITE_URL = SITE_URL_RAW
+  ? SITE_URL_RAW.replace(/\/+$/, "")
+  : "";
+
+function absUrl(pathname) {
+  const p = String(pathname || "");
+  if (!p) return "";
+  if (/^https?:\/\//i.test(p)) return p;
+  if (!SITE_URL) return p;
+  const withSlash = p.startsWith("/") ? p : `/${p}`;
+  return `${SITE_URL}${withSlash}`;
+}
+
 function readText(p) {
   return fs.readFileSync(p, "utf-8");
 }
@@ -174,12 +188,22 @@ async function build() {
         ? `#${postNumber}${cleanedTitle ? ` ${cleanedTitle}` : ""}`
         : baseTitle;
     const excerpt = extractExcerpt(rawForMeta, config.blog.excerptLength || 120);
+    const description = excerpt || config.site.tagline || "";
     const slug = uniqueSlug(makeSlug({ content: normalized, filename }), used);
     const html = await mdToHtml(stripFirstH1(normalized));
 
     const firstImageUrl = extractFirstImageUrl(rawForMeta);
     const firstYouTubeId = extractFirstYouTubeId(rawForMeta);
     const firstVideoUrl = extractFirstVideoUrl(rawForMeta);
+    const ogImage = firstImageUrl
+      ? absUrl(firstImageUrl)
+      : firstYouTubeId
+        ? `https://i.ytimg.com/vi/${firstYouTubeId}/hqdefault.jpg`
+        : "";
+    const postUrl = SITE_URL ? `${SITE_URL}${BASE_PATH}posts/${slug}/` : `${BASE_PATH}posts/${slug}/`;
+    const ogImageMeta = ogImage ? `<meta property="og:image" content="${htmlEscape(ogImage)}" />` : "";
+    const twitterCard = ogImage ? "summary_large_image" : "summary";
+    const twitterImageMeta = ogImage ? `<meta name="twitter:image" content="${htmlEscape(ogImage)}" />` : "";
 
     const postOutDir = path.join(distDir, "posts", slug);
     ensureDir(postOutDir);
@@ -187,7 +211,11 @@ async function build() {
       BASE_PATH,
       SITE_TITLE: htmlEscape(config.site.title),
       POST_TITLE: htmlEscape(title),
-      POST_EXCERPT: htmlEscape(excerpt),
+      POST_EXCERPT: htmlEscape(description),
+      CANONICAL_URL: htmlEscape(postUrl),
+      OG_IMAGE_META: ogImageMeta,
+      TWITTER_CARD: twitterCard,
+      TWITTER_IMAGE_META: twitterImageMeta,
       BACK_TO_POSTS: htmlEscape(config.ui.backToPosts),
       POST_HTML: html,
       POST_SOURCE_FILENAME: htmlEscape(filename)
@@ -258,6 +286,8 @@ async function build() {
       BASE_PATH,
       SITE_TITLE: htmlEscape(config.site.title),
       SITE_TAGLINE: htmlEscape(config.site.tagline),
+      CANONICAL_URL: htmlEscape(SITE_URL ? `${SITE_URL}${BASE_PATH}` : `${BASE_PATH}`),
+      OG_IMAGE: "",
       POST_LIST: listHtml,
       PAGINATION: pagination,
       NEW_POST_FILENAME: htmlEscape(nextPostFilename)
