@@ -104,6 +104,7 @@ header.site-header {
 .post-item {
   padding: 1.5rem;
   position: relative;
+  cursor: pointer;
 }
 
 .post-item-link {
@@ -112,6 +113,7 @@ header.site-header {
   z-index: 1;
   border-radius: 6px;
   text-decoration: none;
+  cursor: pointer;
 }
 .post-item-link:focus-visible {
   outline: 2px solid var(--color-primary);
@@ -123,13 +125,21 @@ header.site-header {
   border-color: var(--color-primary);
 }
 
-.post-item:hover h2 {
-  text-decoration: underline;
-}
-
 .post-item > *:not(.post-item-link) {
   position: relative;
   z-index: 2;
+  pointer-events: none;
+}
+
+.youtube-embed,
+.post-video {
+  pointer-events: auto;
+  position: relative;
+  z-index: 3;
+}
+
+.youtube-embed iframe {
+  pointer-events: auto;
 }
 
 .post-media {
@@ -405,5 +415,14 @@ header.site-header {
 
 .new-post-button:active {
   transform: translateY(0);
+}
+
+.site-footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-align: center;
 }
 
