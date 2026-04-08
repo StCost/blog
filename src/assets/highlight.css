@@ -1,0 +1,41 @@
+/* Minimal highlight.js theme (works with rehype-highlight output) */
+.hljs {
+  color: var(--text);
+  background: transparent;
+}
+.hljs-comment,
+.hljs-quote {
+  color: var(--muted);
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #b3a4ff;
+}
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition {
+  color: #8ff0a4;
+}
+.hljs-deletion,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-meta {
+  color: #ff7b72;
+}
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: #79c0ff;
+}
+.hljs-function .hljs-title {
+  color: #d2a8ff;
+}
+

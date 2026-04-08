@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{POST_TITLE}} · {{SITE_TITLE}}</title>
+    <meta name="description" content="{{POST_EXCERPT}}" />
+    <link rel="stylesheet" href="{{BASE_PATH}}assets/theme.css" />
+    <link rel="stylesheet" href="{{BASE_PATH}}assets/styles.css" />
+    <link rel="stylesheet" href="{{BASE_PATH}}assets/highlight.css" />
+    <script defer src="{{BASE_PATH}}assets/app.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <a class="back-link" href="{{BASE_PATH}}index.html">{{BACK_TO_POSTS}}</a>
+      <article class="card post-content">
+        <h1 class="post-page-title">{{POST_TITLE}}</h1>
+        {{POST_HTML}}
+      </article>
+    </div>
+  </body>
+</html>
+
