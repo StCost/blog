@@ -35,29 +35,31 @@
 
       {{PAGINATION}}
 
-      <section class="new-post-section">
-        <a
-          class="new-post-button"
-          id="new-post-button"
-          href="#"
-          data-filename="{{NEW_POST_FILENAME}}"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-          </svg>
-          <span>New Post</span>
-        </a>
-      </section>
+      <div class="bottom-bar">
+        <footer class="site-footer">
+          <p class="footer-text">{{FOOTER_TEXT}}</p>
+        </footer>
 
-      <footer class="site-footer">
-        <p class="footer-text">{{FOOTER_TEXT}}</p>
-      </footer>
+        <section class="new-post-section">
+          <a
+            class="new-post-button"
+            id="new-post-button"
+            href="#"
+            data-filename="{{NEW_POST_FILENAME}}"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+            </svg>
+            <span>New Post</span>
+          </a>
+        </section>
+      </div>
     </div>
   </body>
 </html>
