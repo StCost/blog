@@ -1,4 +1,4 @@
-# seo-blog
+# blog
 
 Static blog generator that turns Markdown files into **SEO-friendly, fully static HTML** (no framework runtime). Output is written to `dist/` and can be published directly (GitHub Pages supported out of the box).
 
