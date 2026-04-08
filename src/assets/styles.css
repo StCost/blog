@@ -34,7 +34,6 @@ body {
   background: transparent;
   border: 2px solid rgba(255, 140, 66, 0.4);
   border-radius: 6px;
-  transition: border-color 0.2s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
   border-color: rgba(255, 171, 112, 0.4);
@@ -68,6 +67,14 @@ header.site-header {
   border-bottom: none;
 }
 
+.post-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 .site-title {
   color: var(--color-primary);
   font-size: 2.5rem;
@@ -96,7 +103,6 @@ header.site-header {
 
 .post-item {
   padding: 1.5rem;
-  transition: border-color 0.2s ease;
   position: relative;
 }
 
@@ -200,6 +206,19 @@ header.site-header {
   color: var(--color-primary-hover);
 }
 
+.github-edit-button {
+  display: inline;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.github-edit-button:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
 .post-content h1,
 .post-content h2,
 .post-content h3,
@@ -231,10 +250,6 @@ header.site-header {
   margin: 1rem 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   border: none;
-}
-.post-content img:hover {
-  box-shadow: 0 4px 16px rgba(255, 140, 66, 0.3);
-  transition: box-shadow 0.2s ease;
 }
 
 .post-content pre {
@@ -358,8 +373,8 @@ header.site-header {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
   text-decoration: none;
+  opacity: 0.05;
 }
 
 .new-post-button:hover {
@@ -369,6 +384,7 @@ header.site-header {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(255, 140, 66, 0.18);
   text-decoration: none;
+  opacity: 1;
 }
 
 .new-post-button:active {

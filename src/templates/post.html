@@ -12,7 +12,17 @@
   </head>
   <body>
     <div class="container">
-      <a class="back-link" href="{{BASE_PATH}}index.html">{{BACK_TO_POSTS}}</a>
+      <div class="post-topbar">
+        <a class="back-link" href="{{BASE_PATH}}index.html">{{BACK_TO_POSTS}}</a>
+        <a
+          class="github-edit-button"
+          id="github-edit-button"
+          href="#"
+          data-filename="{{POST_SOURCE_FILENAME}}"
+        >
+          Edit on GitHub
+        </a>
+      </div>
       <article class="card post-content">
         <h1 class="post-page-title">{{POST_TITLE}}</h1>
         {{POST_HTML}}

@@ -189,7 +189,8 @@ async function build() {
       POST_TITLE: htmlEscape(title),
       POST_EXCERPT: htmlEscape(excerpt),
       BACK_TO_POSTS: htmlEscape(config.ui.backToPosts),
-      POST_HTML: html
+      POST_HTML: html,
+      POST_SOURCE_FILENAME: htmlEscape(filename)
     });
     fs.writeFileSync(path.join(postOutDir, "index.html"), postHtml, "utf-8");
 
