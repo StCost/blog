@@ -1,0 +1,47 @@
+name: Sync fork with upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *" # every 6 hours
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    # Only meaningful on forks; skip on the upstream repo itself
+    if: ${{ github.event.repository.fork }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream "${{ github.event.repository.parent.clone_url }}"
+          git fetch upstream --prune
+
+      - name: Merge upstream/main into local main
+        run: |
+          git checkout main
+          git merge --no-edit upstream/main
+
+      - name: Create PR (upstream -> fork)
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync upstream"
+          title: "chore: sync from upstream"
+          body: |
+            Automated sync PR.
+
+            Upstream: `${{ github.event.repository.parent.full_name }}`
+            Branch: `upstream/main` -> `main`
+          branch: "automation/sync-upstream"
+          delete-branch: true
+
