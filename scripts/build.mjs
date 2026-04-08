@@ -88,7 +88,7 @@ function renderTemplate(template, vars) {
 }
 
 const BUILD_YEAR = new Date().getFullYear();
-const FOOTER_TEXT = `© 2017–${BUILD_YEAR} ${config.site.companyName || "Dreaming Saints"}`;
+const FOOTER_TEXT = `© 2016–${BUILD_YEAR} ${config.site.companyName || "Dreaming Saints"}`;
 
 async function mdToHtml(md) {
   const file = await unified()
