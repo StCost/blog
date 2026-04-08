@@ -251,16 +251,17 @@ async function build() {
             const mediaHtml = media.imageUrl
               ? `<div class="post-media"><img loading="lazy" decoding="async" src="${htmlEscape(media.imageUrl)}" alt="" /></div>`
               : media.youTubeId
-                ? `<div class="post-media post-media-youtube"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/${htmlEscape(media.youTubeId)}/hqdefault.jpg" alt="" /></div>`
+                ? `<div class="youtube-embed"><iframe width="560" height="315" src="https://www.youtube.com/embed/${htmlEscape(media.youTubeId)}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`
                 : media.videoUrl
-                  ? `<div class="post-media post-media-video"><div class="post-media-play" aria-hidden="true"></div></div>`
+                  ? `<video class="post-video" controls preload="metadata" src="${htmlEscape(media.videoUrl)}"></video>`
                   : "";
             return `
-  <a class="card post-item post-item-link" href="${href}">
+  <section class="card post-item">
+    <a class="post-item-link" href="${href}" aria-label="${htmlEscape(post.title)}"></a>
     <h2>${htmlEscape(post.title)}</h2>
     ${mediaHtml}
     ${post.excerpt ? `<p class="excerpt">${htmlEscape(post.excerpt)}...</p>` : ""}
-  </a>`.trim();
+  </section>`.trim();
           })
           .join("\n")
       : `<section class="card post-item"><p class="excerpt">${htmlEscape(config.ui.noPosts)}</p></section>`;
