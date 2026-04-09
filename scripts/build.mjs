@@ -114,6 +114,10 @@ function extractPostNumber(filename) {
   return Number.isFinite(n) ? n : null;
 }
 
+function isPinnedPostFilename(filename) {
+  return extractPostNumber(filename) === 0;
+}
+
 function cleanTitlePrefixNumber(title, num) {
   const t = String(title || "").trim();
   if (num == null) return t;
@@ -185,6 +189,9 @@ async function build() {
   const nextPostFilename = suggestNextPostFilename(files);
   const used = new Set();
 
+  const pinnedFilename = files.find(isPinnedPostFilename) || null;
+  const pinnedSlug = pinnedFilename ? "pinned" : null;
+
   const posts = [];
   for (const filename of files) {
     const full = path.join(postsDir, filename);
@@ -200,7 +207,10 @@ async function build() {
         : baseTitle;
     const excerpt = extractExcerpt(rawForMeta, config.blog.excerptLength || 120);
     const description = excerpt || config.site.tagline || "";
-    const slug = uniquePostSlug(makeSlug({ content: normalized, filename }), used);
+    const slug =
+      pinnedFilename && filename === pinnedFilename
+        ? uniqueSlug(pinnedSlug, used)
+        : uniquePostSlug(makeSlug({ content: normalized, filename }), used);
     const html = await mdToHtml(stripFirstH1(normalized));
 
     const firstImageUrl = extractFirstImageUrl(rawForMeta);
@@ -221,6 +231,7 @@ async function build() {
     const postHtml = renderTemplate(postTpl, {
       BASE_PATH,
       SITE_TITLE: htmlEscape(config.site.title),
+      SITE_TAGLINE: htmlEscape(config.site.tagline),
       POST_TITLE: htmlEscape(title),
       POST_EXCERPT: htmlEscape(description),
       CANONICAL_URL: htmlEscape(postUrl),
@@ -230,6 +241,7 @@ async function build() {
       BACK_TO_POSTS: htmlEscape(config.ui.backToPosts),
       POST_HTML: html,
       POST_SOURCE_FILENAME: htmlEscape(filename),
+      NEW_POST_FILENAME: htmlEscape(nextPostFilename),
       FOOTER_TEXT: htmlEscape(FOOTER_TEXT)
     });
     fs.writeFileSync(path.join(postOutDir, "index.html"), postHtml, "utf-8");
@@ -239,6 +251,7 @@ async function build() {
       title,
       excerpt,
       slug,
+      html,
       media: {
         imageUrl: firstImageUrl,
         youTubeId: firstYouTubeId,
@@ -252,10 +265,25 @@ async function build() {
   const pages = perPage > 0 ? Math.max(1, Math.ceil(posts.length / perPage)) : 1;
 
   for (let p = 1; p <= pages; p++) {
+    const baseForPaging = pinnedFilename ? posts.filter((x) => x.filename !== pinnedFilename) : posts;
     const slice =
-      perPage > 0 ? posts.slice((p - 1) * perPage, (p - 1) * perPage + perPage) : posts;
+      perPage > 0
+        ? baseForPaging.slice((p - 1) * perPage, (p - 1) * perPage + perPage)
+        : baseForPaging;
 
-    const listHtml = slice.length
+    const pinnedPost = pinnedFilename ? posts.find((x) => x.filename === pinnedFilename) : null;
+    const pinnedHtml =
+      p === 1 && pinnedPost
+        ? `
+  <section class="card post-item post-item-pinned">
+    <h2>${htmlEscape(pinnedPost.title)}</h2>
+    <div class="pinned-content">
+      ${pinnedPost.html || ""}
+    </div>
+  </section>`.trim()
+        : "";
+
+    const itemsHtml = slice.length
       ? slice
           .map((post) => {
             const href = `${BASE_PATH}${post.slug}/`;
@@ -277,6 +305,8 @@ async function build() {
           })
           .join("\n")
       : `<section class="card post-item"><p class="excerpt">${htmlEscape(config.ui.noPosts)}</p></section>`;
+
+    const listHtml = [pinnedHtml, itemsHtml].filter(Boolean).join("\n");
 
     const pagination = (() => {
       if (pages <= 1) return "";
