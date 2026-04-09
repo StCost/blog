@@ -140,11 +140,23 @@ header.site-header {
   border-color: var(--color-primary);
 }
 
+.post-item-pinned {
+  cursor: default;
+}
+
+.post-item-pinned:hover {
+  border-color: var(--color-border);
+}
+
+.post-item-pinned > * {
+  pointer-events: auto;
+}
+
 .post-item h2 {
   cursor: pointer;
 }
 
-.post-item > *:not(.post-item-link) {
+.post-item > *:not(.post-item-link):not(.pinned-content) {
   position: relative;
   z-index: 2;
   pointer-events: none;
@@ -225,6 +237,73 @@ header.site-header {
 .post-item .excerpt {
   color: var(--color-text-muted);
   font-size: 0.95rem;
+}
+
+.post-item-pinned .pinned-content {
+  margin-top: 0.75rem;
+}
+
+.post-item-pinned .pinned-content :first-child {
+  margin-top: 0;
+}
+
+/* List spacing + themed bullet/number markers */
+.post-content ul,
+.post-content ol,
+.pinned-content ul,
+.pinned-content ol {
+  padding-left: 2.25rem;
+  margin: 0.75rem 0;
+}
+
+.post-content li,
+.pinned-content li {
+  margin: 0.25rem 0;
+}
+
+.post-content li::marker,
+.pinned-content li::marker {
+  color: var(--color-primary);
+}
+
+/* Style details/summary toggles (used in pinned + posts) */
+.post-content details,
+.pinned-content details {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg-primary);
+  margin-top: 1rem;
+}
+
+.post-content summary,
+.pinned-content summary {
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+}
+
+.post-content summary:hover,
+.pinned-content summary:hover {
+  background: var(--color-bg-secondary);
+}
+
+.post-content details[open] > summary,
+.pinned-content details[open] > summary {
+  margin-bottom: 0.5rem;
+}
+
+.post-content summary:focus-visible,
+.pinned-content summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.post-content details > :not(summary),
+.pinned-content details > :not(summary) {
+  margin-top: 0.5rem;
 }
 
 .post-content {
@@ -320,6 +399,14 @@ header.site-header {
 }
 
 .post-content hr {
+  border: none;
+  height: 1px;
+  margin: 1.5rem 0;
+  background: rgba(255, 140, 66, 0.8);
+  opacity: 0.8;
+}
+
+.pinned-content hr {
   border: none;
   height: 1px;
   margin: 1.5rem 0;
