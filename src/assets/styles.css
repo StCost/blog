@@ -22,6 +22,10 @@ body {
   scrollbar-gutter: stable;
 }
 
+body {
+  overflow: hidden;
+}
+
 /* Always-visible scrollbar with transparent interior and border */
 ::-webkit-scrollbar {
   width: 12px;
