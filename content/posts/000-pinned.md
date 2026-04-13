@@ -7,7 +7,7 @@
 - [X ———— https://x.com/DreamingSaints](https://x.com/DreamingSaints)
 - [Reddit —— https://www.reddit.com/r/COLLAPSEMACHINE](https://www.reddit.com/r/COLLAPSEMACHINE)
 - [YouTube — https://www.youtube.com/@DreamingSaints](https://www.youtube.com/@DreamingSaints)
-- [Tik Tok —— https://www.tiktok.com/@dreamingsaints](https://www.tiktok.com/@dreamingsaints)
+- [Tik Tok —— https://www.tiktok.com/@collapsemachine](https://www.tiktok.com/@collapsemachine)
 - [Instagram - https://www.instagram.com/dreaming_saints](https://www.instagram.com/dreaming_saints)
 - [Email —— dreamingsaints@gmail.com](mailto:dreamingsaints@gmail.com)
 
