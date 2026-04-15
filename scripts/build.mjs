@@ -79,6 +79,15 @@ function htmlEscape(s) {
     .replaceAll("'", "&#039;");
 }
 
+function xmlEscape(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
+}
+
 function renderTemplate(template, vars) {
   let out = template;
   for (const [k, v] of Object.entries(vars)) {
@@ -167,6 +176,39 @@ const RESERVED_PATH_SLUGS = new Set(["assets"]);
 function uniquePostSlug(baseSlug, used) {
   const initial = RESERVED_PATH_SLUGS.has(baseSlug) ? `${baseSlug}-post` : baseSlug;
   return uniqueSlug(initial, used);
+}
+
+function toAbsoluteUrl(pathname) {
+  if (!SITE_URL) return "";
+  const raw = String(pathname || "");
+  const normalized = raw.startsWith("/") ? raw : `/${raw}`;
+  return `${SITE_URL}${normalized}`;
+}
+
+function buildSitemapXml(urls) {
+  const lines = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+  ];
+  for (const url of urls) {
+    if (!url) continue;
+    lines.push("  <url>");
+    lines.push(`    <loc>${xmlEscape(url)}</loc>`);
+    lines.push("  </url>");
+  }
+  lines.push("</urlset>");
+  return `${lines.join("\n")}\n`;
+}
+
+function buildRobotsTxt() {
+  const lines = [
+    "User-agent: *",
+    "Allow: /"
+  ];
+  if (SITE_URL) {
+    lines.push(`Sitemap: ${SITE_URL}${BASE_PATH}sitemap.xml`);
+  }
+  return `${lines.join("\n")}\n`;
 }
 
 async function build() {
@@ -352,6 +394,21 @@ async function build() {
 <meta http-equiv="refresh" content="0; url=${BASE_PATH}"/></head>
 <body>Not found. <a href="${BASE_PATH}">Go home</a>.</body></html>`;
   fs.writeFileSync(path.join(distDir, "404.html"), notFound, "utf-8");
+
+  // SEO discovery files
+  fs.writeFileSync(path.join(distDir, "robots.txt"), buildRobotsTxt(), "utf-8");
+
+  const sitemapUrls = [];
+  if (SITE_URL) {
+    sitemapUrls.push(toAbsoluteUrl(BASE_PATH));
+    for (let p = 2; p <= pages; p++) {
+      sitemapUrls.push(toAbsoluteUrl(`${BASE_PATH}page/${p}/`));
+    }
+    for (const post of posts) {
+      sitemapUrls.push(toAbsoluteUrl(`${BASE_PATH}${post.slug}/`));
+    }
+  }
+  fs.writeFileSync(path.join(distDir, "sitemap.xml"), buildSitemapXml(sitemapUrls), "utf-8");
 
   // Optional: CNAME support (if provided)
   if (process.env.CNAME) {
