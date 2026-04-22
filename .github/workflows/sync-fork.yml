@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  # Required so we can workflow_dispatch deploy after push; GITHUB_TOKEN pushes do not trigger push workflows.
+  actions: write
 
 jobs:
   sync:
@@ -73,6 +75,12 @@ jobs:
         if: ${{ steps.upstream.outputs.clone_url != '' && steps.sync_check.outputs.needs_sync == 'true' }}
         run: |
           git push origin main --force
+
+      - name: Trigger GitHub Pages deploy
+        if: ${{ steps.upstream.outputs.clone_url != '' && steps.sync_check.outputs.needs_sync == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main
 
       - name: No changes to sync
         if: ${{ steps.upstream.outputs.clone_url != '' && steps.sync_check.outputs.needs_sync == 'false' }}
