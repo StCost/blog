@@ -9,6 +9,8 @@ permissions:
   contents: write
   # Required so we can workflow_dispatch deploy after push; GITHUB_TOKEN pushes do not trigger push workflows.
   actions: write
+  # Required when synced commits touch .github/workflows/* (otherwise push is rejected).
+  workflows: write
 
 jobs:
   sync:
