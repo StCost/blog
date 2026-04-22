@@ -1,6 +1,6 @@
 # blog
 
-Static blog generator that turns Markdown files into **SEO-friendly, fully static HTML** (no framework runtime). Output is written to `dist/` and can be published directly (GitHub Pages supported out of the box).
+Static blog generator that turns Markdown files into **SEO-friendly, fully static HTML** (no framework runtime). Output is written to `dist/` and can be published directly (GitHub Pages supported out of the box)..
 
 ## What it does
 - **Builds HTML pages** from Markdown in `content/posts/`
