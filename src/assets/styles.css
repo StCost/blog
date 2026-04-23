@@ -307,7 +307,7 @@ header.site-header {
 
 .post-content details > :not(summary),
 .pinned-content details > :not(summary) {
-  margin-top: 0.5rem;
+  margin: 0.5rem 0.75rem 0.75rem;
 }
 
 .post-content {
