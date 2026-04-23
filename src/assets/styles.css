@@ -389,6 +389,42 @@ header.site-header {
   margin: 1rem 0;
 }
 
+.post-content pre.code-block,
+.pinned-content pre.code-block {
+  position: relative;
+  padding-top: 2.75rem;
+}
+
+.code-block-toolbar {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  gap: 0.45rem;
+  z-index: 2;
+}
+
+.code-block-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+}
+
+.code-block-btn:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.code-block-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .post-content code {
   background: var(--color-bg-code);
   color: var(--color-text-code);
