@@ -1,7 +1,22 @@
 // Mirrors the current SaintBlog behavior.
 
 export const replaceImageTags = (content) =>
-  content.replace(/<img[^>]*src="([^"]+)"[^>]*>/gi, (_, src) => `![${src}](${src})`);
+  content.replace(/<img\b[^>]*>/gi, (imgTag) => {
+    const srcMatch = imgTag.match(/\bsrc=["']([^"']+)["']/i);
+    if (!srcMatch?.[1]) return imgTag;
+
+    const src = srcMatch[1];
+    const alt = imgTag.match(/\balt=["']([^"']*)["']/i)?.[1] || src;
+    const width = imgTag.match(/\bwidth=["']?(\d+)["']?/i)?.[1];
+    const height = imgTag.match(/\bheight=["']?(\d+)["']?/i)?.[1];
+
+    // Preserve intrinsic dimensions so browsers can reserve space and avoid CLS.
+    if (width && height) {
+      return `<img src="${src}" alt="${alt}" width="${width}" height="${height}" />`;
+    }
+
+    return `![${alt}](${src})`;
+  });
 
 const YOUTUBE_WATCH = /^(https:\/\/(?:www\.)?youtube\.com\/watch\?v=)([A-Za-z0-9_-]{11})$/m;
 const YOUTUBE_SHORT = /^(https:\/\/youtu\.be\/)([A-Za-z0-9_-]{11})$/m;
