@@ -77,7 +77,7 @@ Markdown link to an `.mp4` (used for preview metadata when it appears before oth
 
 [Sample clip (MDN flower demo)](https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4)
 
-Bare `.mp4` URL on its own line (same detector, different pattern — listed second in the file so the link above remains the “first” video for metadata):
+Bare media URL on its own line (`.webm` / `.mp4` / `.mov` — detected for metadata; listed after the Markdown link so the link stays the “first” video URL):
 
 https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm
 
