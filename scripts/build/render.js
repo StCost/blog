@@ -4,9 +4,16 @@ import {
   config,
   GITHUB_DEFAULT_BRANCH,
   GITHUB_EDIT_REPO,
-  GITHUB_POSTS_PATH
+  GITHUB_POSTS_PATH,
+  GOOGLE_SITE_VERIFICATION
 } from "./context.js";
 import { htmlEscape, xmlEscape, renderTemplate } from "./utils.js";
+
+function googleSiteVerificationMetaHtml() {
+  const t = GOOGLE_SITE_VERIFICATION;
+  if (!t) return "";
+  return `<meta name="google-site-verification" content="${htmlEscape(t)}" />`;
+}
 
 export function renderPostHtml(postTpl, view) {
   const postUrl = SITE_URL ? `${SITE_URL}${BASE_PATH}${view.slug}/` : `${BASE_PATH}${view.slug}/`;
@@ -31,7 +38,8 @@ export function renderPostHtml(postTpl, view) {
     FOOTER_TEXT: htmlEscape(view.footerText),
     GITHUB_EDIT_REPO: htmlEscape(GITHUB_EDIT_REPO),
     GITHUB_DEFAULT_BRANCH: htmlEscape(GITHUB_DEFAULT_BRANCH),
-    GITHUB_POSTS_PATH: htmlEscape(GITHUB_POSTS_PATH)
+    GITHUB_POSTS_PATH: htmlEscape(GITHUB_POSTS_PATH),
+    GOOGLE_SITE_VERIFICATION_META: googleSiteVerificationMetaHtml()
   });
 }
 
@@ -97,7 +105,8 @@ export function renderPageHtml(pageTpl, view) {
     FOOTER_TEXT: htmlEscape(view.footerText),
     GITHUB_EDIT_REPO: htmlEscape(GITHUB_EDIT_REPO),
     GITHUB_DEFAULT_BRANCH: htmlEscape(GITHUB_DEFAULT_BRANCH),
-    GITHUB_POSTS_PATH: htmlEscape(GITHUB_POSTS_PATH)
+    GITHUB_POSTS_PATH: htmlEscape(GITHUB_POSTS_PATH),
+    GOOGLE_SITE_VERIFICATION_META: googleSiteVerificationMetaHtml()
   });
 }
 

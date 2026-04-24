@@ -21,6 +21,8 @@ jobs:
     uses: StCost/blog/.github/workflows/deploy-from-posts.yml@main
     with:
       engine_repository: StCost/blog
+      # Google Search Console: add repo secret GOOGLE_SITE_VERIFICATION (token only) and pass:
+      # google_site_verification: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
       # posts_subpath: content/posts
       # site_title: "My notebook"
       # site_tagline: "Short description for meta / empty excerpts"
