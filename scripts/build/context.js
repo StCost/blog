@@ -51,6 +51,9 @@ function resolveGithubPostsPath() {
 
 export const GITHUB_POSTS_PATH = resolveGithubPostsPath();
 
+/** Google Search Console HTML tag token (meta `google-site-verification`). */
+export const GOOGLE_SITE_VERIFICATION = (process.env.GOOGLE_SITE_VERIFICATION || "").trim();
+
 export const distDir = path.join(root, "dist");
 export const assetsSrcDir = path.join(root, "src", "assets");
 export const assetsOutDir = path.join(distDir, "assets");

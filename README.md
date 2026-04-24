@@ -55,6 +55,7 @@ Used by `scripts/build.mjs`:
 - **`GITHUB_EDIT_REPO`**: `owner/name` of the repo where Markdown is edited (embedded as `data-gh-repo` for “Edit on GitHub” / “New post”). If unset, the client tries to infer `owner` and `repo` from a `https://*.github.io/<repo>/` Pages URL (custom domains need this set at build time).
 - **`GITHUB_POSTS_PATH`**: folder inside that repo containing `*.md` files, no leading slash (default: `content/posts` when building the default `content/posts` tree; otherwise `""` for repo-root posts). Set explicitly when your layout does not match (e.g. `content/posts` in a posts-only repo).
 - **`GITHUB_DEFAULT_BRANCH`**: branch used in edit/new URLs (default `main`).
+- **`GOOGLE_SITE_VERIFICATION`**: optional Google Search Console **HTML tag** token only (not the full meta tag). When set, every built page includes `<meta name="google-site-verification" content="…" />`. In Actions, set repo secret `GOOGLE_SITE_VERIFICATION` (engine repo) or pass `google_site_verification` from the posts-only workflow `with:` block / `${{ secrets.GOOGLE_SITE_VERIFICATION }}`.
 
 ## GitHub Pages deployment
 There’s a ready-to-use workflow at `.github/workflows/deploy.yml`:
@@ -75,6 +76,8 @@ You can host **only** posts in a separate GitHub repo and still build with this 
 5. Push to `main`. The site is published under `https://<your-username>.github.io/<that-repo-name>/` (project pages), using `StCost/blog` as the engine.
 
 The reusable workflow sets **`GITHUB_EDIT_REPO`** to your posts repo and **`GITHUB_POSTS_PATH`** from **`posts_subpath`**, so “Edit on GitHub” and “New post” open the correct path (repo root vs `content/posts/`, etc.).
+
+Optional **`google_site_verification`** in the same `with:` block (or a repo secret passed through) emits the Google indexing verification meta tag on all pages.
 
 If you prefer a subfolder for Markdown (e.g. `content/posts/`), set `posts_subpath: content/posts` in the workflow’s `with:` block in the posts-only repo.
 
