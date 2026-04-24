@@ -77,6 +77,8 @@ jobs:
           SITE_TITLE: ${{ inputs.site_title }}
           SITE_TAGLINE: ${{ inputs.site_tagline }}
           SITE_COMPANY_NAME: ${{ inputs.site_company_name }}
+          GITHUB_EDIT_REPO: ${{ github.repository }}
+          GITHUB_POSTS_PATH: ${{ inputs.posts_subpath }}
         run: |
           set -e
           if [ -n "$POSTS_SUBPATH" ]; then

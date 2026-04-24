@@ -1,4 +1,11 @@
-import { BASE_PATH, SITE_URL, config } from "./context.js";
+import {
+  BASE_PATH,
+  SITE_URL,
+  config,
+  GITHUB_DEFAULT_BRANCH,
+  GITHUB_EDIT_REPO,
+  GITHUB_POSTS_PATH
+} from "./context.js";
 import { htmlEscape, xmlEscape, renderTemplate } from "./utils.js";
 
 export function renderPostHtml(postTpl, view) {
@@ -21,7 +28,10 @@ export function renderPostHtml(postTpl, view) {
     POST_HTML: view.html,
     POST_SOURCE_FILENAME: htmlEscape(view.filename),
     NEW_POST_FILENAME: htmlEscape(view.nextPostFilename),
-    FOOTER_TEXT: htmlEscape(view.footerText)
+    FOOTER_TEXT: htmlEscape(view.footerText),
+    GITHUB_EDIT_REPO: htmlEscape(GITHUB_EDIT_REPO),
+    GITHUB_DEFAULT_BRANCH: htmlEscape(GITHUB_DEFAULT_BRANCH),
+    GITHUB_POSTS_PATH: htmlEscape(GITHUB_POSTS_PATH)
   });
 }
 
@@ -84,7 +94,10 @@ export function renderPageHtml(pageTpl, view) {
     POST_LIST: view.listHtml,
     PAGINATION: view.paginationHtml,
     NEW_POST_FILENAME: htmlEscape(view.nextPostFilename),
-    FOOTER_TEXT: htmlEscape(view.footerText)
+    FOOTER_TEXT: htmlEscape(view.footerText),
+    GITHUB_EDIT_REPO: htmlEscape(GITHUB_EDIT_REPO),
+    GITHUB_DEFAULT_BRANCH: htmlEscape(GITHUB_DEFAULT_BRANCH),
+    GITHUB_POSTS_PATH: htmlEscape(GITHUB_POSTS_PATH)
   });
 }
 
