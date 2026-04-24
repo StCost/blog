@@ -30,6 +30,27 @@ function resolvePostsDir() {
 }
 
 export const postsDir = resolvePostsDir();
+
+/** `owner/repo` for Edit/New on GitHub; empty = infer from *.github.io URL in the browser. */
+export const GITHUB_EDIT_REPO = (process.env.GITHUB_EDIT_REPO || "").trim();
+
+export const GITHUB_DEFAULT_BRANCH = (process.env.GITHUB_DEFAULT_BRANCH || "main").trim() || "main";
+
+/**
+ * Path to posts inside the GitHub repo (no leading slash). Used for edit/new links.
+ * Env `GITHUB_POSTS_PATH`: set to "" for Markdown at repo root (posts-only layout).
+ * If unset: `content/posts` when POSTS_DIR is this repo's default, otherwise "" (external folder).
+ */
+function resolveGithubPostsPath() {
+  if (process.env.GITHUB_POSTS_PATH !== undefined) {
+    return String(process.env.GITHUB_POSTS_PATH).trim().replace(/^\/+|\/+$/g, "");
+  }
+  const canonical = path.join(root, "content", "posts");
+  return path.resolve(postsDir) === path.resolve(canonical) ? "content/posts" : "";
+}
+
+export const GITHUB_POSTS_PATH = resolveGithubPostsPath();
+
 export const distDir = path.join(root, "dist");
 export const assetsSrcDir = path.join(root, "src", "assets");
 export const assetsOutDir = path.join(distDir, "assets");

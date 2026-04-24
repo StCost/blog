@@ -52,6 +52,9 @@ Used by `scripts/build.mjs`:
 - **`CNAME`**: if set, writes `dist/CNAME` with this value
 - **`POSTS_DIR`**: absolute or cwd-relative folder of `*.md` posts (default: `content/posts` in this repo). CLI: `npm run build -- --posts path/to/posts`
 - **`SITE_TITLE`**, **`SITE_TAGLINE`**, **`SITE_COMPANY_NAME`**: when set to a non-empty string, override the matching fields from `src/config.js` (footer uses `SITE_COMPANY_NAME`). Used by the posts-only reusable workflow via `with:` inputs `site_title`, `site_tagline`, `site_company_name`.
+- **`GITHUB_EDIT_REPO`**: `owner/name` of the repo where Markdown is edited (embedded as `data-gh-repo` for “Edit on GitHub” / “New post”). If unset, the client tries to infer `owner` and `repo` from a `https://*.github.io/<repo>/` Pages URL (custom domains need this set at build time).
+- **`GITHUB_POSTS_PATH`**: folder inside that repo containing `*.md` files, no leading slash (default: `content/posts` when building the default `content/posts` tree; otherwise `""` for repo-root posts). Set explicitly when your layout does not match (e.g. `content/posts` in a posts-only repo).
+- **`GITHUB_DEFAULT_BRANCH`**: branch used in edit/new URLs (default `main`).
 
 ## GitHub Pages deployment
 There’s a ready-to-use workflow at `.github/workflows/deploy.yml`:
@@ -70,6 +73,8 @@ You can host **only** posts in a separate GitHub repo and still build with this 
 3. Add the workflow file: copy [`examples/posts-only-repo/.github/workflows/deploy.yml`](examples/posts-only-repo/.github/workflows/deploy.yml) to `.github/workflows/deploy.yml` in the new repo (it calls the reusable workflow in this repo).
 4. In that repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 5. Push to `main`. The site is published under `https://<your-username>.github.io/<that-repo-name>/` (project pages), using `StCost/blog` as the engine.
+
+The reusable workflow sets **`GITHUB_EDIT_REPO`** to your posts repo and **`GITHUB_POSTS_PATH`** from **`posts_subpath`**, so “Edit on GitHub” and “New post” open the correct path (repo root vs `content/posts/`, etc.).
 
 If you prefer a subfolder for Markdown (e.g. `content/posts/`), set `posts_subpath: content/posts` in the workflow’s `with:` block in the posts-only repo.
 

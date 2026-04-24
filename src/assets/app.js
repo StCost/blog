@@ -9,6 +9,46 @@ function parseGitHubPagesUrl() {
   return { username, repo };
 }
 
+function getOwnerRepo() {
+  const raw = document.documentElement.getAttribute("data-gh-repo");
+  const s = raw ? raw.trim() : "";
+  if (s) {
+    const i = s.indexOf("/");
+    if (i > 0 && i < s.length - 1) {
+      return { owner: s.slice(0, i), repo: s.slice(i + 1) };
+    }
+  }
+  const parsed = parseGitHubPagesUrl();
+  if (parsed) return { owner: parsed.username, repo: parsed.repo };
+  return null;
+}
+
+/** Posts path inside the GitHub repo (no slashes at ends). Legacy HTML → content/posts. */
+function githubPostsDirFromDom() {
+  const raw = document.documentElement.getAttribute("data-gh-posts-dir");
+  if (raw === null) return "content/posts";
+  return raw.trim();
+}
+
+function githubBranchFromDom() {
+  const b = document.documentElement.getAttribute("data-gh-branch");
+  const s = b ? b.trim() : "";
+  return s || "main";
+}
+
+function githubRepoFilePath(postsDirRel, filename) {
+  const dir = (postsDirRel || "").replace(/^\/+|\/+$/g, "");
+  const file = String(filename || "").replace(/^\/+/, "");
+  return dir ? `${dir}/${file}` : file;
+}
+
+function encodeGithubPathForEdit(relPath) {
+  return relPath
+    .split("/")
+    .map((seg) => encodeURIComponent(seg))
+    .join("/");
+}
+
 function setupNewPostButton() {
   const el = document.getElementById("new-post-button");
   if (!el) return;
@@ -17,13 +57,15 @@ function setupNewPostButton() {
 
   el.addEventListener("click", (e) => {
     e.preventDefault();
-    const parsed = parseGitHubPagesUrl();
-    if (!parsed) {
-      alert(`Can't infer GitHub repo from URL:\n${window.location.href}`);
+    const ownerRepo = getOwnerRepo();
+    if (!ownerRepo) {
+      alert(`Can't resolve GitHub repo (set data-gh-repo on <html> at build, or use a *.github.io/<repo>/ URL):\n${window.location.href}`);
       return;
     }
-    const { username, repo } = parsed;
-    const newPostUrl = `https://github.com/${username}/${repo}/new/main/content/posts?filename=${encodeURIComponent(filename)}`;
+    const branch = githubBranchFromDom();
+    const postsDir = githubPostsDirFromDom();
+    const fullPath = githubRepoFilePath(postsDir, filename);
+    const newPostUrl = `https://github.com/${ownerRepo.owner}/${ownerRepo.repo}/new/${branch}?filename=${encodeURIComponent(fullPath)}`;
     window.open(newPostUrl, "_blank");
   });
 }
@@ -77,13 +119,15 @@ function setupGitHubEditButton() {
 
   el.addEventListener("click", (e) => {
     e.preventDefault();
-    const parsed = parseGitHubPagesUrl();
-    if (!parsed) {
-      alert(`Can't infer GitHub repo from URL:\n${window.location.href}`);
+    const ownerRepo = getOwnerRepo();
+    if (!ownerRepo) {
+      alert(`Can't resolve GitHub repo (set data-gh-repo on <html> at build, or use a *.github.io/<repo>/ URL):\n${window.location.href}`);
       return;
     }
-    const { username, repo } = parsed;
-    const editUrl = `https://github.com/${username}/${repo}/edit/main/content/posts/${encodeURIComponent(filename)}`;
+    const branch = githubBranchFromDom();
+    const postsDir = githubPostsDirFromDom();
+    const rel = githubRepoFilePath(postsDir, filename);
+    const editUrl = `https://github.com/${ownerRepo.owner}/${ownerRepo.repo}/edit/${branch}/${encodeGithubPathForEdit(rel)}`;
     window.open(editUrl, "_blank");
   });
 }
