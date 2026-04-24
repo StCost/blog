@@ -4,12 +4,17 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 
+import { postsDir } from "./build/context.js";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const distDir = path.join(root, "dist");
 
 function runBuild() {
-  const p = spawn(process.execPath, [path.join(root, "scripts", "build.mjs")], {
+  const buildScript = path.join(root, "scripts", "build.mjs");
+  const forwarded = process.argv.slice(2);
+  const args = forwarded.length ? [buildScript, ...forwarded] : [buildScript];
+  const p = spawn(process.execPath, args, {
     stdio: "inherit",
     env: { ...process.env, BASE_PATH: "/" }
   });
@@ -44,21 +49,19 @@ function serveFile(res, filePath) {
 
 await runBuild();
 
-// Rebuild on changes (simple watcher)
-fs.watch(path.join(root, "content"), { recursive: true }, async () => {
-  try {
-    await runBuild();
-  } catch {
-    // keep serving last successful build
-  }
-});
-fs.watch(path.join(root, "src"), { recursive: true }, async () => {
-  try {
-    await runBuild();
-  } catch {
-    // keep serving last successful build
-  }
-});
+function watchRebuild(dir) {
+  if (!fs.existsSync(dir)) return;
+  fs.watch(dir, { recursive: true }, async () => {
+    try {
+      await runBuild();
+    } catch {
+      // keep serving last successful build
+    }
+  });
+}
+
+watchRebuild(postsDir);
+watchRebuild(path.join(root, "src"));
 
 const server = http.createServer((req, res) => {
   const urlPath = (req.url || "/").split("?")[0];

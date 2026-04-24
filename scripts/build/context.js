@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,7 +7,29 @@ import config from "../../src/config.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const root = path.resolve(__dirname, "../..");
 
-export const postsDir = path.join(root, "content", "posts");
+function postsDirFromArgv() {
+  const argv = process.argv.slice(2);
+  for (let i = 0; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === "--posts" && argv[i + 1]) return argv[i + 1];
+    const eq = a.match(/^--posts=(.+)$/);
+    if (eq) return eq[1];
+  }
+  return "";
+}
+
+/** Markdown posts directory: POSTS_DIR env, then --posts / --posts=, else content/posts in this repo. */
+function resolvePostsDir() {
+  const raw = (process.env.POSTS_DIR || "").trim() || postsDirFromArgv().trim();
+  if (!raw) return path.join(root, "content", "posts");
+  const resolved = path.isAbsolute(raw) ? path.normalize(raw) : path.resolve(process.cwd(), raw);
+  if (!fs.existsSync(resolved)) {
+    console.warn(`posts directory not found (using anyway): ${resolved}`);
+  }
+  return resolved;
+}
+
+export const postsDir = resolvePostsDir();
 export const distDir = path.join(root, "dist");
 export const assetsSrcDir = path.join(root, "src", "assets");
 export const assetsOutDir = path.join(distDir, "assets");
