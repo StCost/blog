@@ -243,6 +243,15 @@ header.site-header {
   font-size: 0.95rem;
 }
 
+/* Keep layout stable when content includes very long unbroken strings. */
+.post-item h2,
+.post-item .excerpt,
+.post-content,
+.pinned-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .post-item-pinned .pinned-content {
   margin-top: 0.75rem;
 }
