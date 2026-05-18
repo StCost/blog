@@ -252,10 +252,6 @@ header.site-header {
   word-break: break-word;
 }
 
-.post-item-pinned .pinned-content {
-  margin-top: 0.75rem;
-}
-
 .post-item-pinned .pinned-content :first-child {
   margin-top: 0;
 }
