@@ -47,7 +47,6 @@ export function buildPinnedHtml(p, pinnedPost) {
   if (p !== 1 || !pinnedPost) return "";
   return `
   <section class="card post-item post-item-pinned">
-    <h2>${htmlEscape(pinnedPost.title)}</h2>
     <div class="pinned-content">
       ${pinnedPost.html || ""}
     </div>

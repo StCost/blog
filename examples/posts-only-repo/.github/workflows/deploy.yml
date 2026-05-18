@@ -1,4 +1,5 @@
 # Posts-only repo layout: put all *.md post files at the repository ROOT.
+# Pin a short intro with a 000-*.md file (see 000-pinned-welcome.md in this example).
 # Copy this file to:  .github/workflows/deploy.yml
 #
 # Engine (reusable workflow): https://github.com/StCost/blog
