@@ -6,24 +6,24 @@ Static blog generator that turns Markdown files into **SEO-friendly, fully stati
 - **Builds HTML pages** from Markdown in `content/posts/`
 - **Generates an index** (optionally paginated) and one folder-per-post under `dist/<slug>/index.html` (public URL `/<slug>/`; pagination: site root `/`, `/page/N/`)
 - **Copies static assets** from `src/assets/` into `dist/assets/`
+- **Per-post asset folders**: `content/posts/<same-name-as-post.md>/` (any subfolders) are copied into `dist/<slug>/` beside `index.html`
 - **Adds basic SEO metadata** (canonical URL, OpenGraph, Twitter cards)
 - **Auto-embeds YouTube links** and preserves inline HTML when rendering Markdown
 - **Renders LaTeX math** (`$…$` inline, `$$…$$` display) via KaTeX at build time (same syntax as GitHub-flavored math in `.md` previews)
 
 ## Requirements
-- **Node.js**: the workflow uses Node 20; any recent Node 18+ should work
-- **npm**: `package-lock.json` is present, so `npm ci` is supported
+- **[Bun](https://bun.sh)** 1.1+ (runtime and package manager; CI uses `oven-sh/setup-bun`)
 
 ## Commands
-- **Install**: `npm ci` (or `npm install`)
-- **Build**: `npm run build`
+- **Install**: `bun install`
+- **Build**: `bun run build`
   - Writes output to `dist/`
   - Respects `BASE_PATH`, `SITE_URL`, and `CNAME` (see below)
-- **Dev server**: `npm run dev`
+- **Dev server**: `bun run dev`
   - Runs a local server (default `http://127.0.0.1:4173/`)
   - Rebuilds when Markdown under the active posts directory or files under `src/` change
   - Always uses `BASE_PATH=/` for local convenience
-- **Clean**: `npm run clean` (removes `dist/`)
+- **Clean**: `bun run clean` (removes `dist/`)
 
 ## Project layout (high signal)
 - `scripts/build.mjs`: static site build (Markdown → HTML, templates, pagination, SEO metas)
@@ -36,6 +36,26 @@ Static blog generator that turns Markdown files into **SEO-friendly, fully stati
 - `src/templates/post.html`: post template (article + “Edit on GitHub” button)
 - `src/assets/*`: CSS/JS/favicon copied to `dist/assets/`
 - `dist/`: generated output (publish this directory)
+
+### Post-local images and diagrams
+
+For `content/posts/002-my-topic.md`, create a sibling folder `content/posts/002-my-topic/` and put files there (nested subfolders are fine):
+
+```
+content/posts/
+  002-my-topic.md
+  002-my-topic/
+    diagrams/phase1.svg
+    photo.png
+```
+
+Reference them from the markdown with a path that includes the folder name:
+
+```markdown
+![](./002-my-topic/diagrams/phase1.svg)
+```
+
+At build time the `./002-my-topic/` prefix is rewritten to `./` in the HTML, and files land under `dist/<slug>/` so the published post serves them next to `index.html`. Site-wide files (CSS, JS, favicon) stay in `src/assets/`.
 
 ## How URLs and paths work
 The builder supports “root sites” and “project pages” style hosting:
@@ -51,7 +71,7 @@ Used by `scripts/build.mjs`:
 - **`BASE_PATH`**: URL prefix for links/assets (default: `/`)
 - **`SITE_URL`**: absolute site origin for canonical URLs (default: `src/config.js` `site.url`, or empty)
 - **`CNAME`**: if set, writes `dist/CNAME` with this value
-- **`POSTS_DIR`**: absolute or cwd-relative folder of `*.md` posts (default: `content/posts` in this repo). CLI: `npm run build -- --posts path/to/posts`
+- **`POSTS_DIR`**: absolute or cwd-relative folder of `*.md` posts (default: `content/posts` in this repo). CLI: `bun run build -- --posts path/to/posts`
 - **`SITE_TITLE`**, **`SITE_TAGLINE`**, **`SITE_COMPANY_NAME`**: when set to a non-empty string, override the matching fields from `src/config.js` (footer uses `SITE_COMPANY_NAME`). Used by the posts-only reusable workflow via `with:` inputs `site_title`, `site_tagline`, `site_company_name`.
 - **`GITHUB_EDIT_REPO`**: `owner/name` of the repo where Markdown is edited (embedded as `data-gh-repo` for “Edit on GitHub” / “New post”). If unset, the client tries to infer `owner` and `repo` from a `https://*.github.io/<repo>/` Pages URL (custom domains need this set at build time).
 - **`GITHUB_POSTS_PATH`**: folder inside that repo containing `*.md` files, no leading slash (default: `content/posts` when building the default `content/posts` tree; otherwise `""` for repo-root posts). Set explicitly when your layout does not match (e.g. `content/posts` in a posts-only repo).

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" role="img" aria-labelledby="title desc">
+  <title id="title">Rabi frequency synchronization</title>
+  <desc id="desc">Multi-axis resonant lasers locking subatomic coherence</desc>
+  <rect width="400" height="180" fill="#0d1117"/>
+  <rect x="4" y="4" width="392" height="172" rx="5" fill="#161b22" stroke="#30363d"/>
+  <text x="200" y="22" text-anchor="middle" fill="#ff8c42" font-family="system-ui,sans-serif" font-size="11" font-weight="600">Omega_Rabi - OPTICAL MOLASSES</text>
+  <circle cx="200" cy="95" r="28" fill="#262c36" stroke="#ff8c42" stroke-width="1.2"/>
+  <g stroke="#ff8c42" stroke-width="1.5" opacity="0.85">
+    <line x1="40" y1="95" x2="168" y2="95"/><line x1="360" y1="95" x2="232" y2="95"/>
+    <line x1="200" y1="40" x2="200" y2="63"/><line x1="200" y1="140" x2="200" y2="127"/>
+    <line x1="70" y1="50" x2="178" y2="78"/><line x1="330" y1="50" x2="222" y2="78"/>
+  </g>
+  <g fill="#ffab70" opacity="0.9">
+    <circle cx="188" cy="90" r="2"/><circle cx="200" cy="95" r="2"/><circle cx="212" cy="90" r="2"/>
+    <circle cx="195" cy="102" r="2"/><circle cx="205" cy="102" r="2"/>
+  </g>
+  <path d="M168 95 Q184 82 200 95 T232 95" fill="none" stroke="#ffab70" stroke-width="1" opacity="0.6"/>
+  <text x="32" y="98" fill="#8b949e" font-family="system-ui,sans-serif" font-size="7">laser</text>
+  <text x="200" y="155" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="8">macroscopic coherence, synced subatomic rhythm</text>
+</svg>

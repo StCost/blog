@@ -22,6 +22,13 @@ import {
 } from "./build/context.js";
 import { mdToHtml, normalizeMd, replaceImageTags, stripFirstH1 } from "./build/markdown.js";
 import {
+  copyPostAssets,
+  postAssetBasename,
+  resolvePostAssetDir,
+  resolvePostPublicAssetUrl,
+  rewritePostAssetUrls
+} from "./build/postAssets.js";
+import {
   buildPostSlug,
   cleanTitlePrefixNumber,
   extractPostNumber,
@@ -42,12 +49,17 @@ import {
 import { emptyDir, ensureDir, htmlEscape, readText } from "./build/utils.js";
 
 function copyStaticAssets() {
-  for (const f of fs.readdirSync(assetsSrcDir)) {
-    const src = path.join(assetsSrcDir, f);
-    const st = fs.statSync(src);
-    if (!st.isFile()) continue;
-    fs.copyFileSync(src, path.join(assetsOutDir, f));
+  function copyDir(srcDir, outDir) {
+    ensureDir(outDir);
+    for (const name of fs.readdirSync(srcDir)) {
+      const src = path.join(srcDir, name);
+      const dest = path.join(outDir, name);
+      const st = fs.statSync(src);
+      if (st.isDirectory()) copyDir(src, dest);
+      else if (st.isFile()) fs.copyFileSync(src, dest);
+    }
   }
+  copyDir(assetsSrcDir, assetsOutDir);
 
   const katexCss = path.join(process.cwd(), "node_modules", "katex", "dist", "katex.min.css");
   if (fs.existsSync(katexCss)) {
@@ -90,8 +102,9 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
 
   for (const filename of files) {
     const raw = readText(postFilePath(filename));
-    const rawForMeta = replaceImageTags(raw);
-    const normalized = normalizeMd(raw);
+    const assetBasename = postAssetBasename(filename);
+    const normalized = normalizeMd(rewritePostAssetUrls(raw, assetBasename));
+    const rawForMeta = replaceImageTags(normalized);
 
     const postNumber = extractPostNumber(filename);
     const baseTitle = extractTitleFromContentOrFilename(normalized, filename);
@@ -103,17 +116,19 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
     const slug = buildPostSlug({ filename, normalized, pinnedFilename, used: usedSlugs });
     const html = await mdToHtml(stripFirstH1(normalized));
 
+    const publicAsset = (url) => resolvePostPublicAssetUrl(url, slug);
     const firstImageUrl = extractFirstImageUrl(rawForMeta);
     const firstYouTubeId = extractFirstYouTubeId(rawForMeta);
     const firstVideoUrl = extractFirstVideoUrl(rawForMeta);
     const ogImage = firstImageUrl
-      ? absUrl(firstImageUrl)
+      ? absUrl(publicAsset(firstImageUrl))
       : firstYouTubeId
         ? `https://i.ytimg.com/vi/${firstYouTubeId}/hqdefault.jpg`
         : "";
 
     const postOutDir = path.join(distDir, slug);
     ensureDir(postOutDir);
+    copyPostAssets(resolvePostAssetDir(filename), postOutDir);
     fs.writeFileSync(
       path.join(postOutDir, "index.html"),
       renderPostHtml(postTpl, {
@@ -135,7 +150,11 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
       excerpt,
       slug,
       html,
-      media: { imageUrl: firstImageUrl, youTubeId: firstYouTubeId, videoUrl: firstVideoUrl }
+      media: {
+        imageUrl: firstImageUrl ? publicAsset(firstImageUrl) : "",
+        youTubeId: firstYouTubeId,
+        videoUrl: firstVideoUrl
+      }
     });
   }
 

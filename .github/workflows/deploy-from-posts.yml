@@ -66,12 +66,8 @@ jobs:
         with:
           path: posts
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: engine/package-lock.json
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Install and build
         working-directory: engine
@@ -92,8 +88,8 @@ jobs:
           else
             export POSTS_DIR="$GITHUB_WORKSPACE/posts"
           fi
-          npm ci
-          npm run build
+          bun install --frozen-lockfile
+          bun run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
