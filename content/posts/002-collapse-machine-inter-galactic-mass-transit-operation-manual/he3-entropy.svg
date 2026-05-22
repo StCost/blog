@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" role="img" aria-labelledby="title desc">
   <title id="title">Superfluid entropy evacuation</title>
-  <desc id="desc">Helium-3 superfluid flash-quench driving entropy to zero</desc>
+  <desc id="desc">Helium-3 superfluid flash-quench driving entropy toward practical minimum</desc>
   <defs>
     <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#f85149"/>
     </marker>
   </defs>
-  <rect width="400" height="180" fill="#0d1117"/>
-  <rect x="4" y="4" width="392" height="172" rx="5" fill="#161b22" stroke="#30363d"/>
-  <text x="200" y="22" text-anchor="middle" fill="#58a6ff" font-family="system-ui,sans-serif" font-size="11" font-weight="600">dS(He-3) to 0 - ENTROPY EVACUATION</text>
-  <rect x="60" y="36" width="280" height="100" rx="4" fill="#0d2137" stroke="#58a6ff" stroke-width="1" stroke-opacity="0.6"/>
-  <rect x="160" y="58" width="80" height="56" rx="2" fill="#262c36" stroke="#c9d1d9" stroke-width="1"/>
-  <text x="200" y="90" text-anchor="middle" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="9">cargo</text>
-  <path d="M70 100 Q100 85 130 100 T190 100 T250 100 T310 100 T330 100" fill="none" stroke="#58a6ff" stroke-width="1.2" opacity="0.8"/>
-  <path d="M70 115 Q110 128 150 115 T230 115 T310 115" fill="none" stroke="#58a6ff" stroke-width="0.8" opacity="0.5"/>
+  <rect width="400" height="200" fill="#0d1117"/>
+  <rect x="4" y="4" width="392" height="192" rx="5" fill="#161b22" stroke="#30363d"/>
+  <text x="200" y="22" text-anchor="middle" fill="#58a6ff" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="11" font-weight="600">dS(He-3) - ENTROPY EVACUATION</text>
+  <text x="200" y="38" text-anchor="middle" fill="#f85149" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8">S decreases</text>
+  <rect x="60" y="44" width="280" height="100" rx="4" fill="#0d2137" stroke="#58a6ff" stroke-width="1" stroke-opacity="0.6"/>
+  <rect x="160" y="66" width="80" height="56" rx="2" fill="#262c36" stroke="#c9d1d9" stroke-width="1"/>
+  <text x="200" y="98" text-anchor="middle" fill="#c9d1d9" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9">cargo</text>
+  <path d="M70 108 Q100 93 130 108 T190 108 T250 108 T310 108 T330 108" fill="none" stroke="#58a6ff" stroke-width="1.2" opacity="0.8"/>
+  <path d="M70 123 Q110 136 150 123 T230 123 T310 123" fill="none" stroke="#58a6ff" stroke-width="0.8" opacity="0.5"/>
   <g stroke="#f85149" stroke-width="1" marker-end="url(#arr)">
-    <line x1="200" y1="50" x2="200" y2="28"/><line x1="175" y1="55" x2="155" y2="32"/><line x1="225" y1="55" x2="245" y2="32"/>
+    <line x1="200" y1="58" x2="200" y2="44"/><line x1="175" y1="63" x2="155" y2="48"/><line x1="225" y1="63" x2="245" y2="48"/>
   </g>
-  <text x="200" y="18" text-anchor="middle" fill="#f85149" font-family="system-ui,sans-serif" font-size="8">S to 0</text>
-  <text x="200" y="155" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="8">ultra-cold He-3 superfluid, absolute zero stillness</text>
-  <text x="48" y="168" fill="#58a6ff" font-family="system-ui,sans-serif" font-size="8">flood</text>
-  <text x="330" y="168" text-anchor="end" fill="#8b949e" font-family="system-ui,sans-serif" font-size="8">quench</text>
+  <text x="200" y="168" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8">ultra-cold He-3 superfluid, near ground state</text>
+  <text x="48" y="182" fill="#58a6ff" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8">flood</text>
+  <text x="330" y="182" text-anchor="end" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8">quench</text>
 </svg>

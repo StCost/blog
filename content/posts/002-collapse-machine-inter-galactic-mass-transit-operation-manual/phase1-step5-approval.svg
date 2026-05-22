@@ -4,11 +4,11 @@
   <rect width="96" height="96" fill="#161b22" rx="6"/>
   <rect x="1" y="1" width="94" height="94" rx="5" fill="none" stroke="#30363d"/>
   <rect x="28" y="34" width="40" height="44" rx="4" fill="#262c36" stroke="#3fb950" stroke-width="1.2"/>
-  <text x="48" y="52" text-anchor="middle" fill="#3fb950" font-family="ui-monospace,monospace" font-size="10" font-weight="700">ID</text>
-  <text x="48" y="64" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="6">OK</text>
+  <text x="48" y="52" text-anchor="middle" fill="#3fb950" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="10" font-weight="700">ID</text>
+  <text x="48" y="64" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="6">OK</text>
   <path d="M58 48 L66 56 L78 40" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/>
   <path d="M14 50 L24 50" stroke="#ff8c42" stroke-width="1" stroke-dasharray="2 2"/>
   <circle cx="12" cy="50" r="4" fill="none" stroke="#8b949e" stroke-width="1"/>
-  <text x="48" y="18" text-anchor="middle" fill="#3fb950" font-family="system-ui,sans-serif" font-size="8" font-weight="600">APPROVAL</text>
-  <text x="48" y="86" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="7">VERIFY KEY</text>
+  <text x="48" y="18" text-anchor="middle" fill="#3fb950" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8" font-weight="600">APPROVAL</text>
+  <text x="48" y="86" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="7">VERIFY KEY</text>
 </svg>

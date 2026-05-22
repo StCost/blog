@@ -415,13 +415,15 @@ header.site-header {
   box-shadow: none;
 }
 
+.post-content ol.pipeline-steps,
 .post-content ol.phase1-steps {
   list-style: none;
   padding-left: 0;
   margin: 1.25rem 0;
-  counter-reset: phase1-step;
+  counter-reset: pipeline-step;
 }
 
+.post-content li.pipeline-step,
 .post-content li.phase1-step {
   display: flex;
   gap: 1rem;
@@ -431,22 +433,41 @@ header.site-header {
   border: 1px solid var(--color-border);
   border-radius: 6px;
   background: var(--color-bg-primary);
-  counter-increment: phase1-step;
+  counter-increment: pipeline-step;
 }
 
+.post-content ol.pipeline-steps[data-phase="I"] > li.pipeline-step::before,
+.post-content ol.pipeline-steps[data-phase="I"] > li.phase1-step::before,
+.post-content ol.phase1-steps > li.pipeline-step::before,
+.post-content ol.phase1-steps > li.phase1-step::before {
+  content: "I." counter(pipeline-step);
+}
+
+.post-content ol.pipeline-steps[data-phase="II"] > li.pipeline-step::before,
+.post-content ol.pipeline-steps[data-phase="II"] > li.phase1-step::before {
+  content: "II." counter(pipeline-step);
+}
+
+.post-content ol.pipeline-steps[data-phase="III"] > li.pipeline-step::before,
+.post-content ol.pipeline-steps[data-phase="III"] > li.phase1-step::before {
+  content: "III." counter(pipeline-step);
+}
+
+.post-content li.pipeline-step::before,
 .post-content li.phase1-step::before {
-  content: counter(phase1-step) ".";
   flex-shrink: 0;
-  min-width: 1.25rem;
+  min-width: 2.25rem;
   font-weight: 700;
   color: var(--color-primary);
   line-height: 1.6;
 }
 
+.post-content img.pipeline-step-icon,
 .post-content img.phase1-step-icon {
   flex-shrink: 0;
   width: 88px;
-  height: 88px;
+  height: auto;
+  max-height: 108px;
   margin: 0;
   border-radius: 6px;
   border: 1px solid var(--color-border);
@@ -454,12 +475,18 @@ header.site-header {
   background: var(--color-bg-secondary);
 }
 
+.post-content .pipeline-step-body,
 .post-content .phase1-step-body {
   flex: 1;
   min-width: 0;
   line-height: 1.6;
 }
 
+.post-content .pipeline-step-body img.diagram {
+  margin: 1rem 0 0;
+}
+
+.post-content a.post-image-link img.pipeline-step-icon,
 .post-content a.post-image-link img.phase1-step-icon {
   margin: 0;
 }

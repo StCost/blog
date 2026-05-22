@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" role="img" aria-labelledby="title desc">
   <title id="title">Inverted unitary expansion</title>
   <desc id="desc">Receiver catches wavefunction and re-expands cargo on anchor pad</desc>
   <defs>
@@ -10,19 +10,19 @@
       <path d="M0,0 L6,3 L0,6 Z" fill="#3fb950"/>
     </marker>
   </defs>
-  <rect width="400" height="180" fill="#0d1117"/>
-  <rect x="4" y="4" width="392" height="172" rx="5" fill="#161b22" stroke="#30363d"/>
-  <text x="200" y="22" text-anchor="middle" fill="#3fb950" font-family="system-ui,sans-serif" font-size="11" font-weight="600">U_dagger - INVERTED EXPANSION</text>
-  <rect x="280" y="48" width="100" height="88" rx="4" fill="none" stroke="#3fb950" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="330" y="42" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="7">RECEIVER GATE</text>
-  <circle cx="120" cy="92" r="5" fill="#ffab70"/>
-  <path d="M125 92 L250 92" stroke="#ffab70" stroke-width="1.2" stroke-dasharray="2 2" marker-end="url(#arr)"/>
-  <polygon points="300,95 340,75 360,95 340,115" fill="#262c36" stroke="#3fb950" stroke-width="1.5"/>
-  <polygon points="310,100 350,82 365,100 325,118" fill="none" stroke="#3fb950" stroke-width="1" opacity="0.5"/>
+  <rect width="400" height="200" fill="#0d1117"/>
+  <rect x="4" y="4" width="392" height="192" rx="5" fill="#161b22" stroke="#30363d"/>
+  <text x="200" y="22" text-anchor="middle" fill="#3fb950" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="11" font-weight="600">U^dag - INVERTED EXPANSION</text>
+  <rect x="280" y="44" width="100" height="88" rx="4" fill="none" stroke="#3fb950" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="330" y="38" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="7">RECEIVER GATE</text>
+  <circle cx="120" cy="88" r="5" fill="#ffab70"/>
+  <path d="M125 88 L250 88" stroke="#ffab70" stroke-width="1.2" stroke-dasharray="2 2" marker-end="url(#arr)"/>
+  <polygon points="300,91 340,71 360,91 340,111" fill="#262c36" stroke="#3fb950" stroke-width="1.5"/>
+  <polygon points="310,96 350,78 365,96 325,114" fill="none" stroke="#3fb950" stroke-width="1" opacity="0.5"/>
   <g stroke="#3fb950" stroke-width="1" marker-end="url(#out)">
-    <line x1="330" y1="115" x2="330" y2="135"/><line x1="315" y1="120" x2="300" y2="138"/><line x1="345" y1="120" x2="360" y2="138"/>
+    <line x1="330" y1="111" x2="330" y2="128"/><line x1="315" y1="116" x2="300" y2="132"/><line x1="345" y1="116" x2="360" y2="132"/>
   </g>
-  <rect x="308" y="138" width="44" height="10" rx="2" fill="#0d1117" stroke="#ff8c42" stroke-width="1"/>
-  <text x="330" y="146" text-anchor="middle" fill="#ff8c42" font-family="system-ui,sans-serif" font-size="7">ANCHOR</text>
-  <text x="200" y="155" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="8">wavefunction caught, re-materialized macroscopic cargo</text>
+  <rect x="308" y="148" width="44" height="10" rx="2" fill="#0d1117" stroke="#ff8c42" stroke-width="1"/>
+  <text x="330" y="156" text-anchor="middle" fill="#ff8c42" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="7">ANCHOR</text>
+  <text x="200" y="182" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8">wavefunction caught, re-materialized macroscopic cargo</text>
 </svg>

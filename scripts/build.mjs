@@ -61,10 +61,29 @@ function copyStaticAssets() {
   }
   copyDir(assetsSrcDir, assetsOutDir);
 
-  const katexCss = path.join(process.cwd(), "node_modules", "katex", "dist", "katex.min.css");
-  if (fs.existsSync(katexCss)) {
-    fs.copyFileSync(katexCss, path.join(assetsOutDir, "katex.css"));
+  copyKatexAssets();
+}
+
+function copyKatexAssets() {
+  const katexDist = path.join(process.cwd(), "node_modules", "katex", "dist");
+  const katexCss = path.join(katexDist, "katex.min.css");
+  if (!fs.existsSync(katexCss)) return;
+
+  const fontsSrc = path.join(katexDist, "fonts");
+  const fontsOut = path.join(assetsOutDir, "fonts");
+  ensureDir(fontsOut);
+  if (fs.existsSync(fontsSrc)) {
+    for (const name of fs.readdirSync(fontsSrc)) {
+      if (!name.endsWith(".woff2")) continue;
+      fs.copyFileSync(path.join(fontsSrc, name), path.join(fontsOut, name));
+    }
   }
+
+  const css = readText(katexCss).replace(
+    /,url\(fonts\/[^)]+\.(?:woff|ttf)\) format\("(?:woff|truetype)"\)/g,
+    ""
+  );
+  fs.writeFileSync(path.join(assetsOutDir, "katex.css"), css, "utf-8");
 }
 
 function write404Page() {
