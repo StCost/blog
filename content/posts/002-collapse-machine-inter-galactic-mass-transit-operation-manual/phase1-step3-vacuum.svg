@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">Step 3: Pull vacuum</title>
+  <defs>
+    <marker id="out" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+      <path d="M0,0 L5,2.5 L0,5 Z" fill="#58a6ff"/>
+    </marker>
+  </defs>
+  <rect width="96" height="96" fill="#161b22" rx="6"/>
+  <rect x="1" y="1" width="94" height="94" rx="5" fill="none" stroke="#30363d"/>
+  <rect x="26" y="32" width="44" height="40" rx="3" fill="#0d1117" stroke="#58a6ff" stroke-width="1.2"/>
+  <circle cx="38" cy="48" r="2" fill="#f85149" opacity="0.8"/><circle cx="52" cy="44" r="2" fill="#f85149" opacity="0.6"/>
+  <circle cx="58" cy="56" r="2" fill="#f85149" opacity="0.5"/>
+  <rect x="8" y="44" width="14" height="16" rx="2" fill="#262c36" stroke="#58a6ff" stroke-width="1"/>
+  <line x1="22" y1="52" x2="26" y2="52" stroke="#58a6ff" stroke-width="1.2" marker-end="url(#out)"/>
+  <line x1="12" y1="48" x2="4" y2="40" stroke="#58a6ff" stroke-width="1" marker-end="url(#out)"/>
+  <line x1="12" y1="56" x2="4" y2="64" stroke="#58a6ff" stroke-width="1" marker-end="url(#out)"/>
+  <text x="48" y="18" text-anchor="middle" fill="#58a6ff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">VACUUM</text>
+  <text x="48" y="86" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="7">UHV</text>
+</svg>

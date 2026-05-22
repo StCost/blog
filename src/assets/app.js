@@ -342,6 +342,31 @@ function prefetchDocument(href) {
 }
 
 /** Prefetch post HTML on hover only (no scroll / no pagination). Skipped when Save-Data is on. */
+/** Wrap post/listing images in links so a click opens the image URL in a new tab. */
+function setupImageOpenInNewTab() {
+  const imgs = document.querySelectorAll(
+    ".post-content img, .pinned-content img, .post-media img"
+  );
+  for (const img of imgs) {
+    if (img.closest("a") || img.dataset.newTabReady === "true") continue;
+
+    const href = img.currentSrc || img.src;
+    if (!href) continue;
+
+    const a = document.createElement("a");
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.className = "post-image-link";
+    const label = (img.getAttribute("alt") || "").trim();
+    a.setAttribute("aria-label", label ? `Open image: ${label}` : "Open image in new tab");
+
+    img.dataset.newTabReady = "true";
+    img.parentNode.insertBefore(a, img);
+    a.appendChild(img);
+  }
+}
+
 function setupListPrefetch() {
   if (navigator.connection?.saveData) return;
 
@@ -362,6 +387,7 @@ function setupListPrefetch() {
 function initClientEnhancements() {
   setupBackToPosts();
   setupCodeBlockActions();
+  setupImageOpenInNewTab();
   setupListPrefetch();
 }
 
