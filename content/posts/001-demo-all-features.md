@@ -20,6 +20,14 @@ Regular **bold**, *italic*, and `inline code`. [Link to the engine repo](https:/
 
 Horizontal rule above separates sections.
 
+## Math (remark-math + KaTeX)
+
+Inline: $E = mc^2$. Display:
+
+$$
+\int_0^1 x^2 \, dx = \frac{1}{3}
+$$
+
 ## GFM extras (remark-gfm)
 
 ~~Strikethrough~~ is supported.

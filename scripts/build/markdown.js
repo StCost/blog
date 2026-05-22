@@ -1,8 +1,10 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
 import rehypeStringify from "rehype-stringify";
 import rehypeHighlight from "rehype-highlight";
 
@@ -13,8 +15,10 @@ export async function mdToHtml(md) {
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkMath)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
+    .use(rehypeKatex)
     .use(rehypeHighlight)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(md);

@@ -443,6 +443,20 @@ header.site-header {
   padding: 0;
 }
 
+.post-content .katex,
+.pinned-content .katex {
+  color: var(--color-text-primary);
+  font-size: 1.05em;
+}
+
+.post-content .katex-display,
+.pinned-content .katex-display {
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
 .post-content hr {
   border: none;
   height: 1px;

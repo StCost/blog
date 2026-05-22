@@ -48,6 +48,11 @@ function copyStaticAssets() {
     if (!st.isFile()) continue;
     fs.copyFileSync(src, path.join(assetsOutDir, f));
   }
+
+  const katexCss = path.join(process.cwd(), "node_modules", "katex", "dist", "katex.min.css");
+  if (fs.existsSync(katexCss)) {
+    fs.copyFileSync(katexCss, path.join(assetsOutDir, "katex.css"));
+  }
 }
 
 function write404Page() {

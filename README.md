@@ -8,6 +8,7 @@ Static blog generator that turns Markdown files into **SEO-friendly, fully stati
 - **Copies static assets** from `src/assets/` into `dist/assets/`
 - **Adds basic SEO metadata** (canonical URL, OpenGraph, Twitter cards)
 - **Auto-embeds YouTube links** and preserves inline HTML when rendering Markdown
+- **Renders LaTeX math** (`$…$` inline, `$$…$$` display) via KaTeX at build time (same syntax as GitHub-flavored math in `.md` previews)
 
 ## Requirements
 - **Node.js**: the workflow uses Node 20; any recent Node 18+ should work
