@@ -315,6 +315,79 @@ header.site-header {
   margin: 0.5rem 0.75rem 0.75rem;
 }
 
+.post-content details.phase-details > summary {
+  display: block;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  position: relative;
+}
+
+.post-content details.phase-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.post-content details.phase-details > summary::after {
+  content: "▸";
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--color-primary);
+  transition: transform 0.15s ease;
+}
+
+.post-content details.phase-details[open] > summary::after {
+  transform: rotate(90deg);
+}
+
+.post-content details.phase-details > summary .phase-summary-title {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+}
+
+.post-content details.phase-details > summary .phase-summary-hint {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1em;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  text-indent: -1.1em;
+}
+
+.post-content details.phase-details > summary .phase-summary-hint::before {
+  content: "• ";
+}
+
+.post-content details.phase-details:not([open]) .phase-summary-hint-open {
+  display: none;
+}
+
+.post-content details.phase-details[open] .phase-summary-hint-closed {
+  display: none;
+}
+
+.post-content details.phase-details > summary .phase-summary-chain {
+  margin: 0.5rem 0 0;
+  line-height: 1.6;
+}
+
+.post-content details.phase-details > summary a.post-image-link {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  margin: 0.75rem 0 0;
+  cursor: zoom-in;
+  pointer-events: auto;
+}
+
+.post-content details.phase-details > summary a.post-image-link img.diagram {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
 .post-content {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
@@ -382,6 +455,24 @@ header.site-header {
   max-width: 100%;
   cursor: zoom-in;
   line-height: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg-primary);
+}
+
+.post-content a.post-image-link:hover,
+.pinned-content a.post-image-link:hover,
+.post-media a.post-image-link:hover,
+.post-content a.post-image-link:focus-visible,
+.pinned-content a.post-image-link:focus-visible,
+.post-media a.post-image-link:focus-visible {
+  border-color: var(--color-primary);
+}
+
+.post-content a.post-image-link:has(img.diagram),
+.pinned-content a.post-image-link:has(img.diagram) {
+  display: block;
+  margin: 1.25rem 0;
 }
 
 .post-media a.post-image-link {
@@ -406,13 +497,26 @@ header.site-header {
   vertical-align: top;
 }
 
-.post-content a.post-image-link img.diagram,
 .post-content img.diagram {
   display: block;
   margin: 1.25rem 0;
   border: 1px solid var(--color-border);
   background: var(--color-bg-primary);
   box-shadow: none;
+}
+
+.post-content a.post-image-link img.diagram,
+.post-content a.post-image-link img.pipeline-step-icon,
+.post-content a.post-image-link img.phase1-step-icon {
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.post-content a.post-image-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 .post-content ol.pipeline-steps,
@@ -482,13 +586,9 @@ header.site-header {
   line-height: 1.6;
 }
 
-.post-content .pipeline-step-body img.diagram {
+.post-content .pipeline-step-body img.diagram,
+.post-content .pipeline-step-body a.post-image-link:has(img.diagram) {
   margin: 1rem 0 0;
-}
-
-.post-content a.post-image-link img.pipeline-step-icon,
-.post-content a.post-image-link img.phase1-step-icon {
-  margin: 0;
 }
 
 .post-content pre {

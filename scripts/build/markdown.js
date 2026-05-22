@@ -12,22 +12,31 @@ import katex from "katex";
 import { replaceImageTags, replaceYouTubeUrls } from "../lib/contentTransform.js";
 export { replaceImageTags };
 
-const PIPELINE_STEPS_HTML = /<ol class="(?:pipeline|phase1)-steps"[\s\S]*?<\/ol>/gi;
+const HTML_MATH_BLOCKS = [
+  /<ol class="(?:pipeline|phase1)-steps"[\s\S]*?<\/ol>/gi,
+  /<details class="phase-details"[\s\S]*?<\/details>/gi
+];
 
 function renderMathTex(tex, displayMode) {
   return katex.renderToString(tex, { displayMode, throwOnError: false, strict: "ignore" });
 }
 
+function renderMathInString(block) {
+  let out = block.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => {
+    const html = renderMathTex(tex.trim(), true);
+    return `<span class="katex-display">${html}</span>`;
+  });
+  out = out.replace(/\$([^$\n]+?)\$/g, (_, tex) => renderMathTex(tex.trim(), false));
+  return out;
+}
+
 /** remark-math does not run inside raw HTML blocks; render $...$ / $$...$$ there before parse. */
 export function renderMathInHtmlBlocks(md) {
-  return String(md || "").replace(PIPELINE_STEPS_HTML, (block) => {
-    let out = block.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => {
-      const html = renderMathTex(tex.trim(), true);
-      return `<span class="katex-display">${html}</span>`;
-    });
-    out = out.replace(/\$([^$\n]+?)\$/g, (_, tex) => renderMathTex(tex.trim(), false));
-    return out;
-  });
+  let out = String(md || "");
+  for (const pattern of HTML_MATH_BLOCKS) {
+    out = out.replace(pattern, (block) => renderMathInString(block));
+  }
+  return out;
 }
 
 export async function mdToHtml(md) {

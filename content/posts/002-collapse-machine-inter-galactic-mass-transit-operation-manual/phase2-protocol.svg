@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" role="img" aria-labelledby="title desc">
+  <title id="title">Phase II: Transmit pipeline</title>
+  <desc id="desc">Five-step transmit sequence from density scan through Planck wavefunction</desc>
+  <defs>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.12"/>
+      <stop offset="50%" stop-color="#ff8c42" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffab70" stop-opacity="0.2"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#ff8c42"/>
+    </marker>
+  </defs>
+  <rect width="760" height="220" fill="#0d1117"/>
+  <rect x="8" y="8" width="744" height="204" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="380" y="32" text-anchor="middle" fill="#ff8c42" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="13" font-weight="600" letter-spacing="0.08em">PHASE II - TRANSMIT PIPELINE</text>
+  <rect x="24" y="48" width="712" height="72" rx="4" fill="url(#glow)" stroke="#ff8c42" stroke-width="1" stroke-opacity="0.4"/>
+  <rect x="72" y="68" width="56" height="28" rx="2" fill="#262c36" stroke="#ff8c42" stroke-width="1"/>
+  <g stroke="#ff8c42" stroke-width="0.6" opacity="0.45">
+    <line x1="72" y1="77.33" x2="128" y2="77.33"/><line x1="72" y1="86.67" x2="128" y2="86.67"/>
+    <line x1="86" y1="68" x2="86" y2="96"/><line x1="100" y1="68" x2="100" y2="96"/><line x1="114" y1="68" x2="114" y2="96"/>
+  </g>
+  <text x="100" y="86" text-anchor="middle" fill="#c9d1d9" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9">CARGO</text>
+  <g font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9" fill="#c9d1d9">
+    <g transform="translate(200,56)">
+      <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
+      <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">1</text>
+      <text x="0" y="38" text-anchor="middle" fill="#8b949e" font-size="8">rho_0</text>
+    </g>
+    <g transform="translate(312,56)">
+      <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="0" y="16" text-anchor="middle" fill="#58a6ff" font-weight="700">2</text>
+      <text x="0" y="38" text-anchor="middle" fill="#8b949e" font-size="8">dS He-3</text>
+    </g>
+    <g transform="translate(424,56)">
+      <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
+      <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">3</text>
+      <text x="0" y="38" text-anchor="middle" fill="#8b949e" font-size="8">M grad B</text>
+    </g>
+    <g transform="translate(536,56)">
+      <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
+      <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">4</text>
+      <text x="0" y="38" text-anchor="middle" fill="#8b949e" font-size="8">Rabi</text>
+    </g>
+    <g transform="translate(648,56)">
+      <circle cx="0" cy="12" r="13" fill="#ffab70" fill-opacity="0.15" stroke="#ffab70" stroke-width="1.5"/>
+      <text x="0" y="16" text-anchor="middle" fill="#ffab70" font-weight="700">5</text>
+      <text x="0" y="38" text-anchor="middle" fill="#ffab70" font-size="8">Psi_Planck</text>
+    </g>
+  </g>
+  <line x1="211" y1="68" x2="301" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="323" y1="68" x2="413" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="435" y1="68" x2="525" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="547" y1="68" x2="635" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8" fill="#8b949e">
+    <text x="40" y="158">II.1 Density matrix scan</text>
+    <text x="40" y="172">II.2 He-3 entropy quench</text>
+    <text x="40" y="186">II.3 Magnetic detrapping</text>
+    <text x="400" y="158">II.4 Rabi coherence lock</text>
+    <text x="400" y="172">II.5 Planck wavefunction (transmit to receiver)</text>
+  </g>
+</svg>

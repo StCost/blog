@@ -364,6 +364,11 @@ function setupImageOpenInNewTab() {
     img.dataset.newTabReady = "true";
     img.parentNode.insertBefore(a, img);
     a.appendChild(img);
+
+    // Nested <a> inside <summary> must not toggle the parent <details>.
+    if (a.closest("summary")) {
+      a.addEventListener("click", (e) => e.stopPropagation());
+    }
   }
 }
 
