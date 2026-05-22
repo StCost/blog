@@ -7,9 +7,28 @@ import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
 import rehypeStringify from "rehype-stringify";
 import rehypeHighlight from "rehype-highlight";
+import katex from "katex";
 
 import { replaceImageTags, replaceYouTubeUrls } from "../lib/contentTransform.js";
 export { replaceImageTags };
+
+const PIPELINE_STEPS_HTML = /<ol class="(?:pipeline|phase1)-steps"[\s\S]*?<\/ol>/gi;
+
+function renderMathTex(tex, displayMode) {
+  return katex.renderToString(tex, { displayMode, throwOnError: false, strict: "ignore" });
+}
+
+/** remark-math does not run inside raw HTML blocks; render $...$ / $$...$$ there before parse. */
+export function renderMathInHtmlBlocks(md) {
+  return String(md || "").replace(PIPELINE_STEPS_HTML, (block) => {
+    let out = block.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => {
+      const html = renderMathTex(tex.trim(), true);
+      return `<span class="katex-display">${html}</span>`;
+    });
+    out = out.replace(/\$([^$\n]+?)\$/g, (_, tex) => renderMathTex(tex.trim(), false));
+    return out;
+  });
+}
 
 export async function mdToHtml(md) {
   const file = await unified()
@@ -21,7 +40,7 @@ export async function mdToHtml(md) {
     .use(rehypeKatex)
     .use(rehypeHighlight)
     .use(rehypeStringify, { allowDangerousHtml: true })
-    .process(md);
+    .process(renderMathInHtmlBlocks(md));
   return String(file);
 }
 

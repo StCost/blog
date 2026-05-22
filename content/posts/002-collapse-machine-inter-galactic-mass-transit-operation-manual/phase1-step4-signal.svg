@@ -10,6 +10,6 @@
   <path d="M48 26 Q28 40 12 58" fill="none" stroke="#ffab70" stroke-width="1.2" opacity="0.7"/>
   <path d="M48 26 Q68 40 84 58" fill="none" stroke="#ffab70" stroke-width="1.2" opacity="0.7"/>
   <circle cx="14" cy="62" r="2" fill="#8b949e"/><circle cx="82" cy="62" r="2" fill="#8b949e"/>
-  <text x="48" y="18" text-anchor="middle" fill="#ff8c42" font-family="system-ui,sans-serif" font-size="9" font-weight="600">SIGNAL</text>
-  <text x="48" y="86" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="7">HANDSHAKE</text>
+  <text x="48" y="18" text-anchor="middle" fill="#ff8c42" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9" font-weight="600">SIGNAL</text>
+  <text x="48" y="86" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="7">HANDSHAKE</text>
 </svg>
