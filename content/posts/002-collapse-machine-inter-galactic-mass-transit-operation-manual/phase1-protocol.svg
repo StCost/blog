@@ -16,57 +16,55 @@
   <rect x="8" y="8" width="744" height="204" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
   <text x="380" y="32" text-anchor="middle" fill="#ff8c42" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="13" font-weight="600" letter-spacing="0.08em">PHASE I - PRE-LAUNCH PREPARATION</text>
   <rect x="24" y="48" width="712" height="72" rx="4" fill="url(#glow)" stroke="#ff8c42" stroke-width="1" stroke-opacity="0.4"/>
-  <rect x="48" y="62" width="200" height="44" rx="3" fill="none" stroke="#ff8c42" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <ellipse cx="148" cy="84" rx="52" ry="14" fill="none" stroke="#8b949e" stroke-width="1"/>
-  <rect x="118" y="72" width="60" height="24" rx="2" fill="#262c36" stroke="#ff8c42" stroke-width="1"/>
-  <text x="148" y="88" text-anchor="middle" fill="#c9d1d9" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9">CARGO</text>
-  <text x="148" y="128" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8">TRANSIT CHAMBER</text>
+  <rect x="72" y="68" width="56" height="28" rx="2" fill="#262c36" stroke="#ff8c42" stroke-width="1"/>
+  <g stroke="#ff8c42" stroke-width="0.6" opacity="0.45">
+    <line x1="72" y1="77.33" x2="128" y2="77.33"/><line x1="72" y1="86.67" x2="128" y2="86.67"/>
+    <line x1="86" y1="68" x2="86" y2="96"/><line x1="100" y1="68" x2="100" y2="96"/><line x1="114" y1="68" x2="114" y2="96"/>
+  </g>
+  <text x="100" y="86" text-anchor="middle" fill="#c9d1d9" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9">CARGO</text>
   <g font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9" fill="#c9d1d9">
-    <g transform="translate(280,56)">
+    <g transform="translate(200,56)">
       <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
       <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">1</text>
       <text x="0" y="38" text-anchor="middle" fill="#8b949e">LOAD</text>
     </g>
-    <g transform="translate(350,56)">
+    <g transform="translate(296,56)">
       <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
       <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">2</text>
       <text x="0" y="38" text-anchor="middle" fill="#8b949e">SEAL</text>
     </g>
-    <g transform="translate(420,56)">
+    <g transform="translate(392,56)">
       <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
       <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">3</text>
       <text x="0" y="38" text-anchor="middle" fill="#8b949e">VACUUM</text>
     </g>
-    <g transform="translate(490,56)">
+    <g transform="translate(488,56)">
       <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
       <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">4</text>
       <text x="0" y="38" text-anchor="middle" fill="#8b949e">SIGNAL</text>
     </g>
-    <g transform="translate(560,56)">
+    <g transform="translate(584,56)">
       <circle cx="0" cy="12" r="11" fill="#161b22" stroke="#ff8c42" stroke-width="1.2"/>
       <text x="0" y="16" text-anchor="middle" fill="#ff8c42" font-weight="700">5</text>
       <text x="0" y="38" text-anchor="middle" fill="#8b949e">APPROVAL</text>
     </g>
-    <g transform="translate(630,56)">
+    <g transform="translate(680,56)">
       <circle cx="0" cy="12" r="11" fill="#ff8c42" fill-opacity="0.2" stroke="#ff8c42" stroke-width="1.5"/>
       <text x="0" y="16" text-anchor="middle" fill="#ffab70" font-weight="700">6</text>
       <text x="0" y="38" text-anchor="middle" fill="#ff8c42">BEGIN</text>
     </g>
   </g>
-  <line x1="291" y1="68" x2="339" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <line x1="361" y1="68" x2="409" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <line x1="431" y1="68" x2="479" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <line x1="501" y1="68" x2="549" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <line x1="571" y1="68" x2="619" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="211" y1="68" x2="285" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="307" y1="68" x2="381" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="403" y1="68" x2="477" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="499" y1="68" x2="573" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="595" y1="68" x2="669" y2="68" stroke="#ff8c42" stroke-width="1.2" marker-end="url(#arrow)"/>
   <g font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="8" fill="#8b949e">
-    <text x="48" y="158">(1) Anchor pad lock</text>
-    <text x="48" y="172">(2) Blast doors + mag seals</text>
-    <text x="48" y="186">(3) UHV evacuation (no residual gas)</text>
-    <text x="280" y="158">(4) Handshake to destination</text>
-    <text x="280" y="172">(5) Target verification key</text>
-    <text x="280" y="186">(6) Countdown to core pipeline</text>
+    <text x="40" y="158">(1) Anchor pad lock</text>
+    <text x="40" y="172">(2) Blast doors + mag seals</text>
+    <text x="40" y="186">(3) UHV evacuation (no residual gas)</text>
+    <text x="400" y="158">(4) Handshake to destination</text>
+    <text x="400" y="172">(5) Target verification key</text>
+    <text x="400" y="186">(6) Countdown to core pipeline</text>
   </g>
-  <path d="M520 150 L680 150 L680 100" fill="none" stroke="#ff8c42" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arrow)" opacity="0.7"/>
-  <text x="600" y="168" text-anchor="middle" fill="#ff8c42" font-family="ui-monospace,Cascadia Mono,Consolas,Segoe UI Mono,monospace" font-size="9" opacity="0.85">DESTINATION GATE</text>
-  <rect x="652" y="118" width="56" height="36" rx="3" fill="none" stroke="#8b949e" stroke-width="1" stroke-dasharray="3 2"/>
 </svg>
