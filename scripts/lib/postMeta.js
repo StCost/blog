@@ -30,6 +30,8 @@ const YOUTUBE_WATCH = /https:\/\/(?:www\.)?youtube\.com\/watch\?v=([A-Za-z0-9_-]
 const YOUTUBE_SHORT = /https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})/;
 const YOUTUBE_SHORTS = /https:\/\/(?:www\.)?youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/;
 
+const YOUTUBE_EMBED = /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/;
+
 export function extractFirstYouTubeId(content) {
   const m1 = content.match(YOUTUBE_WATCH);
   if (m1) return m1[1];
@@ -37,6 +39,8 @@ export function extractFirstYouTubeId(content) {
   if (m2) return m2[1];
   const m3 = content.match(YOUTUBE_SHORTS);
   if (m3) return m3[1];
+  const m4 = content.match(YOUTUBE_EMBED);
+  if (m4) return m4[1];
   return null;
 }
 

@@ -122,8 +122,10 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
   for (const filename of files) {
     const raw = readText(postFilePath(filename));
     const assetBasename = postAssetBasename(filename);
-    const normalized = normalizeMd(rewritePostAssetUrls(raw, assetBasename));
-    const rawForMeta = replaceImageTags(normalized);
+    const withAssets = rewritePostAssetUrls(raw, assetBasename);
+    // Media/excerpt must be read before normalizeMd (it turns bare YouTube lines into iframes).
+    const rawForMeta = replaceImageTags(withAssets);
+    const normalized = normalizeMd(withAssets);
 
     const postNumber = extractPostNumber(filename);
     const baseTitle = extractTitleFromContentOrFilename(normalized, filename);
