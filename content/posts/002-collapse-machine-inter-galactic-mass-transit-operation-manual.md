@@ -73,7 +73,7 @@ $$\hat{\rho}_0 \rightarrow \Delta S_{^3\text{He}} \rightarrow \vec{M}\,\nabla B 
   </li>
   <li class="pipeline-step">
     <div class="pipeline-step-body">
-      <strong>$\Delta S_{^3\text{He}}$ (Superfluid Entropy Evacuation) [$\Delta S$ = entropy change; $^3$He = bath]:</strong> The chamber floods with ultra-cold Helium-3 superfluid. This flash-quench collapses internal thermal disorder until entropy sits at the transit-spec floor—motion and heat noise low enough for the next pipeline stage, not a literal thermodynamic zero.
+      <strong>$\Delta S_{^3\text{He}}$ (Superfluid Entropy Evacuation) [$\Delta S$ = entropy change; $^3$He = bath]:</strong> The chamber floods with ultra-cold Helium-3 superfluid. This flash-quench collapses internal thermal disorder until entropy sits at the transit-spec floor—motion and heat noise low enough for the next pipeline stage
       <br />
       <img src="./002-collapse-machine-inter-galactic-mass-transit-operation-manual/he3-entropy.svg" alt="Schematic: Helium-3 superfluid quench driving entropy toward practical minimum" width="400" height="200" class="diagram" />
     </div>
