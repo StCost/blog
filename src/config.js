@@ -9,8 +9,7 @@ function envOverride(name, fallback) {
 const defaults = {
   site: {
     title: "👼 Dreaming Saints 👼",
-    tagline:
-      "Developing 🚕 COLLAPSE MACHINE 💥, a tesla-punk co-op open-world imm-sim sci-fi sandbox",
+    tagline: "developing video games for fun",
     url: "",
     companyName: "Dreaming Saints"
   },
