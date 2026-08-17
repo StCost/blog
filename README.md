@@ -8,7 +8,7 @@ Static blog generator that turns Markdown files into **SEO-friendly, fully stati
 - **Copies static assets** from `src/assets/` into `dist/assets/`
 - **Per-post asset folders**: `content/posts/<same-name-as-post.md>/` (any subfolders) are copied into `dist/<slug>/` beside `index.html`
 - **Adds basic SEO metadata** (canonical URL, OpenGraph, Twitter cards)
-- **Auto-embeds YouTube links** and preserves inline HTML when rendering Markdown
+- **Auto-embeds YouTube and SoundCloud links** and preserves inline HTML when rendering Markdown
 - **Renders LaTeX math** (`$…$` inline, `$$…$$` display) via KaTeX at build time (same syntax as GitHub-flavored math in `.md` previews)
 
 ## Requirements
@@ -29,7 +29,7 @@ Static blog generator that turns Markdown files into **SEO-friendly, fully stati
 - `scripts/build.mjs`: static site build (Markdown → HTML, templates, pagination, SEO metas)
 - `scripts/dev.mjs`: rebuild-on-change + tiny HTTP server for `dist/`
 - `scripts/clean.mjs`: deletes `dist/`
-- `scripts/lib/contentTransform.js`: transforms content (YouTube URL → embed, `<img>` → Markdown image)
+- `scripts/lib/contentTransform.js`: transforms content (YouTube / SoundCloud URL → embed, `<img>` → Markdown image)
 - `scripts/lib/postMeta.js`: slug/title/excerpt + media detection for OG images
 - `src/config.js`: site title/tagline + pagination/excerpt settings
 - `src/templates/page.html`: index template (list + pagination + “New Post” button)
