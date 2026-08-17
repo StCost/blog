@@ -123,7 +123,7 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
     const raw = readText(postFilePath(filename));
     const assetBasename = postAssetBasename(filename);
     const withAssets = rewritePostAssetUrls(raw, assetBasename);
-    // Media/excerpt must be read before normalizeMd (it turns bare YouTube lines into iframes).
+    // Media/excerpt must be read before normalizeMd (it turns bare YouTube / SoundCloud lines into iframes).
     const rawForMeta = replaceImageTags(withAssets);
     const normalized = normalizeMd(withAssets);
 

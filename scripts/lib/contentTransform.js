@@ -46,3 +46,27 @@ export const replaceYouTubeUrls = (content) =>
     })
     .join("\n");
 
+const SOUNDCLOUD_URL =
+  /^(https:\/\/(?:www\.|m\.)?soundcloud\.com\/[A-Za-z0-9_-]+\/(?:sets\/)?[A-Za-z0-9_-]+)(?:\?[^\s]*)?$/i;
+
+const embedSoundCloud = (line) => {
+  const match = line.trim().match(SOUNDCLOUD_URL);
+  if (!match) return line;
+  const src =
+    "https://w.soundcloud.com/player/?url=" +
+    encodeURIComponent(match[1]) +
+    "&color=%23ff8c42&inverse=true&auto_play=false&show_user=true";
+  return `<div class="soundcloud-embed"><iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" title="SoundCloud player" src="${src}"></iframe></div>`;
+};
+
+const isSoundCloudUrl = (trimmed) => SOUNDCLOUD_URL.test(trimmed);
+
+export const replaceSoundCloudUrls = (content) =>
+  content
+    .split("\n")
+    .map((line) => {
+      const trimmed = line.trim();
+      return trimmed && isSoundCloudUrl(trimmed) ? embedSoundCloud(trimmed) : line;
+    })
+    .join("\n");
+
