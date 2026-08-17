@@ -55,8 +55,8 @@ const embedSoundCloud = (line) => {
   const src =
     "https://w.soundcloud.com/player/?url=" +
     encodeURIComponent(match[1]) +
-    "&color=%23ff8c42&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false";
-  return `<div class="soundcloud-embed"><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" title="SoundCloud player" src="${src}"></iframe></div>`;
+    "&color=%23ff8c42&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=true";
+  return `<div class="soundcloud-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" allow="autoplay" title="SoundCloud player" src="${src}"></iframe></div>`;
 };
 
 const isSoundCloudUrl = (trimmed) => SOUNDCLOUD_URL.test(trimmed);
