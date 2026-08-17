@@ -46,23 +46,25 @@ export const replaceYouTubeUrls = (content) =>
     })
     .join("\n");
 
-const SOUNDCLOUD_BARE = /^(https:\/\/(?:(?:www|m)\.)?soundcloud\.com\/\S+)$/i;
-const SOUNDCLOUD_ON_BARE = /^(https:\/\/on\.soundcloud\.com\/\S+)$/i;
-
-function soundcloudPlayerSrc(url) {
-  return `https://w.soundcloud.com/player/?visual=true&url=${encodeURIComponent(url)}&show_artwork=true`;
-}
+const SOUNDCLOUD_URL =
+  /^(https:\/\/(?:www\.|m\.)?soundcloud\.com\/[A-Za-z0-9_-]+\/(?:sets\/)?[A-Za-z0-9_-]+)(?:\?[^\s]*)?$/i;
+const SOUNDCLOUD_ON = /^(https:\/\/on\.soundcloud\.com\/[A-Za-z0-9_-]+)(?:\?[^\s]*)?$/i;
 
 const embedSoundCloud = (line) => {
-  const url = line.trim().replace(/[.,;:]+$/g, "");
-  if (!SOUNDCLOUD_BARE.test(url) && !SOUNDCLOUD_ON_BARE.test(url)) return line;
-  const src = soundcloudPlayerSrc(url);
-  return `<div class="soundcloud-embed"><iframe title="SoundCloud" width="100%" height="400" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="${src}"></iframe></div>`;
+  const trimmed = line.trim().replace(/[.,;:]+$/g, "");
+  const match = trimmed.match(SOUNDCLOUD_URL) || trimmed.match(SOUNDCLOUD_ON);
+  if (!match) return line;
+  const src =
+    "https://w.soundcloud.com/player/?url=" +
+    encodeURIComponent(match[1]) +
+    "&color=%23ff8c42&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=true";
+  return `<div class="soundcloud-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" allow="autoplay" title="SoundCloud player" src="${src}"></iframe></div>`;
 };
 
-const isSoundCloudUrl = (trimmed) =>
-  SOUNDCLOUD_BARE.test(trimmed.replace(/[.,;:]+$/g, "")) ||
-  SOUNDCLOUD_ON_BARE.test(trimmed.replace(/[.,;:]+$/g, ""));
+const isSoundCloudUrl = (trimmed) => {
+  const t = trimmed.replace(/[.,;:]+$/g, "");
+  return SOUNDCLOUD_URL.test(t) || SOUNDCLOUD_ON.test(t);
+};
 
 export const replaceSoundCloudUrls = (content) =>
   content

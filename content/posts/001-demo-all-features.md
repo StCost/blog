@@ -79,6 +79,12 @@ Shorts URL:
 
 https://www.youtube.com/shorts/jNQXAC9IVRw
 
+## SoundCloud (standalone URL lines → embeds)
+
+Same rule as YouTube: the URL alone on a line becomes a player.
+
+https://soundcloud.com/forss/flickermood
+
 ## Video files (Markdown link, bare URL, HTML5)
 
 Markdown link to an `.mp4` (used for preview metadata when it appears before other video patterns):
