@@ -1,4 +1,9 @@
 :root {
+  --page-pad-x: 1rem;
+  --page-pad-y: 2rem;
+  --card-pad: 2rem;
+  --list-pad: 1.5rem;
+
   /* SaintBlog palette (amber/orange) */
   --color-primary: #ff8c42;
   --color-primary-hover: #ffab70;

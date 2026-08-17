@@ -414,12 +414,132 @@ function setupAboutPersonAnchors() {
   openFromHash();
 }
 
+function tipNeedsTap() {
+  return window.matchMedia("(hover: none), (pointer: coarse)").matches;
+}
+
+function clearTipPos(tip) {
+  tip.style.transform = "";
+  tip.style.left = "";
+  tip.style.right = "";
+  tip.style.top = "";
+  tip.style.bottom = "";
+  tip.style.maxHeight = "";
+  tip.style.overflowY = "";
+}
+
+function clampTipToScreen(tip) {
+  const pad = 8;
+  clearTipPos(tip);
+  tip.style.left = "0px";
+  tip.style.right = "auto";
+  tip.style.top = "calc(100% + 6px)";
+  void tip.offsetWidth;
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const link = tip.parentElement?.getBoundingClientRect();
+  let rect = tip.getBoundingClientRect();
+  const maxH = vh - pad * 2;
+
+  if (rect.height > maxH) {
+    tip.style.maxHeight = `${maxH}px`;
+    tip.style.overflowY = "auto";
+    void tip.offsetWidth;
+    rect = tip.getBoundingClientRect();
+  }
+
+  if (rect.height > 0 && link && rect.bottom > vh - pad && link.top > rect.height + pad + 6) {
+    tip.style.top = "auto";
+    tip.style.bottom = "calc(100% + 6px)";
+    rect = tip.getBoundingClientRect();
+  }
+
+  let dx = 0;
+  let dy = 0;
+  if (rect.left < pad) dx = pad - rect.left;
+  if (rect.right + dx > vw - pad) dx = vw - pad - rect.right;
+  if (rect.top < pad) dy = pad - rect.top;
+  if (rect.bottom + dy > vh - pad) dy = vh - pad - rect.bottom;
+  if (dx || dy) tip.style.transform = `translate(${Math.round(dx)}px, ${Math.round(dy)}px)`;
+}
+
+function setupAboutTips() {
+  const tips = [...document.querySelectorAll(".about-tip")].filter(
+    (tip) => tip.parentElement && tip.parentElement.tagName === "A"
+  );
+  if (!tips.length) return;
+
+  let openLink = null;
+
+  function closeTip() {
+    if (!openLink) return;
+    openLink.classList.remove("tip-open");
+    const tip = openLink.querySelector(":scope > .about-tip");
+    if (tip) {
+      tip.classList.remove("is-open");
+      clearTipPos(tip);
+    }
+    openLink.closest(".game-cell")?.classList.remove("tip-open");
+    openLink = null;
+  }
+
+  for (const tip of tips) {
+    const a = tip.parentElement;
+    a.addEventListener("click", (e) => {
+      if (!tipNeedsTap()) return;
+      if (openLink === a) return;
+      e.preventDefault();
+      e.stopPropagation();
+      closeTip();
+      a.classList.add("tip-open");
+      tip.classList.add("is-open");
+      a.closest(".game-cell")?.classList.add("tip-open");
+      openLink = a;
+      requestAnimationFrame(() => clampTipToScreen(tip));
+    });
+    a.addEventListener("mouseenter", () => {
+      if (tipNeedsTap()) return;
+      requestAnimationFrame(() => clampTipToScreen(tip));
+    });
+    a.addEventListener("mouseleave", () => {
+      if (tipNeedsTap()) return;
+      clearTipPos(tip);
+    });
+  }
+
+  document.addEventListener("click", (e) => {
+    if (!openLink) return;
+    if (openLink.contains(e.target)) return;
+    closeTip();
+  });
+  window.addEventListener(
+    "resize",
+    () => {
+      if (!openLink) return;
+      const tip = openLink.querySelector(":scope > .about-tip");
+      if (tip) clampTipToScreen(tip);
+    },
+    { passive: true }
+  );
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!openLink) return;
+      const tip = openLink.querySelector(":scope > .about-tip");
+      if (tip) clampTipToScreen(tip);
+    },
+    { passive: true }
+  );
+}
+
 function initClientEnhancements() {
   setupBackToPosts();
   setupCodeBlockActions();
   setupImageOpenInNewTab();
   setupListPrefetch();
   setupAboutPersonAnchors();
+  setupAboutTips();
 }
 
 if (document.readyState === "loading") {
