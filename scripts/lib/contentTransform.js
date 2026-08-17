@@ -1,5 +1,7 @@
 // Mirrors the current SaintBlog behavior.
 
+import { soundCloudPlayerSrc } from "./soundcloud.js";
+
 export const replaceImageTags = (content) =>
   content.replace(/<img\b[^>]*>/gi, (imgTag) => {
     const srcMatch = imgTag.match(/\bsrc=["']([^"']+)["']/i);
@@ -54,10 +56,7 @@ const embedSoundCloud = (line) => {
   const trimmed = line.trim().replace(/[.,;:]+$/g, "");
   const match = trimmed.match(SOUNDCLOUD_URL) || trimmed.match(SOUNDCLOUD_ON);
   if (!match) return line;
-  const src =
-    "https://w.soundcloud.com/player/?url=" +
-    encodeURIComponent(match[1]) +
-    "&color=%23ff8c42&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=true";
+  const src = soundCloudPlayerSrc(match[1]);
   return `<div class="soundcloud-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" allow="autoplay" title="SoundCloud player" src="${src}"></iframe></div>`;
 };
 

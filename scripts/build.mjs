@@ -9,7 +9,7 @@ import {
   extractFirstYouTubeId,
   extractTitleFromContentOrFilename
 } from "./lib/postMeta.js";
-import { fetchSoundCloudThumbnail } from "./lib/soundcloud.js";
+import { saveSoundCloudCover } from "./lib/soundcloud.js";
 import {
   BASE_PATH,
   FOOTER_TEXT,
@@ -144,20 +144,25 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
     const firstYouTubeId = extractFirstYouTubeId(rawForMeta);
     const firstVideoUrl = extractFirstVideoUrl(rawForMeta);
     const firstSoundCloudUrl = extractFirstSoundCloudUrl(rawForMeta);
+
+    const postOutDir = path.join(distDir, slug);
+    ensureDir(postOutDir);
+    copyPostAssets(resolvePostAssetDir(filename), postOutDir);
+
     let soundCloudThumb = "";
     if (!firstImageUrl && !firstYouTubeId && firstSoundCloudUrl) {
-      soundCloudThumb = (await fetchSoundCloudThumbnail(firstSoundCloudUrl)) || "";
+      const dest = path.join(postOutDir, "soundcloud-cover.jpg");
+      const { remoteUrl, saved } = await saveSoundCloudCover(firstSoundCloudUrl, dest);
+      soundCloudThumb = saved ? `${BASE_PATH}${slug}/soundcloud-cover.jpg` : remoteUrl || "";
     }
     const ogImage = firstImageUrl
       ? absUrl(publicAsset(firstImageUrl))
       : firstYouTubeId
         ? `https://i.ytimg.com/vi/${firstYouTubeId}/hqdefault.jpg`
-        : soundCloudThumb;
+        : soundCloudThumb
+          ? absUrl(soundCloudThumb)
+          : "";
     const listImageUrl = firstImageUrl ? publicAsset(firstImageUrl) : soundCloudThumb;
-
-    const postOutDir = path.join(distDir, slug);
-    ensureDir(postOutDir);
-    copyPostAssets(resolvePostAssetDir(filename), postOutDir);
     fs.writeFileSync(
       path.join(postOutDir, "index.html"),
       renderPostHtml(postTpl, {
@@ -182,7 +187,9 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
       media: {
         imageUrl: listImageUrl,
         youTubeId: firstYouTubeId,
-        videoUrl: firstVideoUrl
+        videoUrl: firstVideoUrl,
+        soundCloudUrl:
+          !listImageUrl && !firstYouTubeId && !firstVideoUrl ? firstSoundCloudUrl || "" : ""
       }
     });
   }
