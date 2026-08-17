@@ -7,6 +7,7 @@ import {
   GITHUB_POSTS_PATH,
   GOOGLE_SITE_VERIFICATION
 } from "./context.js";
+import { soundCloudPlayerSrc } from "../lib/soundcloud.js";
 import { htmlEscape, xmlEscape, renderTemplate } from "./utils.js";
 
 function googleSiteVerificationMetaHtml() {
@@ -53,16 +54,26 @@ export function buildPinnedHtml(p, pinnedPost) {
   </section>`.trim();
 }
 
+function listingImg(src, { play = false } = {}) {
+  const remote = /^https?:\/\//i.test(src);
+  const referrer = remote ? ' referrerpolicy="no-referrer"' : "";
+  const img = `<img loading="lazy" decoding="async"${referrer} src="${htmlEscape(src)}" alt="" />`;
+  if (!play) return `<div class="post-media">${img}</div>`;
+  return `<div class="post-media post-media-video">${img}<div class="post-media-play" aria-hidden="true"></div></div>`;
+}
+
 export function buildPostListItem(post) {
   const href = `${BASE_PATH}${post.slug}/`;
   const media = post.media || {};
   const mediaHtml = media.imageUrl
-    ? `<div class="post-media"><img loading="lazy" decoding="async" src="${htmlEscape(media.imageUrl)}" alt="" /></div>`
+    ? listingImg(media.imageUrl, { play: /\bsoundcloud-cover\.jpe?g\b/i.test(media.imageUrl) || /sndcdn\.com/i.test(media.imageUrl) })
     : media.youTubeId
-      ? `<div class="post-media post-media-video"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/${htmlEscape(media.youTubeId)}/hqdefault.jpg" alt="" /><div class="post-media-play" aria-hidden="true"></div></div>`
+      ? listingImg(`https://i.ytimg.com/vi/${media.youTubeId}/hqdefault.jpg`, { play: true })
       : media.videoUrl
         ? `<video class="post-video" controls preload="metadata" src="${htmlEscape(media.videoUrl)}"></video>`
-        : "";
+        : media.soundCloudUrl
+          ? `<div class="post-media post-media-soundcloud"><iframe width="100%" height="320" scrolling="no" frameborder="no" allow="autoplay" title="SoundCloud player" src="${htmlEscape(soundCloudPlayerSrc(media.soundCloudUrl))}"></iframe></div>`
+          : "";
 
   return `
   <section class="card post-item">

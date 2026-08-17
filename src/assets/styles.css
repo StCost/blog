@@ -199,6 +199,13 @@ header.site-header {
   aspect-ratio: 16 / 9;
 }
 
+.post-media-soundcloud iframe {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border: 0;
+}
+
 .post-media-play {
   position: absolute;
   inset: 0;
