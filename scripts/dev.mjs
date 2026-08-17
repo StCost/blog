@@ -37,10 +37,10 @@ function contentType(filePath) {
   return "application/octet-stream";
 }
 
-function serveFile(res, filePath) {
+function serveFile(res, filePath, status = 200) {
   try {
     const buf = fs.readFileSync(filePath);
-    res.writeHead(200, { "Content-Type": contentType(filePath) });
+    res.writeHead(status, { "Content-Type": contentType(filePath) });
     res.end(buf);
   } catch {
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
@@ -83,8 +83,14 @@ const server = http.createServer((req, res) => {
       return serveFile(res, p);
     }
   }
-  // fallback
-  return serveFile(res, path.join(distDir, "404.html"));
+  // Never send the HTML 404 page as a JS/CSS response (that yields
+  // "Unexpected token '<'" when the browser executes it as a script).
+  if (/\.(js|mjs|css|map|svg|png|jpe?g|gif|webp|ico|woff2?)$/i.test(safe)) {
+    res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Not found");
+    return;
+  }
+  return serveFile(res, path.join(distDir, "404.html"), 404);
 });
 
 const port = Number(process.env.PORT || 4173);

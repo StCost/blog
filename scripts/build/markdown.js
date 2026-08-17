@@ -9,7 +9,7 @@ import rehypeStringify from "rehype-stringify";
 import rehypeHighlight from "rehype-highlight";
 import katex from "katex";
 
-import { replaceImageTags, replaceYouTubeUrls } from "../lib/contentTransform.js";
+import { replaceImageTags, replaceSoundCloudUrls, replaceYouTubeUrls } from "../lib/contentTransform.js";
 export { replaceImageTags };
 
 const HTML_MATH_BLOCKS = [
@@ -54,7 +54,7 @@ export async function mdToHtml(md) {
 }
 
 export function normalizeMd(raw) {
-  return replaceYouTubeUrls(replaceImageTags(raw));
+  return replaceSoundCloudUrls(replaceYouTubeUrls(replaceImageTags(raw)));
 }
 
 export function stripFirstH1(md) {
