@@ -4,10 +4,12 @@ import path from "node:path";
 import {
   extractExcerpt,
   extractFirstImageUrl,
+  extractFirstSoundCloudUrl,
   extractFirstVideoUrl,
   extractFirstYouTubeId,
   extractTitleFromContentOrFilename
 } from "./lib/postMeta.js";
+import { fetchSoundCloudThumbnail } from "./lib/soundcloud.js";
 import {
   BASE_PATH,
   FOOTER_TEXT,
@@ -141,11 +143,17 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
     const firstImageUrl = extractFirstImageUrl(rawForMeta);
     const firstYouTubeId = extractFirstYouTubeId(rawForMeta);
     const firstVideoUrl = extractFirstVideoUrl(rawForMeta);
+    const firstSoundCloudUrl = extractFirstSoundCloudUrl(rawForMeta);
+    let soundCloudThumb = "";
+    if (!firstImageUrl && !firstYouTubeId && firstSoundCloudUrl) {
+      soundCloudThumb = (await fetchSoundCloudThumbnail(firstSoundCloudUrl)) || "";
+    }
     const ogImage = firstImageUrl
       ? absUrl(publicAsset(firstImageUrl))
       : firstYouTubeId
         ? `https://i.ytimg.com/vi/${firstYouTubeId}/hqdefault.jpg`
-        : "";
+        : soundCloudThumb;
+    const listImageUrl = firstImageUrl ? publicAsset(firstImageUrl) : soundCloudThumb;
 
     const postOutDir = path.join(distDir, slug);
     ensureDir(postOutDir);
@@ -172,7 +180,7 @@ async function buildPosts({ postTpl, files, nextPostFilename, pinnedFilename, us
       slug,
       html,
       media: {
-        imageUrl: firstImageUrl ? publicAsset(firstImageUrl) : "",
+        imageUrl: listImageUrl,
         youTubeId: firstYouTubeId,
         videoUrl: firstVideoUrl
       }

@@ -11,16 +11,23 @@ export function ensureDir(p) {
 
 export function emptyDir(p) {
   if (!fs.existsSync(p)) return;
-  for (const entry of fs.readdirSync(p)) {
-    const full = path.join(p, entry);
-    const st = fs.statSync(full);
-    if (st.isDirectory()) {
-      emptyDir(full);
-      fs.rmdirSync(full);
-    } else {
-      fs.unlinkSync(full);
+  try {
+    fs.rmSync(p, { recursive: true, force: true, maxRetries: 8, retryDelay: 100 });
+  } catch {
+    if (!fs.existsSync(p)) {
+      fs.mkdirSync(p, { recursive: true });
+      return;
+    }
+    for (const entry of fs.readdirSync(p)) {
+      const full = path.join(p, entry);
+      try {
+        fs.rmSync(full, { recursive: true, force: true, maxRetries: 8, retryDelay: 100 });
+      } catch {
+        /* Windows can keep media files locked; skip and continue. */
+      }
     }
   }
+  fs.mkdirSync(p, { recursive: true });
 }
 
 export function htmlEscape(s) {

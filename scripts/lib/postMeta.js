@@ -44,6 +44,26 @@ export function extractFirstYouTubeId(content) {
   return null;
 }
 
+const SOUNDCLOUD_TRACK = /https:\/\/(?:(?:www|m)\.)?soundcloud\.com\/[^\s"'<>)]+/i;
+const SOUNDCLOUD_SHORT = /https:\/\/on\.soundcloud\.com\/[^\s"'<>)]+/i;
+
+function trimUrlJunk(url) {
+  return String(url || "").replace(/[.,;:]+$/g, "");
+}
+
+export function extractFirstSoundCloudUrl(content) {
+  const text = String(content || "");
+  const short = text.match(SOUNDCLOUD_SHORT);
+  const track = text.match(SOUNDCLOUD_TRACK);
+  const matches = [short, track]
+    .filter(Boolean)
+    .sort((a, b) => a.index - b.index);
+  if (!matches.length) return null;
+  const url = trimUrlJunk(matches[0][0]);
+  if (/soundcloud\.com\/(?:explore|discover|you|pages)\b/i.test(url)) return null;
+  return url;
+}
+
 export function extractFirstVideoUrl(content) {
   const mdLink = content.match(/\[[^\]]*\]\(([^)]+\.(?:mp4|webm|mov))(?:\?[^)]*)?\)/i);
   if (mdLink) return mdLink[1].trim();

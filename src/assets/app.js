@@ -348,7 +348,7 @@ function setupImageOpenInNewTab() {
     ".post-content img, .pinned-content img, .post-media img"
   );
   for (const img of imgs) {
-    if (img.closest("a") || img.dataset.newTabReady === "true") continue;
+    if (img.closest("a") || img.closest(".about-avatar-wrap") || img.dataset.newTabReady === "true") continue;
 
     const href = img.currentSrc || img.src;
     if (!href) continue;
@@ -389,11 +389,37 @@ function setupListPrefetch() {
   }
 }
 
+function setupAboutPersonAnchors() {
+  if (window.__aboutPersonAnchors) return;
+  window.__aboutPersonAnchors = true;
+  function openFromHash() {
+    const id = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!(el instanceof HTMLDetailsElement)) return;
+    el.open = true;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  document.querySelectorAll("a.about-anchor").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const href = a.getAttribute("href") || "";
+      if (!href.startsWith("#")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      history.replaceState(null, "", href);
+      openFromHash();
+    });
+  });
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
+}
+
 function initClientEnhancements() {
   setupBackToPosts();
   setupCodeBlockActions();
   setupImageOpenInNewTab();
   setupListPrefetch();
+  setupAboutPersonAnchors();
 }
 
 if (document.readyState === "loading") {

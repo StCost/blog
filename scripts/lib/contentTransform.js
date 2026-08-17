@@ -46,3 +46,30 @@ export const replaceYouTubeUrls = (content) =>
     })
     .join("\n");
 
+const SOUNDCLOUD_BARE = /^(https:\/\/(?:(?:www|m)\.)?soundcloud\.com\/\S+)$/i;
+const SOUNDCLOUD_ON_BARE = /^(https:\/\/on\.soundcloud\.com\/\S+)$/i;
+
+function soundcloudPlayerSrc(url) {
+  return `https://w.soundcloud.com/player/?visual=true&url=${encodeURIComponent(url)}&show_artwork=true`;
+}
+
+const embedSoundCloud = (line) => {
+  const url = line.trim().replace(/[.,;:]+$/g, "");
+  if (!SOUNDCLOUD_BARE.test(url) && !SOUNDCLOUD_ON_BARE.test(url)) return line;
+  const src = soundcloudPlayerSrc(url);
+  return `<div class="soundcloud-embed"><iframe title="SoundCloud" width="100%" height="400" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="${src}"></iframe></div>`;
+};
+
+const isSoundCloudUrl = (trimmed) =>
+  SOUNDCLOUD_BARE.test(trimmed.replace(/[.,;:]+$/g, "")) ||
+  SOUNDCLOUD_ON_BARE.test(trimmed.replace(/[.,;:]+$/g, ""));
+
+export const replaceSoundCloudUrls = (content) =>
+  content
+    .split("\n")
+    .map((line) => {
+      const trimmed = line.trim();
+      return trimmed && isSoundCloudUrl(trimmed) ? embedSoundCloud(trimmed) : line;
+    })
+    .join("\n");
+
