@@ -348,7 +348,13 @@ function setupImageOpenInNewTab() {
     ".post-content img, .pinned-content img, .post-media img"
   );
   for (const img of imgs) {
-    if (img.closest("a") || img.closest(".about-avatar-wrap") || img.dataset.newTabReady === "true") continue;
+    if (
+      img.closest("a") ||
+      img.closest(".about-avatar-wrap") ||
+      img.closest(".about-tip-trigger") ||
+      img.closest(".about-tip") ||
+      img.dataset.newTabReady === "true"
+    ) continue;
 
     const href = img.currentSrc || img.src;
     if (!href) continue;
@@ -420,28 +426,39 @@ function tipNeedsTap() {
 
 function clearTipPos(tip) {
   tip.style.transform = "";
+  tip.style.position = "";
   tip.style.left = "";
   tip.style.right = "";
   tip.style.top = "";
   tip.style.bottom = "";
   tip.style.maxHeight = "";
   tip.style.overflowY = "";
+  tip.style.paddingTop = "";
+  tip.style.paddingBottom = "";
+  tip.style.zIndex = "";
 }
 
-function clampTipToScreen(tip) {
+function clampTipToScreen(tip, host = tip.parentElement) {
   const pad = 8;
+  const gap = 6;
+  if (!host) return;
   clearTipPos(tip);
-  tip.style.left = "0px";
+  tip.style.position = "fixed";
+  tip.style.zIndex = "10000";
   tip.style.right = "auto";
-  tip.style.top = "calc(100% + 6px)";
-  void tip.offsetWidth;
+  tip.style.bottom = "auto";
 
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const link = tip.parentElement?.getBoundingClientRect();
+  const link = host.getBoundingClientRect();
+
+  tip.style.left = `${Math.round(link.left)}px`;
+  tip.style.top = `${Math.round(link.bottom - gap)}px`;
+  tip.style.paddingTop = `${gap}px`;
+  void tip.offsetWidth;
+
   let rect = tip.getBoundingClientRect();
   const maxH = vh - pad * 2;
-
   if (rect.height > maxH) {
     tip.style.maxHeight = `${maxH}px`;
     tip.style.overflowY = "auto";
@@ -449,85 +466,126 @@ function clampTipToScreen(tip) {
     rect = tip.getBoundingClientRect();
   }
 
-  if (rect.height > 0 && link && rect.bottom > vh - pad && link.top > rect.height + pad + 6) {
-    tip.style.top = "auto";
-    tip.style.bottom = "calc(100% + 6px)";
+  const placeAbove = rect.bottom > vh - pad && link.top > rect.height + pad + gap;
+  if (placeAbove) {
+    tip.style.paddingTop = "0";
+    tip.style.paddingBottom = `${gap}px`;
+    tip.style.top = `${Math.round(link.top - rect.height + gap)}px`;
+    void tip.offsetWidth;
     rect = tip.getBoundingClientRect();
   }
 
-  let dx = 0;
-  let dy = 0;
-  if (rect.left < pad) dx = pad - rect.left;
-  if (rect.right + dx > vw - pad) dx = vw - pad - rect.right;
-  if (rect.top < pad) dy = pad - rect.top;
-  if (rect.bottom + dy > vh - pad) dy = vh - pad - rect.bottom;
-  if (dx || dy) tip.style.transform = `translate(${Math.round(dx)}px, ${Math.round(dy)}px)`;
+  let left = rect.left;
+  let top = rect.top;
+  if (rect.right > vw - pad) left = vw - pad - rect.width;
+  if (left < pad) left = pad;
+  if (rect.bottom > vh - pad) top = Math.max(pad, vh - pad - rect.height);
+  if (top < pad) top = pad;
+  tip.style.left = `${Math.round(left)}px`;
+  tip.style.top = `${Math.round(top)}px`;
 }
 
 function setupAboutTips() {
   const tips = [...document.querySelectorAll(".about-tip")].filter(
-    (tip) => tip.parentElement && tip.parentElement.tagName === "A"
+    (tip) => tip.parentElement && tip.parentElement.classList.contains("about-tip-trigger")
   );
   if (!tips.length) return;
 
-  let openLink = null;
+  const homes = new WeakMap();
+  let active = null;
+  let hideTimer = 0;
 
-  function closeTip() {
-    if (!openLink) return;
-    openLink.classList.remove("tip-open");
-    const tip = openLink.querySelector(":scope > .about-tip");
-    if (tip) {
-      tip.classList.remove("is-open");
-      clearTipPos(tip);
+  function parkTip(tip) {
+    const host = homes.get(tip);
+    if (host && tip.parentElement !== host) host.appendChild(tip);
+    homes.delete(tip);
+  }
+
+  function hideTip() {
+    window.clearTimeout(hideTimer);
+    hideTimer = 0;
+    if (!active) return;
+    const { host, tip } = active;
+    host.classList.remove("tip-open");
+    tip.classList.remove("is-open");
+    host.closest(".game-cell")?.classList.remove("tip-open");
+    clearTipPos(tip);
+    parkTip(tip);
+    active = null;
+  }
+
+  function showTip(host, tip, tap) {
+    window.clearTimeout(hideTimer);
+    hideTimer = 0;
+    if (active && active.tip !== tip) hideTip();
+    active = { host, tip, tap };
+    host.classList.add("tip-open");
+    tip.classList.add("is-open");
+    host.closest(".game-cell")?.classList.add("tip-open");
+    if (tip.parentElement !== document.body) {
+      homes.set(tip, host);
+      document.body.appendChild(tip);
     }
-    openLink.closest(".game-cell")?.classList.remove("tip-open");
-    openLink = null;
+    clampTipToScreen(tip, host);
+  }
+
+  function scheduleHide() {
+    if (!active || active.tap) return;
+    window.clearTimeout(hideTimer);
+    hideTimer = window.setTimeout(hideTip, 80);
   }
 
   for (const tip of tips) {
-    const a = tip.parentElement;
-    a.addEventListener("click", (e) => {
-      if (!tipNeedsTap()) return;
-      if (openLink === a) return;
-      e.preventDefault();
+    const host = tip.parentElement;
+    host.addEventListener("click", (e) => {
       e.stopPropagation();
-      closeTip();
-      a.classList.add("tip-open");
-      tip.classList.add("is-open");
-      a.closest(".game-cell")?.classList.add("tip-open");
-      openLink = a;
-      requestAnimationFrame(() => clampTipToScreen(tip));
+      if (e.target.closest("a.about-tip-title")) return;
+      if (!tipNeedsTap()) return;
+      e.preventDefault();
+      if (active?.host === host) {
+        hideTip();
+        return;
+      }
+      showTip(host, tip, true);
     });
-    a.addEventListener("mouseenter", () => {
+    host.addEventListener("mouseenter", () => {
       if (tipNeedsTap()) return;
-      requestAnimationFrame(() => clampTipToScreen(tip));
+      showTip(host, tip, false);
     });
-    a.addEventListener("mouseleave", () => {
+    host.addEventListener("mouseleave", () => {
       if (tipNeedsTap()) return;
-      clearTipPos(tip);
+      scheduleHide();
+    });
+    tip.addEventListener("mouseenter", () => {
+      if (tipNeedsTap()) return;
+      window.clearTimeout(hideTimer);
+      hideTimer = 0;
+    });
+    tip.addEventListener("mouseleave", () => {
+      if (tipNeedsTap()) return;
+      scheduleHide();
+    });
+    tip.addEventListener("click", (e) => {
+      e.stopPropagation();
     });
   }
 
   document.addEventListener("click", (e) => {
-    if (!openLink) return;
-    if (openLink.contains(e.target)) return;
-    closeTip();
+    if (!active?.tap) return;
+    if (active.host.contains(e.target) || active.tip.contains(e.target)) return;
+    hideTip();
   });
   window.addEventListener(
     "resize",
     () => {
-      if (!openLink) return;
-      const tip = openLink.querySelector(":scope > .about-tip");
-      if (tip) clampTipToScreen(tip);
+      if (active) clampTipToScreen(active.tip, active.host);
     },
     { passive: true }
   );
   window.addEventListener(
     "scroll",
     () => {
-      if (!openLink) return;
-      const tip = openLink.querySelector(":scope > .about-tip");
-      if (tip) clampTipToScreen(tip);
+      if (active) clampTipToScreen(active.tip, active.host);
     },
     { passive: true }
   );

@@ -677,6 +677,44 @@ header.site-header {
   padding: 0.25rem 0;
 }
 
+.post-content .table-scroll,
+.pinned-content .table-scroll {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.post-content table,
+.pinned-content table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 1rem 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.post-content .table-scroll table,
+.pinned-content .table-scroll table {
+  margin: 0;
+}
+
+.post-content th,
+.post-content td,
+.pinned-content th,
+.pinned-content td {
+  border: 1px solid var(--color-border);
+  padding: 0.45rem 0.6rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.post-content th,
+.pinned-content th {
+  background: var(--color-bg-secondary);
+  white-space: nowrap;
+}
+
 .post-content hr {
   border: none;
   height: 1px;
@@ -830,27 +868,122 @@ header.site-header {
   opacity: 0.5;
 }
 
+.about-tip {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  width: min(272px, calc(100vw - 16px));
+  max-width: calc(100vw - 16px);
+  margin: 0;
+  box-sizing: border-box;
+  pointer-events: auto;
+  background: var(--color-bg-secondary, #161b22);
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  color: #c9d1d9;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 1.35;
+  text-align: left;
+  text-decoration: none;
+  text-transform: none;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
 a.tip-open > .about-tip,
-a > .about-tip.is-open {
+a > .about-tip.is-open,
+.about-tip-trigger.tip-open > .about-tip,
+.about-tip-trigger > .about-tip.is-open,
+.about-tip.is-open {
   display: block !important;
   color: #c9d1d9;
   text-decoration: none;
   pointer-events: auto;
 }
 
-.about-tip {
-  max-width: calc(100vw - 16px);
-  width: min(272px, calc(100vw - 16px));
-  box-sizing: border-box;
+.about-tip-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 460 / 215;
+  background: #0d1117 center / cover no-repeat;
+}
+
+.about-tip-body {
+  display: block;
+  padding: 8px 10px 10px;
+}
+
+a.about-tip-title {
+  display: inline;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a.about-tip-title:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.about-tip-date {
+  display: inline;
+  margin: 0 0 0 6px;
+  font-size: 0.75em;
+  font-weight: 400;
+  color: #6e7681;
+}
+
+.about-tip-desc {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8em;
+  color: #8b949e;
+}
+
+.about-tip-note {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.75em;
+  font-style: italic;
+  color: #8b949e;
+}
+
+.about-tip-said {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0 0 6px;
+  font-style: normal;
+  font-weight: 600;
+  color: #6e7681;
+}
+
+.about-tip-said::after {
+  content: "";
+  flex: 1 1 auto;
+  border-bottom: 1px solid #30363d;
+  margin-bottom: 0.2em;
 }
 
 .game-cell.tip-open,
-.about-studio a.tip-open {
-  z-index: 40;
+.about-studio a.tip-open,
+.about-tip-trigger.tip-open,
+.about-tip-trigger:hover {
+  z-index: 80;
 }
 
 @media (hover: none), (pointer: coarse) {
-  a:not(.tip-open):hover > .about-tip {
+  a:not(.tip-open):hover > .about-tip,
+  .about-tip-trigger:not(.tip-open):hover > .about-tip {
     display: none !important;
   }
 }
