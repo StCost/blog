@@ -40,6 +40,21 @@ on:
         type: string
         required: false
         default: ""
+      site_url:
+        description: "Public origin with no trailing slash. Empty keeps https://<owner>.github.io"
+        type: string
+        required: false
+        default: ""
+      base_path:
+        description: "Site base path. Empty keeps /<repository name>/"
+        type: string
+        required: false
+        default: ""
+      custom_domain:
+        description: "Hostname written to CNAME in the Pages artifact. Empty leaves the github.io address."
+        type: string
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -72,8 +87,8 @@ jobs:
       - name: Install and build
         working-directory: engine
         env:
-          SITE_URL: https://${{ github.repository_owner }}.github.io
-          BASE_PATH: /${{ github.event.repository.name }}/
+          SITE_URL: ${{ inputs.site_url != '' && inputs.site_url || format('https://{0}.github.io', github.repository_owner) }}
+          BASE_PATH: ${{ inputs.base_path != '' && inputs.base_path || format('/{0}/', github.event.repository.name) }}
           POSTS_SUBPATH: ${{ inputs.posts_subpath }}
           SITE_TITLE: ${{ inputs.site_title }}
           SITE_TAGLINE: ${{ inputs.site_tagline }}
@@ -90,6 +105,13 @@ jobs:
           fi
           bun install --frozen-lockfile
           bun run build
+
+      - name: Custom domain
+        if: ${{ inputs.custom_domain != '' }}
+        working-directory: engine
+        env:
+          CUSTOM_DOMAIN: ${{ inputs.custom_domain }}
+        run: printf '%s\n' "$CUSTOM_DOMAIN" > dist/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
